@@ -9,71 +9,56 @@
         :root { --primary: #a166ff; --bg: #0b0b0b; --card-bg: rgba(22, 8, 26, 0.8); }
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
-        
-        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.5; pointer-events: none; }
-
+        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.5; pointer-events: none; }
         header{padding:40px; text-align:center;}
         .logo-img { width: 120px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; }
         header h1{font-weight:900; letter-spacing:4px; text-transform:uppercase; color:var(--primary); font-size: 1.5rem;}
-
-        .hero{text-align:center; padding:20px;}
+        .hero{text-align:center; padding:60px 20px;}
         .hero h2{font-size:3.5rem; background: linear-gradient(to bottom, #fff, #a166ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;}
-        .warning-box { max-width: 600px; margin: 20px auto; border: 1px solid #ff4444; padding: 12px; border-radius: 10px; color: #ff4444; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; background: rgba(255,0,0,0.1); backdrop-filter: blur(5px); }
-
-        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1100px; margin: 20px auto; padding: 0 20px; }
         .portal-card { background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center; border: 1px solid rgba(161, 102, 255, 0.3); text-decoration: none; color: white; transition: 0.4s; backdrop-filter: blur(10px); }
         .portal-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 0 30px rgba(161, 102, 255, 0.3); }
         .portal-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary); }
         .btn-enter { display: inline-block; margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 12px; }
-
         footer{padding:40px; text-align:center; background: rgba(0,0,0,0.5); font-size: 13px; margin-top: 50px;}
         footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
-
 <video autoplay muted loop playsinline id="bg-video">
     <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
 </video>
-
 <header>
     <img src="OTL.png" alt="OTL Logo" class="logo-img">
     <h1>On Top Lounge</h1>
 </header>
-
 <main>
     <section class="hero">
         <h2>Ready For The Action</h2>
-        <div class="warning-box">⚠️ Règle d'or : Tout se passe uniquement via 8bmk. Aucun intermédiaire.</div>
     </section>
-
     <div class="portal-grid">
         <a href="boutique-payante.html" class="portal-card">
             <h3>Premium Store</h3>
-            <p>Comptes GTA 5 Online haute qualité. Sécurisé & rapide.</p>
+            <p>Accédez à notre catalogue exclusif de comptes GTA.</p>
             <div class="btn-enter">Accéder</div>
         </a>
         <a href="boutique-gratuite.html" class="portal-card">
             <h3>Free Resources</h3>
-            <p>Accédez à nos outils et cadeaux communautaires.</p>
+            <p>Outils et cadeaux pour la communauté.</p>
             <div class="btn-enter">Explorer</div>
         </a>
         <a href="documentation.html" class="portal-card">
             <h3>Actualités</h3>
-            <p>Suivez la reprise du Discord et les mises à jour.</p>
+            <p>Mises à jour et vie du projet.</p>
             <div class="btn-enter">Lire</div>
         </a>
     </div>
 </main>
-
 <footer>
-    <p>© 2026 On Top Lounge - Responsable : 8bmk</p>
+    <p>© 2026 On Top Lounge - 8bmk</p>
     <div style="margin-top: 15px;">
-        <a href="mentions-legales.html">Mentions Légales</a> | 
-        <a href="https://discord.gg/MPKADDqYtk" target="_blank">Discord</a> |
-        <a href="mailto:ontoplounge.contact@gmail.com">Contact</a>
+        <a href="mentions-legales.html">Mentions Légales</a> | <a href="https://discord.gg/MPKADDqYtk" target="_blank">Discord</a>
     </div>
 </footer>
-
 </body>
 </html>
