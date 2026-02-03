@@ -31,7 +31,7 @@
         .logo-img { width: 130px; height: 130px; border-radius: 50%; border: 2px solid var(--primary); filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 20px; animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* PORTAL GRID & REFINED PARALLAX */
+        /* PORTAL GRID */
         .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; padding: 0 20px; perspective: 1000px; }
         
         .portal-card { 
@@ -51,12 +51,12 @@
 
         .btn-enter { margin-top: 30px; padding: 14px 35px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 12px; text-transform: uppercase; transition: 0.3s; align-self: center; transform: translateZ(20px); }
 
-        /* CONTENT SECTIONS */
+        /* SECTIONS */
         .content-section { max-width: 1000px; margin: 120px auto; padding: 0 20px; }
         .section-header { margin-bottom: 40px; text-align: center; }
         .section-header h2 { font-size: 2rem; text-transform: uppercase; letter-spacing: 4px; color: var(--primary); font-family: 'Space Mono', monospace; }
 
-        /* ACCORDEON STYLE (FAQ & SÉCURITÉ) */
+        /* ACCORDEON */
         .faq-container { background: rgba(255,255,255,0.02); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
         details { background: rgba(161, 102, 255, 0.03); border: 1px solid rgba(161, 102, 255, 0.08); border-radius: 12px; margin-bottom: 12px; padding: 20px; transition: 0.3s; }
         details[open] { background: rgba(161, 102, 255, 0.08); border-color: var(--primary); }
@@ -68,7 +68,6 @@
         .discord-tooltip { background: var(--discord); color: white; padding: 10px 20px; border-radius: 12px; font-size: 13px; font-weight: bold; margin-right: 15px; opacity: 0; transform: translateX(20px); transition: 0.4s; pointer-events: none; }
         .discord-float { width: 60px; height: 60px; transition: 0.4s; cursor: pointer; }
         .discord-container:hover .discord-tooltip { opacity: 1; transform: translateX(0); }
-        .discord-float:hover { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--discord)); }
 
         footer { padding: 80px 20px; text-align: center; opacity: 0.4; font-size: 10px; letter-spacing: 2px; }
     </style>
@@ -84,7 +83,7 @@
 </div>
 
 <header class="reveal">
-    <img src="OTL.png" alt="OTL" class="logo-img">
+    <img src="OTL.png" alt="OTL Logo" class="logo-img">
     <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: 10px; text-transform: uppercase;">On Top Lounge</h1>
     <p style="opacity: 0.6; margin-top: 10px; font-family: 'Space Mono'; font-size: 0.9rem;">ENCRYPTED ACCESS | PREMIUM DIGITAL ASSETS</p>
 </header>
@@ -94,16 +93,17 @@
         <a href="boutique-payante.html" class="portal-card js-tilt">
             <div style="transform: translateZ(30px)">
                 <h3 style="color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Space Mono';">FORCE OPÉRATIONNELLE</h3>
-                <p style="opacity: 0.7; line-height: 1.7; font-size: 0.95rem;">Accédez à nos actifs de haute hiérarchie. Comptes optimisés, devises massives et configurations prêtes pour le déploiement immédiat.</p>
+                <p style="opacity: 0.7; line-height: 1.7; font-size: 0.95rem;">Accès exclusif aux actifs de haute hiérarchie. Comptes optimisés et configurations Premium avec support prioritaire.</p>
             </div>
-            <div class="btn-enter">Initialiser l'acquisition</div>
+            <div class="btn-enter">Initialiser l'achat</div>
         </a>
+
         <a href="boutique-gratuite.html" class="portal-card js-tilt">
             <div style="transform: translateZ(30px)">
                 <h3 style="color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Space Mono';">RÉSEAU OPEN-SOURCE</h3>
-                <p style="opacity: 0.7; line-height: 1.7; font-size: 0.95rem;">Explorez notre base de données publique. Scripts utilitaires, optimiseurs système et outils communautaires vérifiés par nos experts.</p>
+                <p style="opacity: 0.7; line-height: 1.7; font-size: 0.95rem;">Exploration de notre index public. Téléchargement direct d'outils, scripts de maintenance et archives communautaires sans transaction.</p>
             </div>
-            <div class="btn-enter">Accéder aux archives</div>
+            <div class="btn-enter">Explorer l'index</div>
         </a>
     </section>
 
@@ -116,31 +116,11 @@
         <div class="faq-container">
             <details>
                 <summary>POLITIQUE D'ATTÉNUATION DES RISQUES <span>[+]</span></summary>
-                <p>Nous ne prétendons pas à l'invulnérabilité totale, car la sécurité est un processus constant. Nos protocoles visent à réduire l'exposition de vos actifs en utilisant des méthodes d'injection non-intrusives et des tests de viabilité quotidiens avant chaque mise à jour système.</p>
+                <p>La sécurité est un processus constant. Nos protocoles visent à réduire l'exposition de vos actifs en utilisant des méthodes d'injection non-intrusives et des tests de viabilité quotidiens.</p>
             </details>
             <details>
                 <summary>HYGIÈNE OPÉRATIONNELLE DU CLIENT <span>[+]</span></summary>
-                <p>La pérennité d'un compte dépend à 90% de son utilisateur. Nous recommandons une progression graduelle des statistiques et l'évitement des comportements suspects en sessions publiques, qui sont les premières causes de signalements manuels.</p>
-            </details>
-            <details>
-                <summary>DÉTECTION & VEILLE TECHNOLOGIQUE <span>[+]</span></summary>
-                <p>Notre équipe surveille en temps réel les signatures des derniers correctifs d'anti-cheats. En cas de doute sur la stabilité d'un outil, celui-ci est immédiatement placé en statut "Maintenance" pour protéger votre inventaire.</p>
-            </details>
-        </div>
-    </section>
-
-    <section class="content-section reveal">
-        <div class="section-header">
-            <h2>Foire Aux Questions</h2>
-        </div>
-        <div class="faq-container">
-            <details>
-                <summary>Comment s'effectue la livraison ? <span>[+]</span></summary>
-                <p>Dès la confirmation de la transaction, notre système génère un accès crypté envoyé directement sur votre adresse email. Temps moyen : moins de 2 minutes.</p>
-            </details>
-            <details>
-                <summary>Quels sont les modes de paiement acceptés ? <span>[+]</span></summary>
-                <p>Nous acceptons les cryptomonnaies (BTC, LTC) pour un anonymat total, ainsi que les cartes bancaires via nos passerelles sécurisées SellAuth.</p>
+                <p>La pérennité d'un compte dépend de son utilisateur. Nous recommandons une progression naturelle pour minimiser les signalements système.</p>
             </details>
         </div>
     </section>
@@ -158,6 +138,7 @@
 </footer>
 
 <script>
+    // Animation au défilement
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) entry.target.classList.add('active');
@@ -165,6 +146,7 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
+    // Effet Tilt 3D sur les cartes
     const cards = document.querySelectorAll('.js-tilt');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
