@@ -8,13 +8,11 @@
     <style>
         :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); }
         
-        *{margin:0;padding:0;box-sizing:border-box; cursor: none; scroll-behavior: smooth;}
+        *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;}
 
-        /* Background & Cursor */
+        /* Background Video */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.15; }
-        #cursor-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
-        #cursor-outline { width: 40px; height: 40px; border: 2px solid var(--primary); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: 0.1s ease-out; opacity: 0.5; }
 
         header { padding: 60px 20px; text-align: center; }
         .back-link { position: absolute; top: 30px; left: 30px; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; transition: 0.3s; }
@@ -48,9 +46,6 @@
 </head>
 <body>
 
-<div id="cursor-dot"></div>
-<div id="cursor-outline"></div>
-
 <video autoplay muted loop playsinline id="bg-video">
     <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
 </video>
@@ -67,31 +62,13 @@
     <div class="tools-grid">
         
         <div class="tool-card">
-            <span class="tool-tag">OPTIMISATION</span>
-            <h3>Windows Cleaner v2</h3>
-            <p>Nettoyez les fichiers temporaires et boostez vos FPS en un clic. Sécurisé et léger.</p>
-            <a href="tutorial.html?target=https://lockr.net/VOTRE_LIEN_1" class="btn-download">Télécharger</a>
-        </div>
-
-        <div class="tool-card">
-            <span class="tool-tag">GAMING</span>
-            <h3>Crosshair Overlay</h3>
-            <p>Ajoutez un viseur personnalisé sur n'importe quel jeu. Indétectable par les anti-cheats.</p>
-            <a href="tutorial.html?target=https://lockr.net/VOTRE_LIEN_2" class="btn-download">Télécharger</a>
-        </div>
-
-        <div class="tool-card">
-            <span class="tool-tag">NETWORK</span>
-            <h3>Ping Stabilizer</h3>
-            <p>Réduit les pertes de paquets et stabilise votre connexion lors des sessions de jeu.</p>
-            <a href="tutorial.html?target=https://lockr.net/VOTRE_LIEN_3" class="btn-download">Télécharger</a>
-        </div>
-
-        <div class="tool-card">
-            <span class="tool-tag">ACCOUNT</span>
-            <h3>Checker Basic</h3>
-            <p>Outil simple pour vérifier la validité de vos listes de comptes (format .txt).</p>
-            <a href="tutorial.html?target=https://lockr.net/VOTRE_LIEN_4" class="btn-download">Télécharger</a>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <span class="tool-tag">CS2 EXTERNAL</span>
+                <span style="font-size: 0.6rem; color: #00ff88; font-family: 'Space Mono';">● UNDETECTED</span>
+            </div>
+            <h3>Counter Strike 2 Free</h3>
+            <p>Aimbot, ESP, TriggerBot et RCS. Version externe sécurisée pour CS2.</p>
+            <a href="tutorialCSGO.html" class="btn-download">Télécharger</a>
         </div>
 
     </div>
@@ -100,20 +77,6 @@
 <footer>
     ON TOP LOUNGE — FREE REPOSITORY v1.0
 </footer>
-
-<script>
-    // Cursor Script
-    const dot = document.getElementById('cursor-dot');
-    const outline = document.getElementById('cursor-outline');
-    window.addEventListener('mousemove', (e) => {
-        dot.style.left = e.clientX + 'px';
-        dot.style.top = e.clientY + 'px';
-        setTimeout(() => {
-            outline.style.left = e.clientX + 'px';
-            outline.style.top = e.clientY + 'px';
-        }, 50);
-    });
-</script>
 
 </body>
 </html>
