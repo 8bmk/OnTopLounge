@@ -8,197 +8,128 @@
     <style>
         :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); --discord: #5865F2; }
         
-        *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth; cursor: none;} /* Cursor none pour le custom cursor */
+        *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
 
-        /* [16] OPTIMISATION VIDÉO */
-        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.25; pointer-events: none; }
+        /* BACKGROUND */
+        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.3; }
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
+            z-index: -1; background-size: 100% 3px, 3px 100%; pointer-events: none;
+        }
 
-        /* [2] PARTICULES CANVAS */
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; top: 0; left: 0; }
+        .reveal { opacity: 0; transform: translateY(20px); filter: blur(5px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
 
-        /* [3] CUSTOM CURSOR */
-        #cursor-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s; }
-        #cursor-outline { width: 40px; height: 40px; border: 2px solid var(--primary); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: 0.15s ease-out; opacity: 0.5; }
-
-        /* [13] SYSTEM NOTIFICATION */
-        .notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--card-bg); border: 1px solid var(--primary); padding: 15px 30px; border-radius: 10px; z-index: 10000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .notification.show { transform: translateX(-50%) translateY(0); }
-
-        /* [5 & 19] STATUS BAR & COUNTER */
-        .system-stats { display: flex; gap: 20px; justify-content: center; margin-bottom: 30px; font-family: 'Space Mono'; font-size: 0.7rem; letter-spacing: 1px; }
-        .stat-item { background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 5px; border-left: 2px solid var(--primary); }
-        .pulse-green { color: #00ff88; animation: blink 1.5s infinite; }
-        @keyframes blink { 50% { opacity: 0.5; } }
-
-        /* HEADER */
-        header { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .logo-img { width: 110px; height: 110px; border-radius: 50%; border: 2px solid var(--primary); filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 20px; animation: float 6s ease-in-out infinite; }
+        header { height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .logo-img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--primary); filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 20px; animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
         /* GRID SYSTEM */
-        .portal-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .portal-grid { 
+            display: grid; 
+            grid-template-columns: repeat(6, 1fr); 
+            gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; perspective: 1000px; 
+        }
         
-        /* [4] SKELETON ANIMATION EFFECT SUR CARTES */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
         .portal-card { 
             position: relative; background: var(--card-bg); border-radius: 20px; text-align: center; 
-            border: 1px solid rgba(161, 102, 255, 0.1); text-decoration: none; color: white; 
-            transition: 0.4s; backdrop-filter: blur(10px); display: flex; flex-direction: column; padding: 30px;
+            border: 1px solid rgba(161, 102, 255, 0.15); text-decoration: none; color: white; 
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px;
         }
-        .portal-card:hover { border-color: var(--primary); box-shadow: 0 0 20px rgba(161, 102, 255, 0.2); }
+        .portal-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(161, 102, 255, 0.2); transform: translateY(-5px); }
 
-        .pinned { grid-column: span 3; padding: 50px 40px; }
-        .small { grid-column: span 2; }
+        /* ÉPINGLÉS (GROSSES CARTES) */
+        .pinned { grid-column: span 3; padding: 50px 40px; border: 1px solid rgba(161, 102, 255, 0.4); background: rgba(161, 102, 255, 0.05); }
+        .pinned h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 15px; }
+        
+        /* PETITES CARTES */
+        .small { grid-column: span 2; padding: 25px; }
+        .small h3 { font-size: 1rem; margin-bottom: 10px; }
+        .small p { font-size: 0.8rem; opacity: 0.6; }
 
-        .btn-enter { margin-top: auto; padding: 10px 20px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 10px; text-transform: uppercase; margin-top: 20px; }
+        .btn-enter { margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 10px; text-transform: uppercase; transition: 0.3s; }
+        .portal-card:hover .btn-enter { background: white; }
 
-        /* [17] BACK TO TOP */
-        #backToTop { position: fixed; bottom: 30px; left: 30px; width: 45px; height: 45px; background: var(--primary); border: none; border-radius: 50%; color: black; font-weight: bold; display: none; z-index: 1000; transition: 0.3s; }
-        #backToTop:hover { transform: scale(1.1); background: white; }
+        /* FAQ & CONTENT */
+        .content-section { max-width: 900px; margin: 80px auto; padding: 0 20px; }
+        .faq-container { background: rgba(255,255,255,0.02); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        details { background: rgba(161, 102, 255, 0.03); border: 1px solid rgba(161, 102, 255, 0.08); border-radius: 12px; margin-bottom: 10px; padding: 15px; cursor: pointer; }
+        summary { font-family: 'Space Mono'; font-size: 0.85rem; color: var(--primary); list-style: none; display: flex; justify-content: space-between; }
 
-        footer { padding: 80px; text-align: center; opacity: 0.3; font-size: 9px; letter-spacing: 2px; }
+        footer { padding: 60px; text-align: center; opacity: 0.3; font-size: 9px; letter-spacing: 2px; }
 
-        @media (max-width: 900px) { .pinned, .small { grid-column: span 6; } .system-stats { flex-direction: column; align-items: center; } }
+        @media (max-width: 900px) { .pinned, .small { grid-column: span 6; } }
     </style>
 </head>
 <body>
-
-<div id="cursor-dot"></div>
-<div id="cursor-outline"></div>
-
-<div class="notification" id="notif">
-    <div style="color: var(--primary); font-weight: bold;">[SYSTEME]</div>
-    <div style="font-size: 0.8rem;">Bienvenue sur On Top Lounge Interface v2.4</div>
-</div>
-
-<canvas id="particles-js"></canvas>
 
 <video autoplay muted loop playsinline id="bg-video">
     <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
 </video>
 
-<button id="backToTop">↑</button>
-
 <header class="reveal">
-    <img src="OTL.png" alt="OTL" class="logo-img">
-    <div class="system-stats">
-        <div class="stat-item">MEMBRES: <span style="color:var(--primary)">1,429</span></div>
-        <div class="stat-item">STATUT: <span class="pulse-green">UNDETECTED</span></div>
-        <div class="stat-item">PING: <span id="ping">24ms</span></div>
-    </div>
-    <h1 style="letter-spacing: 12px; text-transform: uppercase; font-size: 2.8rem;">On Top Lounge</h1>
-    <p style="opacity: 0.4; font-family: 'Space Mono'; font-size: 0.75rem; margin-top: 10px;">SECURE DIGITAL ACCESS GATEWAY</p>
+    <img src="OTL.png" alt="OTL Logo" class="logo-img">
+    <h1 style="letter-spacing: 10px; text-transform: uppercase; font-size: 2.5rem;">On Top Lounge</h1>
+    <p style="opacity: 0.5; font-family: 'Space Mono'; font-size: 0.8rem; margin-top: 10px;">PREMIUM QUALITY // COMMUNITY DRIVEN</p>
 </header>
 
 <main>
-    <section class="portal-grid">
-        <a href="boutique-payante.html" class="portal-card pinned reveal js-tilt">
-            <h3 style="font-family: 'Space Mono'; color: var(--primary);">PREMIUM STORE</h3>
-            <p style="opacity: 0.6; margin-top:10px;">Accès aux services haute hiérarchie et comptes sécurisés.</p>
-            <div class="btn-enter">Initialiser l'accès</div>
+    <section class="portal-grid reveal">
+        
+        <a href="boutique-payante.html" class="portal-card pinned js-tilt">
+            <h3 style="font-family: 'Space Mono';">BOUTIQUE PREMIUM</h3>
+            <p style="opacity: 0.7;">Comptes boostés, services exclusifs et options VIP. Le meilleur d'OTL.</p>
+            <div class="btn-enter">Accéder aux offres</div>
         </a>
 
-        <a href="boutique-gratuite.html" class="portal-card pinned reveal js-tilt">
-            <h3 style="font-family: 'Space Mono'; color: var(--primary);">FREE INDEX</h3>
-            <p style="opacity: 0.6; margin-top:10px;">Scripts publics et outils communautaires en libre service.</p>
-            <div class="btn-enter">Ouvrir les archives</div>
+        <a href="boutique-gratuite.html" class="portal-card pinned js-tilt">
+            <h3 style="font-family: 'Space Mono';">ESPACE GRATUIT</h3>
+            <p style="opacity: 0.7;">Ressources, scripts et outils gratuits pour toute la communauté.</p>
+            <div class="btn-enter">Explorer l'index</div>
         </a>
 
-        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card small reveal js-tilt">
+        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card small js-tilt">
             <h3 style="color: #5865F2;">DISCORD</h3>
+            <p>Support & News</p>
             <div class="btn-enter" style="background:#5865F2; color:white;">Rejoindre</div>
         </a>
 
-        <div class="portal-card small reveal js-tilt">
-            <h3 style="color: #00ff88;">GLOBAL STATUS</h3>
-            <p style="font-size: 0.7rem; margin-top:5px;">Systèmes 100% opérationnels</p>
+        <div class="portal-card small js-tilt">
+            <h3 style="color: #00ff88;">STATUS</h3>
+            <p>Tous les outils : <span style="color: #00ff88; font-weight: bold;">ONLINE</span></p>
             <div class="btn-enter" style="background:#00ff88; color:black;">Vérifier</div>
         </div>
 
-        <a href="#" class="portal-card small reveal js-tilt">
-            <h3 style="color: #ffaa00;">REVIEWS</h3>
-            <div class="btn-enter" style="background:#ffaa00; color:black;">Lire les avis</div>
+        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card small js-tilt">
+            <h3 style="color: #ffaa00;">AVIS</h3>
+            <p>Retours Clients</p>
+            <div class="btn-enter" style="background:#ffaa00; color:black;">Voir</div>
         </a>
+
+    </section>
+
+    <section class="content-section reveal">
+        <div class="faq-container">
+            <details>
+                <summary>POURQUOI NOUS CHOISIR ? <span>▼</span></summary>
+                <p style="margin-top:10px; font-size:0.85rem; opacity:0.7;">Nous offrons le meilleur rapport qualité-prix avec un support actif et des mises à jour constantes pour éviter tout risque.</p>
+            </details>
+            <details>
+                <summary>MÉTHODES DE PAIEMENT <span>▼</span></summary>
+                <p style="margin-top:10px; font-size:0.85rem; opacity:0.7;">Nous acceptons diverses méthodes sécurisées via notre plateforme Discord. Contactez un administrateur.</p>
+            </details>
+        </div>
     </section>
 </main>
 
 <footer>
-    <p>© 2026 ON TOP LOUNGE — ENCRYPTED BY 8BMK</p>
+    <p>© 2026 ON TOP LOUNGE — BY 8BMK</p>
 </footer>
 
 <script>
-    // [3] Custom Cursor Logic
-    const dot = document.getElementById('cursor-dot');
-    const outline = document.getElementById('cursor-outline');
-    window.addEventListener('mousemove', (e) => {
-        dot.style.left = e.clientX + 'px';
-        dot.style.top = e.clientY + 'px';
-        setTimeout(() => {
-            outline.style.left = e.clientX + 'px';
-            outline.style.top = e.clientY + 'px';
-        }, 50);
-    });
-
-    // [13] Notification Show
-    window.onload = () => {
-        setTimeout(() => {
-            document.getElementById('notif').classList.add('show');
-            setTimeout(() => {
-                document.getElementById('notif').classList.remove('show');
-            }, 5000);
-        }, 1000);
-    };
-
-    // [2] Simple Particles Engine
-    const canvas = document.getElementById('particles-js');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    let particles = [];
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x > canvas.width) this.x = 0;
-            if (this.x < 0) this.x = canvas.width;
-            if (this.y > canvas.height) this.y = 0;
-            if (this.y < 0) this.y = canvas.height;
-        }
-        draw() {
-            ctx.fillStyle = 'rgba(161, 102, 255, 0.3)';
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-    for (let i = 0; i < 50; i++) particles.push(new Particle());
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animate);
-    }
-    animate();
-
-    // [17] Back To Top Logic
-    const btt = document.getElementById('backToTop');
-    window.onscroll = () => {
-        if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-            btt.style.display = "block";
-        } else { btt.style.display = "none"; }
-    };
-    btt.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
-
-    // Animations Reveal
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) entry.target.classList.add('active');
@@ -206,13 +137,13 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-    // Tilt Effect
-    document.querySelectorAll('.js-tilt').forEach(card => {
+    const cards = document.querySelectorAll('.js-tilt');
+    cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left - rect.width/2) / 15;
-            const y = (e.clientY - rect.top - rect.height/2) / -15;
-            card.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg) scale(1.02)`;
+            const rotateX = (e.clientY - rect.top - rect.height / 2) / -15;
+            const rotateY = (e.clientX - rect.left - rect.width / 2) / 15;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
         });
         card.addEventListener('mouseleave', () => {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
