@@ -9,7 +9,7 @@
         :root { --primary: #a166ff; --bg: #0b0b0b; --card-bg: rgba(22, 8, 26, 0.7); }
         *{margin:0;padding:0;box-sizing:border-box;}
         
-        /* 4. ANIMATION D'ENTRÉE (Fade-in) */
+        /* 4. ANIMATION D'ENTRÉE */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
@@ -17,7 +17,7 @@
         /* VIDÉO DE FOND */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.5; pointer-events: none; }
 
-        /* 1. EFFET SCANLINE (Rétro) */
+        /* 1. EFFET SCANLINE */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
@@ -49,14 +49,14 @@
         }
         .portal-card:hover .btn-enter { box-shadow: 0 0 25px var(--primary); transform: scale(1.05); }
 
-        /* 5. BOUTON FLOTTANT DISCORD */
+        /* 5. BOUTON FLOTTANT DISCORD AVEC TON LIEN */
         .discord-float {
-            position: fixed; bottom: 30px; right: 30px; background: #5865F2; width: 60px; height: 60px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5); transition: 0.3s; z-index: 100;
+            position: fixed; bottom: 30px; right: 30px; background: #7289da; width: 65px; height: 65px;
+            border-radius: 18px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.3s; z-index: 100;
         }
-        .discord-float:hover { transform: scale(1.1) rotate(10deg); background: #7289da; }
-        .discord-float img { width: 30px; }
+        .discord-float:hover { transform: scale(1.1) rotate(-5deg); background: #5d73c7; box-shadow: 0 0 20px #7289da; }
+        .discord-float img { width: 45px; height: 45px; object-fit: contain; }
 
         footer{padding:40px; text-align:center; background: rgba(0,0,0,0.7); font-size: 12px; letter-spacing: 1px;}
     </style>
@@ -97,11 +97,11 @@
 </main>
 
 <a href="https://discord.gg/MPKADDqYtk" class="discord-float" target="_blank" title="Rejoindre le Discord">
-    <img src="https://assets-global.website-files.com/6257adef93867e3d0394e36a/6257adef93867e734294e410_Discord%20Logomark%20White.svg" alt="Discord">
+    <img src="https://upload.wikimedia.org/wikipedia/fr/8/80/Logo_Discord_2015.png" alt="Discord">
 </a>
 
 <footer>
-    <p>© 2026 ON TOP LOUNGE — DESIGNED BY 8BMK</p>
+    <p>© 2026 ON TOP LOUNGE — 8BMK</p>
     <div style="margin-top:15px; opacity: 0.6;">
         <a href="mentions-legales.html" style="color: white; text-decoration: none;">Mentions Légales</a>
     </div>
