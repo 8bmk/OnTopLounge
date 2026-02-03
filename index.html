@@ -41,8 +41,6 @@
             backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between;
             transform-style: preserve-3d; overflow: hidden;
         }
-
-        /* GLITCH OVERLAY (CSS ONLY) */
         .portal-card::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px);
@@ -58,18 +56,12 @@
         .section-header { margin-bottom: 40px; text-align: center; }
         .section-header h2 { font-size: 2rem; text-transform: uppercase; letter-spacing: 4px; color: var(--primary); font-family: 'Space Mono', monospace; }
 
-        /* FAQ REVISITÉE */
+        /* ACCORDEON STYLE (FAQ & SÉCURITÉ) */
         .faq-container { background: rgba(255,255,255,0.02); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
         details { background: rgba(161, 102, 255, 0.03); border: 1px solid rgba(161, 102, 255, 0.08); border-radius: 12px; margin-bottom: 12px; padding: 20px; transition: 0.3s; }
         details[open] { background: rgba(161, 102, 255, 0.08); border-color: var(--primary); }
-        summary { font-weight: bold; list-style: none; display: flex; justify-content: space-between; cursor: pointer; color: #efefef; }
+        summary { font-weight: bold; list-style: none; display: flex; justify-content: space-between; cursor: pointer; color: #efefef; font-family: 'Space Mono'; font-size: 0.9rem; }
         details p { margin-top: 15px; font-size: 0.95rem; line-height: 1.6; opacity: 0.8; color: #ccc; }
-
-        /* SÉCURITÉ / PROTOCOLES */
-        .guides-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .guide-box { background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0)); padding: 35px; border-radius: 20px; border-left: 3px solid var(--primary); }
-        .guide-box h4 { color: var(--primary); margin-bottom: 15px; font-family: 'Space Mono'; letter-spacing: 1px; font-size: 1.1rem; }
-        .guide-box p { font-size: 0.9rem; line-height: 1.6; opacity: 0.7; }
 
         /* DISCORD */
         .discord-container { position: fixed; bottom: 30px; right: 30px; display: flex; align-items: center; z-index: 1000; }
@@ -101,37 +93,39 @@
     <section class="portal-grid reveal">
         <a href="boutique-payante.html" class="portal-card js-tilt">
             <div style="transform: translateZ(30px)">
-                <h3 style="color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Space Mono';">01. ACCÈS PREMIUM</h3>
-                <p style="opacity: 0.7; line-height: 1.7; font-size: 0.95rem;">Catalogue de comptes haute-fidélité. Statistiques optimisées et sécurité anti-ban de grade militaire.</p>
+                <h3 style="color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Space Mono';">FORCE OPÉRATIONNELLE</h3>
+                <p style="opacity: 0.7; line-height: 1.7; font-size: 0.95rem;">Accédez à nos actifs de haute hiérarchie. Comptes optimisés, devises massives et configurations prêtes pour le déploiement immédiat.</p>
             </div>
-            <div class="btn-enter">Entrer dans le shop</div>
+            <div class="btn-enter">Initialiser l'acquisition</div>
         </a>
         <a href="boutique-gratuite.html" class="portal-card js-tilt">
             <div style="transform: translateZ(30px)">
-                <h3 style="color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Space Mono';">02. DÉPÔT PUBLIC</h3>
-                <p style="opacity: 0.7; line-height: 1.7; font-size: 0.95rem;">Scripts, utilitaires système et assets communautaires vérifiés. Disponibilité immédiate.</p>
+                <h3 style="color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Space Mono';">RÉSEAU OPEN-SOURCE</h3>
+                <p style="opacity: 0.7; line-height: 1.7; font-size: 0.95rem;">Explorez notre base de données publique. Scripts utilitaires, optimiseurs système et outils communautaires vérifiés par nos experts.</p>
             </div>
-            <div class="btn-enter">Consulter l'archive</div>
+            <div class="btn-enter">Accéder aux archives</div>
         </a>
     </section>
 
     <section class="content-section reveal">
         <div class="section-header">
-            <h2>Protocoles de Sécurité</h2>
+            <h2>Protocoles & Intégrité</h2>
+            <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 10px; letter-spacing: 2px;">MESURES DE PROTECTION DU MATÉRIEL NUMÉRIQUE</p>
         </div>
-        <div class="guides-wrapper">
-            <div class="guide-box">
-                <h4>SÉCURITÉ RÉSEAU</h4>
-                <p>Nos actifs sont injectés via des proxies sécurisés. Pour une longévité maximale, évitez les changements brusques d'IP durant les premières 24h.</p>
-            </div>
-            <div class="guide-box">
-                <h4>INTÉGRITÉ DU LOGICIEL</h4>
-                <p>L'utilisation de nos produits avec des outils tiers "gratuits" compromet le cryptage. Restez sur notre suite logicielle pour une discrétion totale.</p>
-            </div>
-            <div class="guide-box">
-                <h4>DISCRÉTION OPÉRATIONNELLE</h4>
-                <p>Le modding est un art. Évitez les comportements suspects en session publique pour minimiser les signalements manuels des utilisateurs.</p>
-            </div>
+        
+        <div class="faq-container">
+            <details>
+                <summary>POLITIQUE D'ATTÉNUATION DES RISQUES <span>[+]</span></summary>
+                <p>Nous ne prétendons pas à l'invulnérabilité totale, car la sécurité est un processus constant. Nos protocoles visent à réduire l'exposition de vos actifs en utilisant des méthodes d'injection non-intrusives et des tests de viabilité quotidiens avant chaque mise à jour système.</p>
+            </details>
+            <details>
+                <summary>HYGIÈNE OPÉRATIONNELLE DU CLIENT <span>[+]</span></summary>
+                <p>La pérennité d'un compte dépend à 90% de son utilisateur. Nous recommandons une progression graduelle des statistiques et l'évitement des comportements suspects en sessions publiques, qui sont les premières causes de signalements manuels.</p>
+            </details>
+            <details>
+                <summary>DÉTECTION & VEILLE TECHNOLOGIQUE <span>[+]</span></summary>
+                <p>Notre équipe surveille en temps réel les signatures des derniers correctifs d'anti-cheats. En cas de doute sur la stabilité d'un outil, celui-ci est immédiatement placé en statut "Maintenance" pour protéger votre inventaire.</p>
+            </details>
         </div>
     </section>
 
@@ -142,19 +136,11 @@
         <div class="faq-container">
             <details>
                 <summary>Comment s'effectue la livraison ? <span>[+]</span></summary>
-                <p>Dès la confirmation de la transaction, notre système SellAuth génère un lien de téléchargement crypté ou envoie les identifiants directement sur votre adresse email. Temps moyen : < 1 minute.</p>
+                <p>Dès la confirmation de la transaction, notre système génère un accès crypté envoyé directement sur votre adresse email. Temps moyen : moins de 2 minutes.</p>
             </details>
             <details>
                 <summary>Quels sont les modes de paiement acceptés ? <span>[+]</span></summary>
-                <p>Nous acceptons les cryptomonnaies (BTC, LTC, ETH) pour un anonymat total, ainsi que les cartes bancaires via nos passerelles de paiement sécurisées (Stripe/PayPal selon disponibilité).</p>
-            </details>
-            <details>
-                <summary>Proposez-vous une garantie de remplacement ? <span>[+]</span></summary>
-                <p>Absolument. Chaque actif Premium dispose d'une garantie "Zero-Defect" de 48h. Si un problème technique survient de notre côté, le remplacement est automatique via notre support Discord.</p>
-            </details>
-            <details>
-                <summary>Est-ce détectable par les anti-cheats ? <span>[+]</span></summary>
-                <p>Nous utilisons des méthodes d'injection de type Kernel qui restent indétectables par les solutions standards. Nos outils sont mis à jour avant chaque patch majeur des éditeurs.</p>
+                <p>Nous acceptons les cryptomonnaies (BTC, LTC) pour un anonymat total, ainsi que les cartes bancaires via nos passerelles sécurisées SellAuth.</p>
             </details>
         </div>
     </section>
@@ -172,7 +158,6 @@
 </footer>
 
 <script>
-    // Reveal Scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) entry.target.classList.add('active');
@@ -180,21 +165,16 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-    // Refined Smooth Parallax
     const cards = document.querySelectorAll('.js-tilt');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
-            // Intensité réduite (divisé par 25 au lieu de 10)
             const rotateX = (y - rect.height / 2) / -25;
             const rotateY = (x - rect.width / 2) / 25;
-            
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
         });
-        
         card.addEventListener('mouseleave', () => {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
         });
