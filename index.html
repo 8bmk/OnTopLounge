@@ -12,116 +12,55 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
-
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.5; pointer-events: none; }
 
-        /* 1. EFFET SCANLINE */
+        /* EFFET SCANLINE */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             z-index: -1; background-size: 100% 4px, 3px 100%; pointer-events: none;
         }
 
-        .status-bar { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.6); padding: 8px 15px; border-radius: 50px; font-size: 11px; font-weight: bold; border: 1px solid rgba(161, 102, 255, 0.3); display: flex; align-items: center; gap: 8px; animation: fadeIn 1s ease; }
+        .status-bar { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.6); padding: 8px 15px; border-radius: 50px; font-size: 11px; font-weight: bold; border: 1px solid rgba(161, 102, 255, 0.3); display: flex; align-items: center; gap: 8px; z-index: 10; }
         .status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px #00ff88; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         header{padding:60px 20px; text-align:center; animation: fadeIn 1s ease;}
+        .logo-img { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 15px; }
         
-        /* LOGO EN ROND */
-        .logo-img { 
-            width: 130px; 
-            height: 130px;
-            border-radius: 50%; /* Rend le logo rond */
-            object-fit: cover;
-            border: 2px solid var(--primary);
-            filter: drop-shadow(0 0 15px var(--primary)); 
-            margin-bottom: 15px; 
-        }
-        
-        /* GRILLE ET ALIGNEMENT DES BOUTONS */
-        .portal-grid { 
-            display: flex; /* Utilisation de flex pour forcer la même hauteur */
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px; 
-            max-width: 1100px; 
-            margin: 0 auto 60px auto; 
-            padding: 0 20px; 
-            animation: fadeIn 1.5s ease; 
-        }
-        
-        .portal-card { 
-            background: var(--card-bg); 
-            padding: 40px; 
-            border-radius: 24px; 
-            text-align: center; 
-            border: 1px solid rgba(161, 102, 255, 0.2); 
-            text-decoration: none; 
-            color: white; 
-            transition: 0.4s; 
-            backdrop-filter: blur(12px); 
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Aligne les boutons en bas de la carte */
-        }
-
+        /* GRILLE PRINCIPALE */
+        .portal-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1100px; margin: 0 auto 40px auto; padding: 0 20px; animation: fadeIn 1.5s ease; }
+        .portal-card { background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center; border: 1px solid rgba(161, 102, 255, 0.2); text-decoration: none; color: white; transition: 0.4s; backdrop-filter: blur(12px); width: 320px; display: flex; flex-direction: column; justify-content: space-between; }
         .portal-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 0 30px rgba(161, 102, 255, 0.4); }
-        
-        .btn-enter { 
-            display: inline-block; 
-            margin-top: 25px; 
-            padding: 12px 30px; 
-            background: var(--primary); 
-            color: #000; 
-            font-weight: 900; 
-            border-radius: 50px; 
-            font-size: 12px; 
-            text-transform: uppercase;
-            transition: 0.3s; 
-            box-shadow: 0 0 10px rgba(161, 102, 255, 0.5);
-            align-self: center; /* Centre le bouton horizontalement */
-        }
+        .btn-enter { display: inline-block; margin-top: 25px; padding: 12px 30px; background: var(--primary); color: #000; font-weight: 900; border-radius: 50px; font-size: 12px; text-transform: uppercase; transition: 0.3s; align-self: center; }
 
-        /* 5. BOUTON DISCORD + INFOBULLE */
-        .discord-container {
-            position: fixed; bottom: 30px; right: 30px;
-            display: flex; align-items: center; z-index: 100;
-        }
+        /* SECTION FAQ & GUIDES */
+        .content-section { max-width: 900px; margin: 60px auto; padding: 0 20px; animation: fadeIn 2s ease; }
+        .section-title { color: var(--primary); text-align: center; margin-bottom: 30px; letter-spacing: 3px; font-weight: 900; text-transform: uppercase; }
 
-        .discord-tooltip {
-            background: var(--discord);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-right: 15px;
-            opacity: 0;
-            transform: translateX(10px);
-            transition: 0.3s;
-            pointer-events: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+        /* ACCORDÉON FAQ */
+        details { background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.2); border-radius: 15px; margin-bottom: 10px; padding: 15px; cursor: pointer; transition: 0.3s; }
+        details:hover { border-color: var(--primary); }
+        summary { font-weight: bold; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::after { content: ' +'; color: var(--primary); font-size: 1.2rem; }
+        details[open] summary::after { content: ' −'; }
+        details p { margin-top: 15px; opacity: 0.8; font-size: 14px; line-height: 1.6; }
 
-        .discord-float {
-            background: transparent; /* Fond transparent pour le nouveau logo */
-            width: 65px; height: 65px;
-            display: flex; align-items: center; justify-content: center;
-            transition: 0.3s;
-        }
+        /* GUIDES SÉCURITÉ */
+        .guides-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .guide-item { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 4px solid var(--primary); }
+        .guide-item h4 { margin-bottom: 10px; font-size: 16px; }
+        .guide-item p { font-size: 13px; opacity: 0.7; }
 
+        /* DISCORD */
+        .discord-container { position: fixed; bottom: 30px; right: 30px; display: flex; align-items: center; z-index: 100; }
+        .discord-tooltip { background: var(--discord); color: white; padding: 8px 15px; border-radius: 10px; font-size: 14px; font-weight: bold; margin-right: 15px; opacity: 0; transform: translateX(10px); transition: 0.3s; pointer-events: none; }
+        .discord-float { width: 65px; height: 65px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
         .discord-float img { width: 100%; height: 100%; object-fit: contain; }
-
-        .discord-container:hover .discord-tooltip {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
+        .discord-container:hover .discord-tooltip { opacity: 1; transform: translateX(0); }
         .discord-container:hover .discord-float { transform: scale(1.1) rotate(5deg); }
 
-        footer{padding:40px; text-align:center; background: rgba(0,0,0,0.7); font-size: 12px; letter-spacing: 1px;}
+        footer{padding:60px 40px; text-align:center; background: rgba(0,0,0,0.7); font-size: 12px; letter-spacing: 1px;}
     </style>
 </head>
 <body>
@@ -144,25 +83,52 @@
         <a href="boutique-payante.html" class="portal-card">
             <div>
                 <h3 style="color: var(--primary); margin-bottom: 15px;">PREMIUM STORE</h3>
-                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Catalogue exclusif de comptes GTA 5 sécurisés et boostés.</p>
+                <p style="opacity: 0.7; font-size: 14px;">Comptes GTA 5 sécurisés et boostés.</p>
             </div>
             <div class="btn-enter">Entrer</div>
         </a>
         <a href="boutique-gratuite.html" class="portal-card">
             <div>
                 <h3 style="color: var(--primary); margin-bottom: 15px;">RESOURCES</h3>
-                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Logiciels, guides et cadeaux pour la communauté.</p>
+                <p style="opacity: 0.7; font-size: 14px;">Logiciels et cadeaux communautaires.</p>
             </div>
             <div class="btn-enter">Explorer</div>
         </a>
-        <a href="documentation.html" class="portal-card">
-            <div>
-                <h3 style="color: var(--primary); margin-bottom: 15px;">UPDATES</h3>
-                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Suivez l'évolution du projet et les dernières annonces.</p>
-            </div>
-            <div class="btn-enter">Lire</div>
-        </a>
     </div>
+
+    <section class="content-section">
+        <h2 class="section-title">Foire Aux Questions</h2>
+        <details>
+            <summary>La livraison est-elle immédiate ?</summary>
+            <p>Oui, dès que le paiement est validé sur SellAuth, vous recevez les identifiants par mail automatiquement.</p>
+        </details>
+        <details>
+            <summary>Y a-t-il un risque de bannissement ?</summary>
+            <p>Nos comptes sont préparés avec des méthodes "Safe-Injection". En suivant nos guides de sécurité, le risque est proche de zéro.</p>
+        </details>
+        <details>
+            <summary>Quels sont les moyens de paiement ?</summary>
+            <p>Nous acceptons les Crypto-monnaies, Cartes Bancaires et certains modes de paiement locaux via notre boutique.</p>
+        </details>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">Sécurité & Conseils</h2>
+        <div class="guides-container">
+            <div class="guide-item">
+                <h4>🛡️ Premier Log-in</h4>
+                <p>Attendez toujours 24h avant de changer l'adresse mail du compte pour éviter les alertes de sécurité.</p>
+            </div>
+            <div class="guide-item">
+                <h4>💰 Gestion du Cash</h4>
+                <p>Évitez de dépenser plus de 50 millions en une seule session de jeu.</p>
+            </div>
+            <div class="guide-item">
+                <h4>🔑 Mot de passe</h4>
+                <p>Activez la double authentification (2FA) dès que possible pour une protection maximale.</p>
+            </div>
+        </div>
+    </section>
 </main>
 
 <div class="discord-container">
@@ -175,7 +141,8 @@
 <footer>
     <p>© 2026 ON TOP LOUNGE — 8BMK</p>
     <div style="margin-top:15px; opacity: 0.6;">
-        <a href="mentions-legales.html" style="color: white; text-decoration: none;">Mentions Légales</a>
+        <a href="mentions-legales.html" style="color: white; text-decoration: none; margin-right: 15px;">Mentions Légales</a>
+        <a href="https://discord.gg/MPKADDqYtk" style="color: white; text-decoration: none;">Discord Officiel</a>
     </div>
 </footer>
 
