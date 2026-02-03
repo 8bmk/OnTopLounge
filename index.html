@@ -6,59 +6,106 @@
     <title>On Top Lounge | Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #0b0b0b; --card-bg: rgba(22, 8, 26, 0.8); }
+        :root { --primary: #a166ff; --bg: #0b0b0b; --card-bg: rgba(22, 8, 26, 0.7); }
         *{margin:0;padding:0;box-sizing:border-box;}
+        
+        /* 4. ANIMATION D'ENTRÉE (Fade-in) */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
+
+        /* VIDÉO DE FOND */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.5; pointer-events: none; }
-        header{padding:40px; text-align:center;}
-        .logo-img { width: 120px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; }
-        header h1{font-weight:900; letter-spacing:4px; text-transform:uppercase; color:var(--primary); font-size: 1.5rem;}
-        .hero{text-align:center; padding:60px 20px;}
-        .hero h2{font-size:3.5rem; background: linear-gradient(to bottom, #fff, #a166ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;}
-        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1100px; margin: 20px auto; padding: 0 20px; }
-        .portal-card { background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center; border: 1px solid rgba(161, 102, 255, 0.3); text-decoration: none; color: white; transition: 0.4s; backdrop-filter: blur(10px); }
-        .portal-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 0 30px rgba(161, 102, 255, 0.3); }
-        .portal-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary); }
-        .btn-enter { display: inline-block; margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 12px; }
-        footer{padding:40px; text-align:center; background: rgba(0,0,0,0.5); font-size: 13px; margin-top: 50px;}
-        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
+
+        /* 1. EFFET SCANLINE (Rétro) */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: -1; background-size: 100% 4px, 3px 100%; pointer-events: none;
+        }
+
+        /* 3. STATUT DU SERVICE */
+        .status-bar { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.6); padding: 8px 15px; border-radius: 50px; font-size: 11px; font-weight: bold; border: 1px solid rgba(161, 102, 255, 0.3); display: flex; align-items: center; gap: 8px; animation: fadeIn 1s ease; }
+        .status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px #00ff88; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        header{padding:60px 20px; text-align:center; animation: fadeIn 1s ease;}
+        .logo-img { width: 140px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; }
+        
+        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1100px; margin: 0 auto 60px auto; padding: 0 20px; animation: fadeIn 1.5s ease; }
+        
+        .portal-card { 
+            background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center; 
+            border: 1px solid rgba(161, 102, 255, 0.2); text-decoration: none; color: white; 
+            transition: 0.4s; backdrop-filter: blur(12px); 
+        }
+
+        /* 2. BOUTONS AVEC LUEUR (GLOW) */
+        .portal-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 0 30px rgba(161, 102, 255, 0.4); }
+        .btn-enter { 
+            display: inline-block; margin-top: 20px; padding: 12px 30px; background: var(--primary); 
+            color: #000; font-weight: 900; border-radius: 50px; font-size: 12px; text-transform: uppercase;
+            transition: 0.3s; box-shadow: 0 0 10px rgba(161, 102, 255, 0.5);
+        }
+        .portal-card:hover .btn-enter { box-shadow: 0 0 25px var(--primary); transform: scale(1.05); }
+
+        /* 5. BOUTON FLOTTANT DISCORD */
+        .discord-float {
+            position: fixed; bottom: 30px; right: 30px; background: #5865F2; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); transition: 0.3s; z-index: 100;
+        }
+        .discord-float:hover { transform: scale(1.1) rotate(10deg); background: #7289da; }
+        .discord-float img { width: 30px; }
+
+        footer{padding:40px; text-align:center; background: rgba(0,0,0,0.7); font-size: 12px; letter-spacing: 1px;}
     </style>
 </head>
 <body>
+
 <video autoplay muted loop playsinline id="bg-video">
     <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
 </video>
+
+<div class="status-bar">
+    <div class="status-dot"></div> SERVICE OPÉRATIONNEL
+</div>
+
 <header>
     <img src="OTL.png" alt="OTL Logo" class="logo-img">
-    <h1>On Top Lounge</h1>
+    <h1 style="letter-spacing: 8px; font-weight: 900; color: var(--primary); text-transform: uppercase;">On Top Lounge</h1>
 </header>
+
 <main>
-    <section class="hero">
-        <h2>Ready For The Action</h2>
-    </section>
     <div class="portal-grid">
         <a href="boutique-payante.html" class="portal-card">
-            <h3>Premium Store</h3>
-            <p>Accédez à notre catalogue exclusif de comptes GTA.</p>
-            <div class="btn-enter">Accéder</div>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">PREMIUM STORE</h3>
+            <p style="opacity: 0.7; font-size: 14px;">Accès au catalogue de comptes sécurisés.</p>
+            <div class="btn-enter">Entrer</div>
         </a>
         <a href="boutique-gratuite.html" class="portal-card">
-            <h3>Free Resources</h3>
-            <p>Outils et cadeaux pour la communauté.</p>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">RESOURCES</h3>
+            <p style="opacity: 0.7; font-size: 14px;">Contenu gratuit et outils communautaires.</p>
             <div class="btn-enter">Explorer</div>
         </a>
         <a href="documentation.html" class="portal-card">
-            <h3>Actualités</h3>
-            <p>Mises à jour et vie du projet.</p>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">UPDATES</h3>
+            <p style="opacity: 0.7; font-size: 14px;">Dernières news et journal de bord.</p>
             <div class="btn-enter">Lire</div>
         </a>
     </div>
 </main>
+
+<a href="https://discord.gg/MPKADDqYtk" class="discord-float" target="_blank" title="Rejoindre le Discord">
+    <img src="https://assets-global.website-files.com/6257adef93867e3d0394e36a/6257adef93867e734294e410_Discord%20Logomark%20White.svg" alt="Discord">
+</a>
+
 <footer>
-    <p>© 2026 On Top Lounge - 8bmk</p>
-    <div style="margin-top: 15px;">
-        <a href="mentions-legales.html">Mentions Légales</a> | <a href="https://discord.gg/MPKADDqYtk" target="_blank">Discord</a>
+    <p>© 2026 ON TOP LOUNGE — DESIGNED BY 8BMK</p>
+    <div style="margin-top:15px; opacity: 0.6;">
+        <a href="mentions-legales.html" style="color: white; text-decoration: none;">Mentions Légales</a>
     </div>
 </footer>
+
 </body>
 </html>
