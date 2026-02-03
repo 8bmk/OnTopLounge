@@ -3,205 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Store | On Top Lounge</title>
+    <title>OTL | Force Opérationnelle</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.9); --accent: #00ff88; }
-        
-        *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
-        body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
+        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.9); --discord: #5865F2; }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:white;min-height:100vh; overflow-x: hidden;}
 
-        /* BACKGROUND IDENTIQUE ACCUEIL */
-        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.25; }
+        /* SCANLINE EFFECT */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
             z-index: -1; background-size: 100% 3px, 3px 100%; pointer-events: none;
         }
 
-        /* NAVIGATION MINI */
-        nav { padding: 30px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
-        .back-link { color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
-        .back-link:hover { opacity: 0.7; transform: translateX(-5px); }
+        header { padding: 80px 20px 40px; text-align: center; }
+        .back-link { position: absolute; top: 30px; left: 30px; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; transition: 0.3s; z-index: 100; }
+        .back-link:hover { background: var(--primary); color: black; }
 
-        header { text-align: center; padding: 60px 20px; }
-        header h1 { font-size: 2.5rem; letter-spacing: 12px; text-transform: uppercase; font-weight: 900; margin-bottom: 10px; }
-        .category-tag { background: rgba(161, 102, 255, 0.1); color: var(--primary); padding: 5px 15px; border-radius: 50px; font-size: 10px; font-family: 'Space Mono'; border: 1px solid var(--primary); }
+        .shop-container { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; padding: 20px; max-width: 1100px; margin: 0 auto; }
 
-        /* FILTRES TACTIQUES */
-        .shop-container { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
+        .product-card { 
+            background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.2); border-radius: 25px; 
+            padding: 40px; width: 100%; max-width: 480px; position: relative; overflow: hidden; 
+            backdrop-filter: blur(10px); transition: 0.4s; display: flex; flex-direction: column;
+        }
+        .product-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(161, 102, 255, 0.1); }
+
+        .price-tag { font-family: 'Space Mono'; color: var(--primary); font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; display: block; }
         
-        /* GRID DES PRODUITS */
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 50px; perspective: 1000px; }
+        h2 { font-family: 'Space Mono'; font-size: 1.6rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
 
-        .product-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), border 0.3s;
-            transform-style: preserve-3d;
-        }
+        .specs-list { list-style: none; margin-bottom: 35px; flex-grow: 1; }
+        .specs-list li { margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; opacity: 0.9; }
+        .specs-list li::before { content: "►"; color: var(--primary); font-size: 0.7rem; margin-right: 12px; }
+        .specs-list b { color: var(--primary); }
 
-        .product-card:hover { border-color: var(--primary); }
+        .btn-buy { display: block; text-align: center; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; transition: 0.3s; }
         
-        /* EFFET GLITCH SUBTILE SUR CARD */
-        .product-card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(161, 102, 255, 0.05) 0px, transparent 2px);
-            opacity: 0; transition: 0.3s; pointer-events: none;
-        }
-        .product-card:hover::before { opacity: 1; }
+        .btn-sellauth { background: var(--primary); color: black; box-shadow: 0 5px 15px rgba(161, 102, 255, 0.3); }
+        .btn-sellauth:hover { background: white; transform: scale(1.02); }
 
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: #111;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            object-fit: cover;
-            border: 1px solid rgba(161, 102, 255, 0.1);
-            transform: translateZ(20px);
-        }
+        .btn-discord { background: transparent; border: 2px solid var(--discord); color: white; }
+        .btn-discord:hover { background: var(--discord); }
 
-        .product-badge {
-            position: absolute; top: 15px; right: 15px;
-            background: var(--accent); color: black;
-            font-size: 9px; font-weight: 900; padding: 4px 10px;
-            border-radius: 4px; text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-        }
-
-        .product-title { font-size: 1.2rem; margin-bottom: 10px; font-family: 'Space Mono'; color: var(--primary); }
-        
-        .product-specs { list-style: none; margin-bottom: 25px; }
-        .product-specs li { font-size: 0.85rem; opacity: 0.6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .product-specs li::before { content: "▹"; color: var(--primary); }
-
-        .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); pt-20px; padding-top: 20px; }
-        .price { font-size: 1.5rem; font-weight: 900; font-family: 'Space Mono'; }
-        .price span { font-size: 0.8rem; opacity: 0.5; margin-left: 5px; }
-
-        .buy-btn {
-            background: white; color: black;
-            padding: 12px 25px; border-radius: 10px;
-            text-decoration: none; font-weight: 900; font-size: 0.8rem;
-            text-transform: uppercase; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(255,255,255,0.1);
-        }
-        .buy-btn:hover { background: var(--primary); color: white; transform: scale(1.05); }
-
-        /* STATUS TAGS */
-        .stock-status { font-size: 10px; display: flex; align-items: center; gap: 5px; margin-top: 10px; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-
-        footer { text-align: center; padding: 50px; opacity: 0.3; font-size: 10px; letter-spacing: 2px; }
+        .badge { position: absolute; top: 20px; right: -30px; background: #ff4444; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 0.7rem; font-weight: bold; font-family: 'Space Mono'; }
     </style>
 </head>
 <body>
 
-<video autoplay muted loop playsinline id="bg-video">
-    <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
-</video>
-
-<nav>
-    <a href="index.html" class="back-link">← RETOUR AU PORTAIL</a>
-    <div class="category-tag">SESSION: 04-X8</div>
-</nav>
+<a href="index.html" class="back-link">← RETOUR PORTAIL</a>
 
 <header>
-    <h1>Premium Assets</h1>
-    <p style="opacity: 0.5; font-family: 'Space Mono';">SÉLECTION DE COMPTES VÉRIFIÉS & SÉCURISÉS</p>
+    <h1 style="letter-spacing: 5px; text-transform: uppercase; font-size: 2rem;">SÉLECTION D'ACTIFS</h1>
+    <p style="opacity: 0.5; font-family: 'Space Mono'; margin-top: 10px;">PRODUITS DISPONIBLES EN RÉSEAU SÉCURISÉ</p>
 </header>
 
 <div class="shop-container">
-    <div class="products-grid">
-        
-        <div class="product-card js-tilt">
-            <span class="product-badge">Best Seller</span>
-            <img src="https://via.placeholder.com/400x250/1a1a1a/a166ff?text=GTA+V+ULTRA" alt="Account" class="product-image">
-            <h3 class="product-title">PACK ALPHA-8</h3>
-            <ul class="product-specs">
-                <li>Niveau 120-250 (Safe Rank)</li>
-                <li>$500M - $1B Cash Direct</li>
-                <li>Toutes les propriétés débloquées</li>
-                <li>Tenues moddées exclusives</li>
-            </ul>
-            <div class="price-row">
-                <div class="price">24.99<span>€</span></div>
-                <a href="#" class="buy-btn">Acquérir</a>
-            </div>
-            <div class="stock-status">
-                <div class="dot"></div> DISPONIBILITÉ : IMMÉDIATE
-            </div>
-        </div>
-
-        <div class="product-card js-tilt">
-            <img src="https://via.placeholder.com/400x250/1a1a1a/a166ff?text=GTA+V+STARTER" alt="Account" class="product-image">
-            <h3 class="product-title">STARTER PROTOCOL</h3>
-            <ul class="product-specs">
-                <li>Niveau 60 (Prêt pour braquages)</li>
-                <li>$100M Cash</li>
-                <li>Éléments de base débloqués</li>
-                <li>Protection Anti-Ban V2</li>
-            </ul>
-            <div class="price-row">
-                <div class="price">14.99<span>€</span></div>
-                <a href="#" class="buy-btn">Acquérir</a>
-            </div>
-            <div class="stock-status">
-                <div class="dot"></div> DISPONIBILITÉ : IMMÉDIATE
-            </div>
-        </div>
-
-        <div class="product-card js-tilt">
-            <span class="product-badge" style="background: var(--primary); color: white;">Ultimate</span>
-            <img src="https://via.placeholder.com/400x250/1a1a1a/a166ff?text=PRESTIGE+MASTER" alt="Account" class="product-image">
-            <h3 class="product-title">PRESTIGE MASTER</h3>
-            <ul class="product-specs">
-                <li>Niveau Personnalisable</li>
-                <li>$5B+ Assets totaux</li>
-                <li>Recherche Bunker 100%</li>
-                <li>Statistiques Maxées</li>
-            </ul>
-            <div class="price-row">
-                <div class="price">49.99<span>€</span></div>
-                <a href="#" class="buy-btn">Acquérir</a>
-            </div>
-            <div class="stock-status">
-                <div class="dot"></div> DISPONIBILITÉ : SUR COMMANDE
-            </div>
-        </div>
-
+    
+    <div class="product-card">
+        <div class="badge">POPULAIRE</div>
+        <span class="price-tag">35.00€</span>
+        <h2>Premium Pack</h2>
+        <ul class="specs-list">
+            <li>Argent : <b>10M à 200M GTA$</b></li>
+            <li>Niveau : <b>150 à 8000</b></li>
+            <li>Véhicules : <b>10 à 250 (Moddés)</b></li>
+            <li>Déblocage : <b>Unlock All complet</b></li>
+            <li>Capacités : <b>Fast Run & Full Stats</b></li>
+            <li>K/D : <b>Aléatoire (2000 à 8000)</b></li>
+            <li>Et bien plus encore...</li>
+        </ul>
+        <a href="TON_LIEN_SELLAUTH_ICI" class="btn-buy btn-sellauth">Initialiser l'achat</a>
     </div>
+
+    <div class="product-card">
+        <span class="price-tag">15€ — 150€</span>
+        <h2>Compte Custom</h2>
+        <p style="opacity: 0.7; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">
+            Besoin d'un compte configuré selon vos propres critères ? 
+            Nous réalisons votre montage sur mesure.
+        </p>
+        <ul class="specs-list">
+            <li>Montant d'argent au choix</li>
+            <li>Niveau spécifique demandé</li>
+            <li>Garage personnalisé</li>
+            <li>Tenues moddées exclusives</li>
+            <li>Assistance directe via Ticket</li>
+        </ul>
+        <a href="https://discord.gg/MPKADDqYtk" class="btn-buy btn-discord">Commander via Discord</a>
+    </div>
+
 </div>
 
-<footer>
-    © 2026 ON TOP LOUNGE — TOUS DROITS RÉSERVÉS
+<footer style="text-align: center; padding: 60px; opacity: 0.3; font-size: 0.8rem; font-family: 'Space Mono';">
+    TERMINAL ID: OTL-PRIME-STATION // ENCRYPTED SHOP
 </footer>
-
-<script>
-    // PARALLAX EFFECT (Adouci comme l'accueil)
-    const cards = document.querySelectorAll('.js-tilt');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const rotateX = (y - rect.height / 2) / -25;
-            const rotateY = (x - rect.width / 2) / 25;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
-        });
-    });
-</script>
 
 </body>
 </html>
