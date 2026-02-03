@@ -2,14 +2,82 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Mon Site GitHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOM DE TON SITE</title> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
-        h1 { color: #2ecc71; }
+        /* TOUTE CETTE PARTIE STYLE (CSS) EST CE QUI FAIT LE DESIGN VIOLET ET NOIR. 
+           NE TOUCHE À RIEN ICI POUR GARDER L'ESTHÉTIQUE. */
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',sans-serif;background:#0b0b0b;color:#d0a0ff;overflow-x:hidden;position:relative;}
+        header{position:fixed;top:0;width:100%;padding:15px 40px;display:flex;justify-content:space-between;align-items:center;background:#0b0b0b;z-index:1000;}
+        header h1{font-weight:800;letter-spacing:2px;font-size:24px;color:#a166ff;}
+        nav ul{display:flex;gap:20px;list-style:none;}
+        nav a{text-decoration:none;color:#d0a0ff;font-weight:500;transition:0.3s;}
+        nav a:hover{color:#a166ff;}
+        main{padding-top:100px;max-width:1200px;margin:auto;}
+        .hero{text-align:center;padding:120px 20px;background:#0b0b0b;color:#a166ff;}
+        .hero h2{font-size:48px;margin-bottom:20px;font-weight:800;}
+        .hero p{color:#d0a0ff;max-width:600px;margin:auto;}
+        .section{padding:60px 20px;opacity:0;transform:translateY(30px);transition:all 0.8s ease;position:relative;}
+        .section.visible{opacity:1;transform:translateY(0);}
+        .section h3{font-size:32px;margin-bottom:30px;text-align:center;color:#a166ff;}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;}
+        a.card-link{display:block;text-decoration:none;color:inherit;}
+        .card{background:#1a0a1f;padding:0;border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform 0.3s;}
+        .card img{width:100%;display:block;transition:transform 0.5s ease;}
+        .card h4{position:absolute;bottom:15px;left:15px;color:#d0a0ff;font-weight:700;font-size:18px;transition:opacity 0.3s;}
+        .card:hover img{transform:scale(1.2);}
+        .card:hover h4{opacity:0;}
+        footer{padding:40px;text-align:center;color:#d0a0ff;border-top:1px solid #1a0a1f;margin-top:60px;}
     </style>
 </head>
 <body>
-    <h1>Bravo ! Mon site est en ligne 🚀</h1>
-    <p>Ceci est ma première page HTML hébergée sur GitHub.</p>
+
+<header>
+    <h1>VOTRE LOGO</h1> <nav>
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#section1">Catégorie 1</a></li> <li><a href="#section2">Catégorie 2</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <h2>Ton Titre Principal Accrocheur</h2> <p>Une petite description qui explique ce qu'on trouve sur ton site.</p>
+    </section>
+
+    <section class="section" id="section1">
+        <h3>Titre de la première section</h3>
+        <div class="grid">
+            
+            <a href="page-detail.html" class="card-link">
+                <div class="card">
+                    <img src="https://via.placeholder.com/500" alt="Description"> <h4>Nom de l'objet ou projet</h4>
+                </div>
+            </a>
+
+            </div>
+    </section>
+
+</main>
+
+<footer id="contact">
+    <p>© 2026 TON NOM — Tous droits réservés</p>
+</footer>
+
+<script>
+    // Ce script gère l'apparition des sections quand on défile (le fondu)
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => { observer.observe(section); });
+</script>
+
 </body>
 </html>
