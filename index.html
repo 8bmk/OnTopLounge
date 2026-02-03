@@ -6,12 +6,12 @@
     <title>On Top Lounge | Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.8); --discord: #5865F2; --rare: #ff00c8; }
+        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.8); --discord: #5865F2; }
         
         *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
 
-        /* BACKGROUND VIDEO & SCANLINES */
+        /* EFFET SCANLINE & BACKGROUND */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.4; }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -19,67 +19,53 @@
             z-index: -1; background-size: 100% 3px, 3px 100%; pointer-events: none;
         }
 
-        /* ANIMATIONS DE REVEAL */
+        /* ANIMATIONS */
         .reveal { opacity: 0; transform: translateY(30px); filter: blur(5px); transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
 
-        /* EFFET GLITCH AU SURVOL */
-        .glitch-hover:hover { animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite; }
-        @keyframes glitch {
-            0% { transform: translate(0); text-shadow: -2px 0 red, 2px 0 blue; }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); text-shadow: 2px 0 red, -2px 0 blue; }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        /* STATUS BAR */
-        .status-bar { position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 10px 20px; border-radius: 50px; font-size: 10px; font-weight: bold; border: 1px solid var(--primary); z-index: 1000; display: flex; align-items: center; gap: 10px; }
+        /* HEADER & STATUS */
+        .status-bar { position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 10px 20px; border-radius: 50px; font-size: 10px; font-weight: bold; border: 1px solid var(--primary); z-index: 1000; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
         .status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px #00ff88; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        header { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .logo-img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); filter: drop-shadow(0 0 20px var(--primary)); margin-bottom: 20px; }
+        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .logo-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); filter: drop-shadow(0 0 20px var(--primary)); margin-bottom: 20px; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* STATS BAR */
-        .stats-container { display: flex; justify-content: center; gap: 50px; margin-bottom: 50px; flex-wrap: wrap; }
-        .stat-item { text-align: center; }
-        .stat-value { font-size: 2.5rem; font-weight: 900; color: var(--primary); font-family: 'Space Mono'; display: block; }
-        .stat-label { font-size: 11px; text-transform: uppercase; opacity: 0.6; letter-spacing: 2px; }
-
-        /* GRID & RARE CARD */
-        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        /* GRID PORTAL */
+        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .portal-card { 
             background: var(--card-bg); padding: 50px 30px; border-radius: 30px; text-align: center; 
             border: 1px solid rgba(161, 102, 255, 0.1); text-decoration: none; color: white; 
             transition: 0.5s; backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: space-between;
         }
-        
-        /* EFFET RARE (Bordure Animée) */
-        .rare-card { position: relative; border-color: transparent !important; overflow: hidden; }
-        .rare-card::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, transparent, transparent, var(--rare)); animation: rotate 4s linear infinite; z-index: -1; }
-        .rare-card::before { content: ''; position: absolute; inset: 2px; background: var(--bg); border-radius: 28px; z-index: -1; }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-
-        .btn-enter { margin-top: 30px; padding: 15px 40px; background: var(--primary); color: #000; font-weight: 900; border-radius: 50px; font-size: 12px; text-transform: uppercase; transition: 0.3s; align-self: center; }
+        .portal-card:hover { border-color: var(--primary); box-shadow: 0 0 40px rgba(161, 102, 255, 0.2); transform: scale(1.02); }
+        .btn-enter { margin-top: 30px; padding: 15px 40px; background: var(--primary); color: #000; font-weight: 900; border-radius: 50px; font-size: 13px; text-transform: uppercase; transition: 0.3s; align-self: center; }
 
         /* SECTIONS CONTENT */
-        .content-section { max-width: 1000px; margin: 100px auto; padding: 0 20px; }
-        .section-header h2 { font-size: 2rem; text-transform: uppercase; letter-spacing: 5px; color: var(--primary); text-align: center; margin-bottom: 40px; }
+        .content-section { max-width: 1000px; margin: 150px auto; padding: 0 20px; }
+        .section-header { margin-bottom: 50px; text-align: center; }
+        .section-header h2 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 5px; color: var(--primary); font-family: 'Space Mono', monospace; }
 
-        /* MAINTENANCE BOX */
-        .maintenance-box { background: rgba(255, 0, 0, 0.05); border: 1px dashed rgba(255, 0, 0, 0.3); padding: 40px; border-radius: 20px; text-align: center; font-family: 'Space Mono', monospace; }
-        .typing-text::after { content: "|"; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
+        /* FAQ STYLE */
+        .faq-container { background: rgba(255,255,255,0.02); border-radius: 20px; padding: 10px; }
+        details { background: rgba(161, 102, 255, 0.05); border: 1px solid rgba(161, 102, 255, 0.1); border-radius: 15px; margin-bottom: 15px; padding: 20px; transition: 0.3s; }
+        details[open] { background: rgba(161, 102, 255, 0.1); border-color: var(--primary); }
+        summary { font-weight: bold; list-style: none; display: flex; justify-content: space-between; cursor: pointer; }
+
+        /* GUIDES CARDS */
+        .guides-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .guide-box { background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0)); padding: 30px; border-radius: 20px; border-top: 2px solid var(--primary); }
+        .guide-box h4 { color: var(--primary); margin-bottom: 15px; font-family: 'Space Mono'; }
 
         /* DISCORD */
         .discord-container { position: fixed; bottom: 30px; right: 30px; display: flex; align-items: center; z-index: 1000; }
         .discord-tooltip { background: var(--discord); color: white; padding: 10px 20px; border-radius: 12px; font-size: 14px; font-weight: bold; margin-right: 15px; opacity: 0; transform: translateX(20px); transition: 0.4s; }
-        .discord-float { width: 70px; height: 70px; transition: 0.4s; }
+        .discord-float { width: 70px; height: 70px; transition: 0.4s; cursor: pointer; }
         .discord-container:hover .discord-tooltip { opacity: 1; transform: translateX(0); }
-        .discord-float:hover { transform: scale(1.1) rotate(8deg); }
+        .discord-float:hover { transform: scale(1.1) rotate(8deg); filter: drop-shadow(0 0 15px var(--discord)); }
 
-        footer { padding: 60px 20px; text-align: center; opacity: 0.5; font-size: 11px; }
+        footer { padding: 100px 20px; text-align: center; opacity: 0.5; font-size: 11px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -89,43 +75,28 @@
 </video>
 
 <div class="status-bar">
-    <div class="status-dot"></div> SYSTEM ONLINE
+    <div class="status-dot"></div> SYSTÈME OPÉRATIONNEL
 </div>
 
 <header class="reveal">
-    <img src="OTL.png" alt="OTL" class="logo-img glitch-hover">
-    <h1 class="glitch-hover" style="font-size: 3rem; font-weight: 900; letter-spacing: 12px; text-transform: uppercase;">On Top Lounge</h1>
+    <img src="OTL.png" alt="OTL" class="logo-img">
+    <h1 style="font-size: 3rem; font-weight: 900; letter-spacing: 12px; text-transform: uppercase;">On Top Lounge</h1>
+    <p style="opacity: 0.6; margin-top: 10px; font-family: 'Space Mono';">EST. 2026 | PREMIUM GAMING HUB</p>
 </header>
 
 <main>
-    <div class="stats-container reveal">
-        <div class="stat-item">
-            <span class="stat-value" data-target="1500">0</span>
-            <span class="stat-label">Clients</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value" data-target="99">0</span>
-            <span class="stat-label">% Safe Rate</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value" data-target="24">0</span>
-            <span class="stat-label">H/7 Support</span>
-        </div>
-    </div>
-
     <section class="portal-grid reveal">
-        <a href="boutique-payante.html" class="portal-card rare-card">
+        <a href="boutique-payante.html" class="portal-card">
             <div>
-                <span style="color: var(--rare); font-weight: bold; font-size: 10px; letter-spacing: 2px;">EXCLUSIVE ACCESS</span>
-                <h3 class="glitch-hover" style="color: white; font-size: 1.5rem; margin: 15px 0;">PREMIUM STORE</h3>
-                <p style="opacity: 0.7; font-size: 14px;">Comptes GTA 5 Moddés, Tenues Save Wizard & Packs Dollars.</p>
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 20px;">01. PREMIUM STORE</h3>
+                <p style="opacity: 0.7; line-height: 1.8;">Accédez à notre sélection exclusive de comptes GTA 5 avec des statistiques optimisées pour le haut niveau.</p>
             </div>
-            <div class="btn-enter" style="background: var(--rare); color: white;">Entrer</div>
+            <div class="btn-enter">Accéder au shop</div>
         </a>
         <a href="boutique-gratuite.html" class="portal-card">
             <div>
-                <h3 class="glitch-hover" style="color: var(--primary); font-size: 1.5rem; margin-bottom: 20px;">RESOURCES</h3>
-                <p style="opacity: 0.7; font-size: 14px;">Guides d'optimisation et outils gratuits pour la communauté.</p>
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 20px;">02. RESOURCES</h3>
+                <p style="opacity: 0.7; line-height: 1.8;">Outils, utilitaires et contenus gratuits mis à disposition pour la communauté On Top Lounge.</p>
             </div>
             <div class="btn-enter">Explorer</div>
         </a>
@@ -133,11 +104,37 @@
 
     <section class="content-section reveal">
         <div class="section-header">
-            <h2>System Updates</h2>
+            <h2>Questions fréquentes</h2>
         </div>
-        <div class="maintenance-box">
-            <p style="color: #ff4444; margin-bottom: 10px;">> [ERROR] MODULE_RESOURCES_V2 NOT FOUND</p>
-            <p class="typing-text">> Decrypting new scripts... Expected arrival: March 2026</p>
+        <div class="faq-container">
+            <details>
+                <summary>Comment se passe la réception ? <span>[+]</span></summary>
+                <p>Après validation, un email automatique vous est envoyé avec les accès complets (Mail + Password). Tout est instantané via SellAuth.</p>
+            </details>
+            <details>
+                <summary>Le service est-il garanti ? <span>[+]</span></summary>
+                <p>Chaque achat bénéficie d'une garantie de remplacement en cas de problème technique lié au compte dans les 48h suivant l'achat.</p>
+            </details>
+        </div>
+    </section>
+
+    <section class="content-section reveal">
+        <div class="section-header">
+            <h2>Protocoles de Sécurité</h2>
+        </div>
+        <div class="guides-wrapper">
+            <div class="guide-box">
+                <h4>#01 PROTECTION</h4>
+                <p>Ne changez pas les informations du compte immédiatement après l'achat. Attendez 24h de repos serveur.</p>
+            </div>
+            <div class="guide-box">
+                <h4>#02 UTILISATION</h4>
+                <p>Nos comptes utilisent des méthodes d'injection privées. Ne mélangez pas avec des menus gratuits tiers.</p>
+            </div>
+            <div class="guide-box">
+                <h4>#03 SUPPORT</h4>
+                <p>Un doute ? Notre équipe est disponible sur Discord 7j/7 pour vous accompagner dans vos premiers pas.</p>
+            </div>
         </div>
     </section>
 </main>
@@ -149,37 +146,25 @@
     </a>
 </div>
 
+<footer>
+    <p>© 2026 ON TOP LOUNGE — DÉVELOPPÉ PAR 8BMK</p>
+    <div style="margin-top: 20px;">
+        <a href="#" style="color: var(--primary); text-decoration: none; margin: 0 10px;">Mentions</a>
+        <a href="#" style="color: var(--primary); text-decoration: none; margin: 0 10px;">Discord</a>
+    </div>
+</footer>
+
 <script>
-    // REVEAL ANIMATION
+    // SCRIPT POUR L'EFFET D'APPARITION AU SCROLL
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                if(entry.target.classList.contains('stats-container')) startStats();
             }
         });
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-    // COUNTER ANIMATION
-    function startStats() {
-        document.querySelectorAll('.stat-value').forEach(stat => {
-            const target = +stat.getAttribute('data-target');
-            const speed = 200;
-            const updateCount = () => {
-                const count = +stat.innerText;
-                const inc = target / speed;
-                if (count < target) {
-                    stat.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 1);
-                } else {
-                    stat.innerText = target + (target === 99 ? '%' : '+');
-                }
-            };
-            updateCount();
-        });
-    }
 </script>
 
 </body>
