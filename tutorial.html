@@ -118,3 +118,13 @@
     </script>
 </body>
 </html>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetLink = urlParams.get('target');
+    const redirectBtn = document.querySelector('.btn-redirect');
+
+    if (targetLink) {
+        redirectBtn.href = targetLink; // Applique le lien Lockr au bouton
+    }
+</script>
