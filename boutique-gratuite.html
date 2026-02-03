@@ -4,26 +4,21 @@
     <meta charset="UTF-8">
     <title>Free Resources | On Top Lounge</title>
     <style>
-        body{background:#0b0b0b; color:#d0a0ff; font-family:sans-serif; padding:50px;}
-        .container{max-width:800px; margin:auto;}
-        h1{color:#fff; border-left:5px solid #a166ff; padding-left:15px;}
-        .item{background:#16081a; padding:20px; border-radius:10px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;}
-        .btn-dl{background:#fff; color:#000; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;}
-        .back{color:#a166ff; text-decoration:none; display:block; margin-top:30px;}
+        body{background:#0b0b0b; color:#fff; font-family:sans-serif; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0;}
+        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.3; }
+        .container{background: rgba(22, 8, 26, 0.95); padding: 40px; border-radius: 20px; border: 1px solid #a166ff; width: 90%; max-width: 500px; text-align: center;}
+        .btn-back{color: #a166ff; text-decoration: none; font-size: 14px;}
     </style>
 </head>
 <body>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
+    </video>
     <div class="container">
-        <h1>Ressources Gratuites</h1>
-        <p>Téléchargez nos outils communautaires sans frais.</p><br>
-        <div class="item">
-            <div>
-                <strong>Starter Kit v1</strong>
-                <p style="font-size:12px; opacity:0.6;">Taille : 15 Mo</p>
-            </div>
-            <a href="#" class="btn-dl">Télécharger</a>
-        </div>
-        <a href="index.html" class="back">← Retour au Portail</a>
+        <h1>Cadeaux & Freebies</h1>
+        <p>Les ressources gratuites arrivent très prochainement.</p>
+        <div style="margin: 30px 0; font-style: italic; opacity: 0.5;">[Chargement des fichiers en cours...]</div>
+        <a href="index.html" class="btn-back">← Retour à l'accueil</a>
     </div>
 </body>
 </html>
