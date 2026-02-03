@@ -6,15 +6,13 @@
     <title>On Top Lounge | Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #0b0b0b; --card-bg: rgba(22, 8, 26, 0.7); }
+        :root { --primary: #a166ff; --bg: #0b0b0b; --card-bg: rgba(22, 8, 26, 0.7); --discord: #5865F2; }
         *{margin:0;padding:0;box-sizing:border-box;}
         
-        /* 4. ANIMATION D'ENTRÉE */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
 
-        /* VIDÉO DE FOND */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.5; pointer-events: none; }
 
         /* 1. EFFET SCANLINE */
@@ -24,39 +22,104 @@
             z-index: -1; background-size: 100% 4px, 3px 100%; pointer-events: none;
         }
 
-        /* 3. STATUT DU SERVICE */
         .status-bar { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.6); padding: 8px 15px; border-radius: 50px; font-size: 11px; font-weight: bold; border: 1px solid rgba(161, 102, 255, 0.3); display: flex; align-items: center; gap: 8px; animation: fadeIn 1s ease; }
         .status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px #00ff88; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         header{padding:60px 20px; text-align:center; animation: fadeIn 1s ease;}
-        .logo-img { width: 140px; filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 10px; }
         
-        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1100px; margin: 0 auto 60px auto; padding: 0 20px; animation: fadeIn 1.5s ease; }
+        /* LOGO EN ROND */
+        .logo-img { 
+            width: 130px; 
+            height: 130px;
+            border-radius: 50%; /* Rend le logo rond */
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            filter: drop-shadow(0 0 15px var(--primary)); 
+            margin-bottom: 15px; 
+        }
+        
+        /* GRILLE ET ALIGNEMENT DES BOUTONS */
+        .portal-grid { 
+            display: flex; /* Utilisation de flex pour forcer la même hauteur */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px; 
+            max-width: 1100px; 
+            margin: 0 auto 60px auto; 
+            padding: 0 20px; 
+            animation: fadeIn 1.5s ease; 
+        }
         
         .portal-card { 
-            background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center; 
-            border: 1px solid rgba(161, 102, 255, 0.2); text-decoration: none; color: white; 
-            transition: 0.4s; backdrop-filter: blur(12px); 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 24px; 
+            text-align: center; 
+            border: 1px solid rgba(161, 102, 255, 0.2); 
+            text-decoration: none; 
+            color: white; 
+            transition: 0.4s; 
+            backdrop-filter: blur(12px); 
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Aligne les boutons en bas de la carte */
         }
 
-        /* 2. BOUTONS AVEC LUEUR (GLOW) */
         .portal-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 0 30px rgba(161, 102, 255, 0.4); }
+        
         .btn-enter { 
-            display: inline-block; margin-top: 20px; padding: 12px 30px; background: var(--primary); 
-            color: #000; font-weight: 900; border-radius: 50px; font-size: 12px; text-transform: uppercase;
-            transition: 0.3s; box-shadow: 0 0 10px rgba(161, 102, 255, 0.5);
+            display: inline-block; 
+            margin-top: 25px; 
+            padding: 12px 30px; 
+            background: var(--primary); 
+            color: #000; 
+            font-weight: 900; 
+            border-radius: 50px; 
+            font-size: 12px; 
+            text-transform: uppercase;
+            transition: 0.3s; 
+            box-shadow: 0 0 10px rgba(161, 102, 255, 0.5);
+            align-self: center; /* Centre le bouton horizontalement */
         }
-        .portal-card:hover .btn-enter { box-shadow: 0 0 25px var(--primary); transform: scale(1.05); }
 
-        /* 5. BOUTON FLOTTANT DISCORD AVEC TON LIEN */
-        .discord-float {
-            position: fixed; bottom: 30px; right: 30px; background: #7289da; width: 65px; height: 65px;
-            border-radius: 18px; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.3s; z-index: 100;
+        /* 5. BOUTON DISCORD + INFOBULLE */
+        .discord-container {
+            position: fixed; bottom: 30px; right: 30px;
+            display: flex; align-items: center; z-index: 100;
         }
-        .discord-float:hover { transform: scale(1.1) rotate(-5deg); background: #5d73c7; box-shadow: 0 0 20px #7289da; }
-        .discord-float img { width: 45px; height: 45px; object-fit: contain; }
+
+        .discord-tooltip {
+            background: var(--discord);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 15px;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: 0.3s;
+            pointer-events: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .discord-float {
+            background: transparent; /* Fond transparent pour le nouveau logo */
+            width: 65px; height: 65px;
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s;
+        }
+
+        .discord-float img { width: 100%; height: 100%; object-fit: contain; }
+
+        .discord-container:hover .discord-tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .discord-container:hover .discord-float { transform: scale(1.1) rotate(5deg); }
 
         footer{padding:40px; text-align:center; background: rgba(0,0,0,0.7); font-size: 12px; letter-spacing: 1px;}
     </style>
@@ -79,26 +142,35 @@
 <main>
     <div class="portal-grid">
         <a href="boutique-payante.html" class="portal-card">
-            <h3 style="color: var(--primary); margin-bottom: 10px;">PREMIUM STORE</h3>
-            <p style="opacity: 0.7; font-size: 14px;">Accès au catalogue de comptes sécurisés.</p>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">PREMIUM STORE</h3>
+                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Catalogue exclusif de comptes GTA 5 sécurisés et boostés.</p>
+            </div>
             <div class="btn-enter">Entrer</div>
         </a>
         <a href="boutique-gratuite.html" class="portal-card">
-            <h3 style="color: var(--primary); margin-bottom: 10px;">RESOURCES</h3>
-            <p style="opacity: 0.7; font-size: 14px;">Contenu gratuit et outils communautaires.</p>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">RESOURCES</h3>
+                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Logiciels, guides et cadeaux pour la communauté.</p>
+            </div>
             <div class="btn-enter">Explorer</div>
         </a>
         <a href="documentation.html" class="portal-card">
-            <h3 style="color: var(--primary); margin-bottom: 10px;">UPDATES</h3>
-            <p style="opacity: 0.7; font-size: 14px;">Dernières news et journal de bord.</p>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">UPDATES</h3>
+                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Suivez l'évolution du projet et les dernières annonces.</p>
+            </div>
             <div class="btn-enter">Lire</div>
         </a>
     </div>
 </main>
 
-<a href="https://discord.gg/MPKADDqYtk" class="discord-float" target="_blank" title="Rejoindre le Discord">
-    <img src="https://upload.wikimedia.org/wikipedia/fr/8/80/Logo_Discord_2015.png" alt="Discord">
-</a>
+<div class="discord-container">
+    <div class="discord-tooltip">Besoin d'aide ?</div>
+    <a href="https://discord.gg/MPKADDqYtk" class="discord-float" target="_blank">
+        <img src="https://static.vecteezy.com/system/resources/previews/018/930/500/non_2x/discord-logo-discord-icon-transparent-free-png.png" alt="Discord">
+    </a>
+</div>
 
 <footer>
     <p>© 2026 ON TOP LOUNGE — 8BMK</p>
