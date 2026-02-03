@@ -2,23 +2,176 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Free Resources | On Top Lounge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Archive | On Top Lounge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        body{background:#0b0b0b; color:#fff; font-family:sans-serif; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0;}
-        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.3; }
-        .container{background: rgba(22, 8, 26, 0.95); padding: 40px; border-radius: 20px; border: 1px solid #a166ff; width: 90%; max-width: 500px; text-align: center;}
-        .btn-back{color: #a166ff; text-decoration: none; font-size: 14px;}
+        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(20, 20, 25, 0.6); --free-cyan: #00d9ff; }
+        
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:white; overflow-x:hidden;}
+
+        /* BG IDENTIQUE POUR LA COHÉRENCE */
+        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.2; }
+        
+        /* LAYOUT STYLE POTIONGANG */
+        .container { max-width: 1300px; margin: 0 auto; padding: 40px 20px; }
+
+        /* HEADER & SEARCH */
+        .archive-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.05); pb: 20px; padding-bottom: 20px; }
+        .archive-title h1 { font-family: 'Space Mono'; font-size: 1.8rem; letter-spacing: -1px; }
+        .archive-title p { opacity: 0.5; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
+
+        .search-bar { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 12px 20px; border-radius: 12px; width: 300px; color: white; outline: none; transition: 0.3s; }
+        .search-bar:focus { border-color: var(--free-cyan); box-shadow: 0 0 15px rgba(0, 217, 255, 0.1); }
+
+        /* SIDEBAR CATEGORIES */
+        .main-layout { display: grid; grid-template-columns: 240px 1fr; gap: 40px; }
+        .categories-nav { display: flex; flex-direction: column; gap: 10px; }
+        .cat-link { text-decoration: none; color: white; opacity: 0.6; padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; transition: 0.3s; border: 1px solid transparent; }
+        .cat-link:hover, .cat-link.active { opacity: 1; background: rgba(161, 102, 255, 0.1); border-color: rgba(161, 102, 255, 0.2); color: var(--primary); }
+
+        /* RESOURCE GRID */
+        .resource-section-title { font-family: 'Space Mono'; font-size: 1rem; color: var(--free-cyan); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .resource-section-title::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
+
+        .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 60px; }
+
+        /* RESOURCE CARD STYLE */
+        .res-card { 
+            background: var(--card-bg); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); 
+            padding: 20px; transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; position: relative;
+            backdrop-filter: blur(10px);
+        }
+        .res-card:hover { transform: translateY(-5px); border-color: var(--free-cyan); background: rgba(0, 217, 255, 0.05); }
+
+        .res-thumb { width: 100%; height: 150px; background: #111; border-radius: 10px; margin-bottom: 15px; overflow: hidden; position: relative; }
+        .res-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        
+        .res-version { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); font-size: 10px; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Space Mono'; }
+
+        .res-info h3 { font-size: 1rem; margin-bottom: 5px; letter-spacing: -0.5px; }
+        .res-info p { font-size: 0.8rem; opacity: 0.5; line-height: 1.4; height: 38px; overflow: hidden; }
+
+        .res-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .res-tag { font-size: 9px; text-transform: uppercase; font-weight: bold; color: var(--free-cyan); background: rgba(0, 217, 255, 0.1); padding: 2px 8px; border-radius: 4px; }
+        .res-stats { font-size: 10px; opacity: 0.4; font-family: 'Space Mono'; }
+
+        /* DOWNLOAD BUTTON ANIMATION */
+        .btn-dl { width: 100%; margin-top: 15px; background: rgba(255,255,255,0.05); border: none; padding: 10px; border-radius: 8px; color: white; font-weight: bold; font-size: 0.8rem; cursor: pointer; transition: 0.3s; }
+        .res-card:hover .btn-dl { background: var(--free-cyan); color: black; }
+
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .categories-nav { flex-direction: row; overflow-x: auto; pb: 10px; }
+            .cat-link { white-space: nowrap; }
+        }
     </style>
 </head>
 <body>
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
-    </video>
-    <div class="container">
-        <h1>Cadeaux & Freebies</h1>
-        <p>Les ressources gratuites arrivent très prochainement.</p>
-        <div style="margin: 30px 0; font-style: italic; opacity: 0.5;">[Chargement des fichiers en cours...]</div>
-        <a href="index.html" class="btn-back">← Retour à l'accueil</a>
+
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
+</video>
+
+<div class="container">
+    <header class="archive-header">
+        <div class="archive-title">
+            <a href="index.html" style="color: var(--primary); text-decoration: none; font-size: 0.7rem; font-family: 'Space Mono';">← RETOUR ACCUEIL</a>
+            <h1>Public Archive</h1>
+            <p>Ressources gratuites & outils communautaires</p>
+        </div>
+        <input type="text" class="search-bar" placeholder="Rechercher un script, un tool...">
+    </header>
+
+    <div class="main-layout">
+        <aside class="categories-nav">
+            <a href="#" class="cat-link active">Tout explorer</a>
+            <a href="#" class="cat-link">Scripts & Menus</a>
+            <a href="#" class="cat-link">Optimisation PC</a>
+            <a href="#" class="cat-link">Utilitaires Discord</a>
+            <a href="#" class="cat-link">Archives Legacy</a>
+        </aside>
+
+        <section>
+            <h2 class="resource-section-title">MIS À JOUR RÉCEMMENT</h2>
+            <div class="resources-grid">
+                
+                <div class="res-card">
+                    <div class="res-thumb">
+                        <span class="res-version">v2.4.1</span>
+                        <img src="https://via.placeholder.com/300x150/111/00d9ff?text=Optimizer" alt="Tool">
+                    </div>
+                    <div class="res-info">
+                        <h3>OTL Optimizer Pro</h3>
+                        <p>Nettoyage complet des logs Windows et optimisation des processus en un clic.</p>
+                    </div>
+                    <div class="res-meta">
+                        <span class="res-tag">Système</span>
+                        <span class="res-stats">4.2k DL</span>
+                    </div>
+                    <button class="btn-dl">Télécharger</button>
+                </div>
+
+                <div class="res-card">
+                    <div class="res-thumb">
+                        <span class="res-version">v1.0.0</span>
+                        <img src="https://via.placeholder.com/300x150/111/00d9ff?text=Spoofer+Lite" alt="Tool">
+                    </div>
+                    <div class="res-info">
+                        <h3>HWID Spoofer Lite</h3>
+                        <p>Version publique de notre changeur d'ID matériel pour tests de sécurité.</p>
+                    </div>
+                    <div class="res-meta">
+                        <span class="res-tag">Sécurité</span>
+                        <span class="res-stats">1.8k DL</span>
+                    </div>
+                    <button class="btn-dl">Télécharger</button>
+                </div>
+
+                <div class="res-card">
+                    <div class="res-thumb">
+                        <span class="res-version">FIXED</span>
+                        <img src="https://via.placeholder.com/300x150/111/00d9ff?text=External+Menu" alt="Tool">
+                    </div>
+                    <div class="res-info">
+                        <h3>Phoenix Menu (Free)</h3>
+                        <p>Menu externe basique avec fonctions ESP et protection de base.</p>
+                    </div>
+                    <div class="res-meta">
+                        <span class="res-tag">Script</span>
+                        <span class="res-stats">12k DL</span>
+                    </div>
+                    <button class="btn-dl">Télécharger</button>
+                </div>
+
+            </div>
+
+            <h2 class="resource-section-title">TENDANCE</h2>
+            <div class="resources-grid">
+                <div class="res-card">
+                    <div class="res-thumb">
+                        <span class="res-version">BETA</span>
+                        <img src="https://via.placeholder.com/300x150/111/00d9ff?text=Discord+Nuker" alt="Tool">
+                    </div>
+                    <div class="res-info">
+                        <h3>Webhook Manager</h3>
+                        <p>Gérez et envoyez des messages via Webhooks Discord en toute simplicité.</p>
+                    </div>
+                    <div class="res-meta">
+                        <span class="res-tag">Discord</span>
+                        <span class="res-stats">950 DL</span>
+                    </div>
+                    <button class="btn-dl">Télécharger</button>
+                </div>
+            </div>
+        </section>
     </div>
+</div>
+
+<footer style="text-align: center; padding: 40px; opacity: 0.3; font-size: 11px;">
+    ON TOP LOUNGE — ACCÈS PUBLIC SÉCURISÉ
+</footer>
+
 </body>
 </html>
