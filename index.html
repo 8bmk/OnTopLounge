@@ -11,7 +11,7 @@
         *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
 
-        /* EFFET SCANLINE & BACKGROUND */
+        /* BACKGROUND */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.3; }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -22,59 +22,46 @@
         .reveal { opacity: 0; transform: translateY(20px); filter: blur(5px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
 
-        /* HEADER */
-        .status-bar { position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 10px 20px; border-radius: 50px; font-size: 10px; font-weight: bold; border: 1px solid var(--primary); z-index: 1000; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
-        .status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px #00ff88; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        header { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .logo-img { width: 130px; height: 130px; border-radius: 50%; border: 2px solid var(--primary); filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 20px; animation: float 6s ease-in-out infinite; }
+        header { height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .logo-img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--primary); filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 20px; animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* PORTAL GRID ÉLARGIE */
+        /* GRID SYSTEM */
         .portal-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px; perspective: 1000px; 
+            grid-template-columns: repeat(6, 1fr); 
+            gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; perspective: 1000px; 
         }
         
         .portal-card { 
-            position: relative; background: var(--card-bg); padding: 40px 25px; border-radius: 25px; text-align: center; 
+            position: relative; background: var(--card-bg); border-radius: 20px; text-align: center; 
             border: 1px solid rgba(161, 102, 255, 0.15); text-decoration: none; color: white; 
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease; 
-            backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between;
-            transform-style: preserve-3d; overflow: hidden;
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px;
         }
-        .portal-card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px);
-            opacity: 0; transition: opacity 0.3s; pointer-events: none;
-        }
-        .portal-card:hover::before { opacity: 1; }
-        .portal-card:hover { border-color: var(--primary); box-shadow: 0 15px 40px rgba(161, 102, 255, 0.15); }
+        .portal-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(161, 102, 255, 0.2); transform: translateY(-5px); }
 
-        .btn-enter { margin-top: 25px; padding: 12px 30px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 11px; text-transform: uppercase; transition: 0.3s; align-self: center; transform: translateZ(20px); }
+        /* ÉPINGLÉS (GROSSES CARTES) */
+        .pinned { grid-column: span 3; padding: 50px 40px; border: 1px solid rgba(161, 102, 255, 0.4); background: rgba(161, 102, 255, 0.05); }
+        .pinned h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 15px; }
+        
+        /* PETITES CARTES */
+        .small { grid-column: span 2; padding: 25px; }
+        .small h3 { font-size: 1rem; margin-bottom: 10px; }
+        .small p { font-size: 0.8rem; opacity: 0.6; }
+
+        .btn-enter { margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 10px; text-transform: uppercase; transition: 0.3s; }
         .portal-card:hover .btn-enter { background: white; }
 
-        /* SECTIONS */
-        .content-section { max-width: 1000px; margin: 100px auto; padding: 0 20px; }
-        .section-header { margin-bottom: 40px; text-align: center; }
-        .section-header h2 { font-size: 2rem; text-transform: uppercase; letter-spacing: 4px; color: var(--primary); font-family: 'Space Mono', monospace; }
-
-        /* FAQ ACCORDEON */
+        /* FAQ & CONTENT */
+        .content-section { max-width: 900px; margin: 80px auto; padding: 0 20px; }
         .faq-container { background: rgba(255,255,255,0.02); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
-        details { background: rgba(161, 102, 255, 0.03); border: 1px solid rgba(161, 102, 255, 0.08); border-radius: 12px; margin-bottom: 12px; padding: 20px; transition: 0.3s; }
-        details[open] { background: rgba(161, 102, 255, 0.08); border-color: var(--primary); }
-        summary { font-weight: bold; list-style: none; display: flex; justify-content: space-between; cursor: pointer; color: #efefef; font-family: 'Space Mono'; font-size: 0.9rem; }
-        details p { margin-top: 15px; font-size: 0.95rem; line-height: 1.6; opacity: 0.8; color: #ccc; }
+        details { background: rgba(161, 102, 255, 0.03); border: 1px solid rgba(161, 102, 255, 0.08); border-radius: 12px; margin-bottom: 10px; padding: 15px; cursor: pointer; }
+        summary { font-family: 'Space Mono'; font-size: 0.85rem; color: var(--primary); list-style: none; display: flex; justify-content: space-between; }
 
-        /* DISCORD FLOAT */
-        .discord-container { position: fixed; bottom: 30px; right: 30px; display: flex; align-items: center; z-index: 1000; }
-        .discord-tooltip { background: var(--discord); color: white; padding: 10px 20px; border-radius: 12px; font-size: 13px; font-weight: bold; margin-right: 15px; opacity: 0; transform: translateX(20px); transition: 0.4s; pointer-events: none; }
-        .discord-float { width: 60px; height: 60px; transition: 0.4s; cursor: pointer; }
-        .discord-container:hover .discord-tooltip { opacity: 1; transform: translateX(0); }
+        footer { padding: 60px; text-align: center; opacity: 0.3; font-size: 9px; letter-spacing: 2px; }
 
-        footer { padding: 80px 20px; text-align: center; opacity: 0.4; font-size: 10px; letter-spacing: 2px; }
+        @media (max-width: 900px) { .pinned, .small { grid-column: span 6; } }
     </style>
 </head>
 <body>
@@ -83,87 +70,66 @@
     <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
 </video>
 
-<div class="status-bar">
-    <div class="status-dot"></div> SYSTÈME OPÉRATIONNEL
-</div>
-
 <header class="reveal">
     <img src="OTL.png" alt="OTL Logo" class="logo-img">
-    <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: 10px; text-transform: uppercase;">On Top Lounge</h1>
-    <p style="opacity: 0.6; margin-top: 10px; font-family: 'Space Mono'; font-size: 0.9rem;">ACCÈS PRIVÉ | SERVICES PREMIUM</p>
+    <h1 style="letter-spacing: 10px; text-transform: uppercase; font-size: 2.5rem;">On Top Lounge</h1>
+    <p style="opacity: 0.5; font-family: 'Space Mono'; font-size: 0.8rem; margin-top: 10px;">PREMIUM QUALITY // COMMUNITY DRIVEN</p>
 </header>
 
 <main>
     <section class="portal-grid reveal">
-        <a href="boutique-payante.html" class="portal-card js-tilt">
-            <div style="transform: translateZ(30px)">
-                <h3 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 15px; font-family: 'Space Mono';">BOUTIQUE PREMIUM</h3>
-                <p style="opacity: 0.7; line-height: 1.6; font-size: 0.9rem;">Accédez à nos meilleurs comptes et services payants. Qualité maximale et livraison rapide.</p>
-            </div>
-            <div class="btn-enter">Voir les offres</div>
+        
+        <a href="boutique-payante.html" class="portal-card pinned js-tilt">
+            <h3 style="font-family: 'Space Mono';">BOUTIQUE PREMIUM</h3>
+            <p style="opacity: 0.7;">Comptes boostés, services exclusifs et options VIP. Le meilleur d'OTL.</p>
+            <div class="btn-enter">Accéder aux offres</div>
         </a>
 
-        <a href="boutique-gratuite.html" class="portal-card js-tilt">
-            <div style="transform: translateZ(30px)">
-                <h3 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 15px; font-family: 'Space Mono';">ESPACE GRATUIT</h3>
-                <p style="opacity: 0.7; line-height: 1.6; font-size: 0.9rem;">Téléchargement d'outils, scripts et ressources en libre accès pour la communauté.</p>
-            </div>
+        <a href="boutique-gratuite.html" class="portal-card pinned js-tilt">
+            <h3 style="font-family: 'Space Mono';">ESPACE GRATUIT</h3>
+            <p style="opacity: 0.7;">Ressources, scripts et outils gratuits pour toute la communauté.</p>
             <div class="btn-enter">Explorer l'index</div>
         </a>
 
-        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card js-tilt">
-            <div style="transform: translateZ(30px)">
-                <h3 style="color: #5865F2; font-size: 1.3rem; margin-bottom: 15px; font-family: 'Space Mono';">COMMUNAUTÉ</h3>
-                <p style="opacity: 0.7; line-height: 1.6; font-size: 0.9rem;">Rejoignez le Discord officiel pour le support, les news et discuter avec les membres.</p>
-            </div>
-            <div class="btn-enter" style="background: #5865F2; color: white;">Rejoindre</div>
+        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card small js-tilt">
+            <h3 style="color: #5865F2;">DISCORD</h3>
+            <p>Support & News</p>
+            <div class="btn-enter" style="background:#5865F2; color:white;">Rejoindre</div>
         </a>
 
-        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card js-tilt">
-            <div style="transform: translateZ(30px)">
-                <h3 style="color: #00ff88; font-size: 1.3rem; margin-bottom: 15px; font-family: 'Space Mono';">AVIS & PREUVES</h3>
-                <p style="opacity: 0.7; line-height: 1.6; font-size: 0.9rem;">Consultez les retours de nos clients satisfaits et les preuves de nos services réussis.</p>
-            </div>
-            <div class="btn-enter" style="background: #00ff88; color: black;">Consulter</div>
+        <div class="portal-card small js-tilt">
+            <h3 style="color: #00ff88;">STATUS</h3>
+            <p>Tous les outils : <span style="color: #00ff88; font-weight: bold;">ONLINE</span></p>
+            <div class="btn-enter" style="background:#00ff88; color:black;">Vérifier</div>
+        </div>
+
+        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card small js-tilt">
+            <h3 style="color: #ffaa00;">AVIS</h3>
+            <p>Retours Clients</p>
+            <div class="btn-enter" style="background:#ffaa00; color:black;">Voir</div>
         </a>
+
     </section>
 
     <section class="content-section reveal">
-        <div class="section-header">
-            <h2>Questions fréquentes</h2>
-            <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 10px; letter-spacing: 2px;">INFOS ET PROTOCOLES</p>
-        </div>
-        
         <div class="faq-container">
             <details>
-                <summary>EST-CE QUE C'EST SÉCURISÉ ? <span>[+]</span></summary>
-                <p>Oui, nous utilisons des méthodes testées quotidiennement pour garantir une sécurité maximale sur tous nos services.</p>
+                <summary>POURQUOI NOUS CHOISIR ? <span>▼</span></summary>
+                <p style="margin-top:10px; font-size:0.85rem; opacity:0.7;">Nous offrons le meilleur rapport qualité-prix avec un support actif et des mises à jour constantes pour éviter tout risque.</p>
             </details>
             <details>
-                <summary>COMMENT SE PASSE LA LIVRAISON ? <span>[+]</span></summary>
-                <p>Pour les achats via la boutique payante, tout est automatisé ou géré par ticket sur notre Discord pour un suivi personnalisé.</p>
-            </details>
-            <details>
-                <summary>BESOIN D'AIDE ? <span>[+]</span></summary>
-                <p>Notre équipe est disponible 24/7 sur Discord pour répondre à toutes vos questions techniques ou commerciales.</p>
+                <summary>MÉTHODES DE PAIEMENT <span>▼</span></summary>
+                <p style="margin-top:10px; font-size:0.85rem; opacity:0.7;">Nous acceptons diverses méthodes sécurisées via notre plateforme Discord. Contactez un administrateur.</p>
             </details>
         </div>
     </section>
 </main>
 
-<div class="discord-container">
-    <div class="discord-tooltip">Besoin d'aide ?</div>
-    <a href="https://discord.gg/MPKADDqYtk" class="discord-float" target="_blank">
-        <img src="https://static.vecteezy.com/system/resources/previews/018/930/500/non_2x/discord-logo-discord-icon-transparent-free-png.png" alt="Discord" style="width: 100%;">
-    </a>
-</div>
-
 <footer>
-    <p>© 2026 ON TOP LOUNGE — DESIGN BY 8BMK</p>
+    <p>© 2026 ON TOP LOUNGE — BY 8BMK</p>
 </footer>
 
 <script>
-    // Animation au défilement
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) entry.target.classList.add('active');
@@ -171,15 +137,12 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-    // Effet Tilt 3D
     const cards = document.querySelectorAll('.js-tilt');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const rotateX = (y - rect.height / 2) / -20;
-            const rotateY = (x - rect.width / 2) / 20;
+            const rotateX = (e.clientY - rect.top - rect.height / 2) / -15;
+            const rotateY = (e.clientX - rect.left - rect.width / 2) / 15;
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
         });
         card.addEventListener('mouseleave', () => {
