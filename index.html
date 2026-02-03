@@ -9,96 +9,55 @@
         :root { --primary: #a166ff; --bg: #0b0b0b; --card-bg: #16081a; }
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;}
-
-        /* Effet de fond néon */
-        body::before {
-            content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 600px; height: 600px; background: radial-gradient(circle, rgba(161,102,255,0.15) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1;
-        }
-
+        body::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(161,102,255,0.15) 0%, rgba(0,0,0,0) 70%); z-index: -1; }
         header{padding:30px; text-align:center;}
-        .logo-container img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary); margin-bottom: 15px; }
+        .logo-img { width: 100px; filter: drop-shadow(0 0 10px var(--primary)); margin-bottom: 10px; }
         header h1{font-weight:900; letter-spacing:4px; text-transform:uppercase; color:var(--primary);}
-
-        .hero{text-align:center; padding:50px 20px;}
-        .hero h2{font-size:3.5rem; margin-bottom:10px; background: linear-gradient(to bottom, #fff, #a166ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
-
-        /* Grille de navigation */
-        .portal-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px; max-width: 1100px; margin: 50px auto; padding: 0 20px;
-        }
-
-        .portal-card {
-            background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center;
-            border: 1px solid #2a1136; text-decoration: none; color: white;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
-        }
-
-        .portal-card:hover {
-            transform: scale(1.05); border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(161, 102, 255, 0.2);
-        }
-
+        .hero{text-align:center; padding:40px 20px;}
+        .hero h2{font-size:3.5rem; background: linear-gradient(to bottom, #fff, #a166ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+        .warning-box { max-width: 600px; margin: 20px auto; border: 1px solid #ff4444; padding: 10px; border-radius: 10px; color: #ff4444; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
+        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .portal-card { background: var(--card-bg); padding: 40px; border-radius: 24px; text-align: center; border: 1px solid #2a1136; text-decoration: none; color: white; transition: 0.4s; position: relative; }
+        .portal-card:hover { transform: scale(1.05); border-color: var(--primary); box-shadow: 0 0 30px rgba(161, 102, 255, 0.2); }
         .portal-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary); }
-        .portal-card p { font-size: 0.9rem; opacity: 0.7; line-height: 1.5; }
-
-        .btn-enter {
-            display: inline-block; margin-top: 20px; padding: 10px 25px;
-            background: var(--primary); color: #000; font-weight: 800;
-            border-radius: 50px; font-size: 12px; text-transform: uppercase;
-        }
-
+        .btn-enter { display: inline-block; margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 12px; }
         footer{padding:40px; text-align:center; opacity:0.5; font-size: 13px;}
         footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
-
 <header>
-    <div class="logo-container">
-        <img src="OTL.png" alt="Logo On Top Lounge" onerror="this.src='https://via.placeholder.com/80/a166ff/000000?text=OTL'">
-    </div>
+    <img src="OTL.png" alt="OTL Logo" class="logo-img">
     <h1>On Top Lounge</h1>
 </header>
-
 <main>
     <section class="hero">
         <h2>Ready For The Action</h2>
-        <p>Choisissez votre destination au sein de notre écosystème.</p>
+        <div class="warning-box">⚠️ Règle d'or : Tout se passe uniquement via 8bmk. Aucun intermédiaire.</div>
     </section>
-
     <div class="portal-grid">
         <a href="boutique-payante.html" class="portal-card">
             <h3>Premium Store</h3>
-            <p>Accédez à nos outils exclusifs et services VIP haut de gamme.</p>
-            <div class="btn-enter">Entrer</div>
+            <p>Comptes GTA 5 Online haute qualité. Sécurisé & rapide.</p>
+            <div class="btn-enter">Voir les comptes</div>
         </a>
-
         <a href="boutique-gratuite.html" class="portal-card">
             <h3>Free Resources</h3>
-            <p>Téléchargez nos packs gratuits et outils communautaires.</p>
+            <p>Accédez à nos outils et cadeaux communautaires.</p>
             <div class="btn-enter">Explorer</div>
         </a>
-
         <a href="documentation.html" class="portal-card">
-            <h3>Documentation</h3>
-            <p>Mises à jour, guides et informations sur la communauté.</p>
-            <div class="btn-enter">Lire</div>
+            <h3>Actualités</h3>
+            <p>Suivez la reprise du Discord et les mises à jour.</p>
+            <div class="btn-enter">Lire les news</div>
         </a>
     </div>
 </main>
-
 <footer>
-    <p>© 2026 On Top Lounge</p>
+    <p>© 2026 On Top Lounge - 8bmk</p>
     <div style="margin-top: 15px;">
-        <a href="mentions-legales.html">Mentions Légales</a> | 
-        <a href="#">Discord</a> | 
-        <a href="#">Contact</a>
+        <a href="mentions-legales.html">Mentions Légales</a> | <a href="https://discord.gg/MPKADDqYtk" target="_blank">Discord</a>
     </div>
 </footer>
-
 </body>
 </html>
