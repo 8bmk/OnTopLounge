@@ -6,27 +6,101 @@
     <title>OTL | Logiciels Gratuits</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); }
+        :root { --primary: #00d4ff; --otl-purple: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); }
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Inter',sans-serif;background:var(--bg);color:white;}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;}
+        
+        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.15; }
+        
         header { padding: 60px 20px; text-align: center; }
-        .back-link { position: absolute; top: 30px; left: 30px; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; font-size: 0.8rem; }
-        .title-section h1 { font-family: 'Space Mono'; letter-spacing: 5px; text-transform: uppercase; }
-        .empty-state { text-align: center; margin-top: 100px; opacity: 0.4; font-family: 'Space Mono'; }
+        .back-link { position: absolute; top: 30px; left: 30px; color: var(--otl-purple); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid var(--otl-purple); padding: 8px 15px; border-radius: 5px; transition: 0.3s; z-index: 10; }
+        .back-link:hover { background: var(--otl-purple); color: black; }
+
+        .title-section h1 { font-family: 'Space Mono'; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; }
+        .title-section p { opacity: 0.5; font-size: 0.9rem; margin-bottom: 30px; }
+
+        /* Grid Logiciels */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px 50px; }
+        
+        .tool-card { 
+            background: var(--card-bg); border: 1px solid rgba(0, 212, 255, 0.1); border-radius: 20px; 
+            padding: 25px; transition: 0.4s; backdrop-filter: blur(10px); display: flex; flex-direction: column;
+        }
+        .tool-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15); }
+
+        .soft-icon { width: 50px; height: 50px; border-radius: 10px; margin-bottom: 15px; background: #111; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Couleurs spécifiques Adobe/Filmora */
+        .ps { color: #31A8FF; border-color: #31A8FF; }
+        .ae { color: #CF96FD; border-color: #CF96FD; }
+        .pr { color: #EA77FF; border-color: #EA77FF; }
+        .fl { color: #00FFCC; border-color: #00FFCC; }
+
+        .tool-tag { font-family: 'Space Mono'; font-size: 0.6rem; background: rgba(0, 212, 255, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 4px; align-self: flex-start; margin-bottom: 10px; }
+        .tool-card h3 { margin-bottom: 8px; font-size: 1.1rem; }
+        .tool-card p { font-size: 0.8rem; opacity: 0.6; line-height: 1.4; margin-bottom: 20px; }
+
+        .btn-download { 
+            margin-top: auto; padding: 10px; background: transparent; border: 1px solid var(--primary); 
+            color: var(--primary); text-align: center; text-decoration: none; font-weight: bold; 
+            border-radius: 10px; font-size: 0.75rem; text-transform: uppercase; transition: 0.3s; 
+        }
+        .btn-download:hover { background: var(--primary); color: black; }
     </style>
 </head>
 <body>
-    <header>
-        <a href="boutique-gratuite.html" class="back-link">← HUB</a>
-        <div class="title-section">
-            <h1>SOFTWARES</h1>
-            <p style="opacity:0.5; margin-top:10px;">OPTIMISATION & UTILITAIRES</p>
-        </div>
-    </header>
-    <main>
-        <div class="empty-state">
-            <p>Bientôt disponible...</p>
-        </div>
-    </main>
+
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
+</video>
+
+<header>
+    <a href="boutique-gratuite.html" class="back-link">← HUB</a>
+    <div class="title-section">
+        <h1>FREE SOFTWARES</h1>
+        <p>LOGICIELS DE CRÉATION PRÉ-ACTIVÉS</p>
+    </div>
+</header>
+
+<main class="tools-grid">
+    
+    <div class="tool-card">
+        <div class="soft-icon ps">Ps</div>
+        <span class="tool-tag">ADOBE 2024</span>
+        <h3>Photoshop</h3>
+        <p>Le standard mondial de la retouche photo. Version complète avec Neural Filters.</p>
+        <a href="tutorialPS.html" class="btn-download">Télécharger</a>
+    </div>
+
+    <div class="tool-card">
+        <div class="soft-icon ae">Ae</div>
+        <span class="tool-tag">ADOBE 2024</span>
+        <h3>After Effects</h3>
+        <p>Effets visuels et animations professionnelles. Pré-activé sans abonnement.</p>
+        <a href="tutorialAE.html" class="btn-download">Télécharger</a>
+    </div>
+
+    <div class="tool-card">
+        <div class="soft-icon pr">Pr</div>
+        <span class="tool-tag">ADOBE 2024</span>
+        <h3>Premiere Pro</h3>
+        <p>Montage vidéo de pointe. Prêt à l'emploi avec codecs activés.</p>
+        <a href="tutorialPR.html" class="btn-download">Télécharger</a>
+    </div>
+
+    <div class="tool-card">
+        <div class="soft-icon fl">Wf</div>
+        <span class="tool-tag">WONDERSHARE 13</span>
+        <h3>Filmora</h3>
+        <p>Montage vidéo simple et rapide. Export sans watermark (version 13.x).</p>
+        <a href="tutorialFilmora.html" class="btn-download">Télécharger</a>
+    </div>
+
+</main>
+
+<footer>
+    <center style="opacity: 0.3; font-size: 10px; padding-bottom: 30px;">ON TOP LOUNGE — CREATIVE SUITE v1.0</center>
+</footer>
+
 </body>
 </html>
