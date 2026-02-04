@@ -8,12 +8,12 @@
     <style>
         :root { --primary: #a166ff; --bg: #060606; }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Inter', sans-serif; background:var(--bg); color:white; overflow:hidden; }
+        body { font-family:'Inter', sans-serif; background:var(--bg); color:white; overflow-x:hidden; min-height: 100vh; }
 
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.15; }
 
         header { padding: 80px 20px 40px; text-align: center; }
-        .back-link { position: absolute; top: 30px; left: 30px; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; transition: 0.3s; }
+        .back-link { position: absolute; top: 30px; left: 30px; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; transition: 0.3s; z-index: 100; }
         .back-link:hover { background: var(--primary); color: black; }
 
         .title-section h1 { font-family: 'Space Mono'; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; }
@@ -23,41 +23,61 @@
         .hub-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 1100px;
-            margin: 50px auto;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 40px auto;
             padding: 0 40px;
         }
 
         .hub-card {
             background: rgba(15, 15, 20, 0.85);
             border: 1px solid rgba(161, 102, 255, 0.1);
-            border-radius: 24px;
-            padding: 50px 30px;
+            border-radius: 30px;
+            padding: 40px 25px;
             text-align: center;
             text-decoration: none;
             color: white;
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        /* Image Styling */
+        .hub-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* Force le cercle */
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 2px solid rgba(161, 102, 255, 0.3);
+            box-shadow: 0 0 20px rgba(161, 102, 255, 0.2);
+            transition: 0.4s;
+            background: white; /* Assure que le fond blanc de tes images ne crée pas de trou */
+        }
+
         .hub-card:hover {
             border-color: var(--primary);
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(161, 102, 255, 0.2);
             background: rgba(161, 102, 255, 0.05);
         }
 
-        .hub-card i { font-size: 3rem; margin-bottom: 20px; display: block; }
-        .hub-card h2 { font-family: 'Space Mono'; font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 2px; }
-        .hub-card p { font-size: 0.8rem; opacity: 0.5; line-height: 1.6; }
+        .hub-card:hover .hub-img {
+            transform: scale(1.1) rotate(3deg);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(161, 102, 255, 0.4);
+        }
 
-        .tag-count { font-size: 0.6rem; color: var(--primary); border: 1px solid var(--primary); padding: 2px 8px; border-radius: 10px; margin-top: 15px; }
+        .hub-card h2 { font-family: 'Space Mono'; font-size: 1.1rem; margin-bottom: 12px; letter-spacing: 2px; color: white; }
+        .hub-card p { font-size: 0.8rem; opacity: 0.5; line-height: 1.5; margin-bottom: 15px; }
 
-        @media (max-width: 850px) { .hub-container { grid-template-columns: 1fr; } }
+        .tag-count { font-family: 'Space Mono'; font-size: 0.6rem; color: var(--primary); border: 1px solid var(--primary); padding: 4px 12px; border-radius: 20px; }
+
+        @media (max-width: 900px) { 
+            .hub-container { grid-template-columns: 1fr; max-width: 450px; } 
+            header { padding-top: 100px; }
+        }
     </style>
 </head>
 <body>
@@ -77,21 +97,21 @@
 <main class="hub-container">
     
     <a href="free-softwares.html" class="hub-card">
-        <i>⚙️</i>
+        <img src="Creator_20260204_769828.jpg" alt="Softwares" class="hub-img">
         <h2>LOGICIELS</h2>
         <p>Optimisation PC, Cleaners, et outils open-source vérifiés.</p>
-        <span class="tag-count">0 DISPONIBLES</span>
+        <span class="tag-count">PROCHAINEMENT</span>
     </a>
 
     <a href="free-games.html" class="hub-card">
-        <i>🎮</i>
+        <img src="Creator_20260204_678752.jpg" alt="Games" class="hub-img">
         <h2>JEUX</h2>
         <p>Jeux gratuits, comptes ou accès exclusifs temporaires.</p>
-        <span class="tag-count">0 DISPONIBLES</span>
+        <span class="tag-count">PROCHAINEMENT</span>
     </a>
 
     <a href="free-cheats.html" class="hub-card">
-        <i>⚠️</i>
+        <img src="Creator_20260204_345072.jpg" alt="Cheats" class="hub-img">
         <h2>CHEATS</h2>
         <p>Ressources externes (CS2, Roblox). Non vérifiées par OTL.</p>
         <span class="tag-count">2 DISPONIBLES</span>
@@ -100,7 +120,7 @@
 </main>
 
 <footer>
-    <center style="opacity: 0.3; font-size: 10px; margin-top: 50px;">ON TOP LOUNGE — SELECTION HUB v1.0</center>
+    <center style="opacity: 0.3; font-size: 10px; margin: 40px 0;">ON TOP LOUNGE — SELECTION HUB v1.1</center>
 </footer>
 
 </body>
