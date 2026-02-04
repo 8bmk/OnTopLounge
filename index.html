@@ -6,7 +6,7 @@
     <title>On Top Lounge | Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); --discord: #5865F2; }
+        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); --discord: #5865F2; --gold: #ffcc00; }
         
         *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
@@ -38,22 +38,29 @@
             border: 1px solid rgba(161, 102, 255, 0.15); text-decoration: none; color: white; 
             transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px);
             display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px;
+            overflow: hidden;
         }
         .portal-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(161, 102, 255, 0.2); transform: translateY(-5px); }
 
-        /* ÉPINGLÉS (GROSSES CARTES) */
+        /* ÉPINGLÉS */
         .pinned { grid-column: span 3; padding: 50px 40px; border: 1px solid rgba(161, 102, 255, 0.4); background: rgba(161, 102, 255, 0.05); }
         .pinned h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 15px; }
         
-        /* PETITES CARTES */
-        .small { grid-column: span 2; padding: 25px; }
-        .small h3 { font-size: 1rem; margin-bottom: 10px; }
-        .small p { font-size: 0.8rem; opacity: 0.6; }
+        /* QUICK ACCESS BENTO (NEW) */
+        .bento { grid-column: span 2; padding: 25px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); }
+        .bento h3 { font-family: 'Space Mono'; font-size: 0.9rem; margin-top: 10px; margin-bottom: 5px; text-transform: uppercase; }
+        .bento p { font-size: 0.75rem; opacity: 0.5; }
+        .status-tag { font-size: 0.6rem; color: #00ff88; font-weight: bold; margin-top: 8px; letter-spacing: 1px; }
 
+        .gold-hover:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(255, 204, 0, 0.15); }
+        .purple-hover:hover { border-color: var(--primary); box-shadow: 0 0 20px rgba(161, 102, 255, 0.15); }
+        .blue-hover:hover { border-color: var(--discord); box-shadow: 0 0 20px rgba(88, 101, 242, 0.15); }
+
+        /* BUTTONS */
         .btn-enter { margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 10px; text-transform: uppercase; transition: 0.3s; }
         .portal-card:hover .btn-enter { background: white; }
 
-        /* FAQ & CONTENT */
+        /* FAQ */
         .content-section { max-width: 900px; margin: 80px auto; padding: 0 20px; }
         .faq-container { background: rgba(255,255,255,0.02); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
         details { background: rgba(161, 102, 255, 0.03); border: 1px solid rgba(161, 102, 255, 0.08); border-radius: 12px; margin-bottom: 10px; padding: 15px; cursor: pointer; }
@@ -61,7 +68,7 @@
 
         footer { padding: 60px; text-align: center; opacity: 0.3; font-size: 9px; letter-spacing: 2px; }
 
-        @media (max-width: 900px) { .pinned, .small { grid-column: span 6; } }
+        @media (max-width: 900px) { .pinned, .bento { grid-column: span 6; } }
     </style>
 </head>
 <body>
@@ -91,42 +98,25 @@
             <div class="btn-enter">Explorer l'index</div>
         </a>
 
-        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card small js-tilt">
-            <h3 style="color: #5865F2;">DISCORD</h3>
-            <p>Support & News</p>
-            <div class="btn-enter" style="background:#5865F2; color:white;">Rejoindre</div>
+        <a href="amnesia-cheat.html" class="portal-card bento js-tilt gold-hover">
+            <div style="font-size: 1.5rem;">🔑</div>
+            <h3>Game Cheats</h3>
+            <p>Amnesia RDR2 & GTA V</p>
+            <span class="status-tag">UNDETECTED</span>
         </a>
 
-        <div class="activity-terminal">
-    <div class="terminal-header">
-        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-        <span class="terminal-title">OTL_SYSTEM_LOGS</span>
-    </div>
-    <div class="terminal-body">
-        <div class="log-line"><span class="log-time">[11:42]</span> <span class="log-msg">Initialisation du catalogue...</span></div>
-        <div class="log-line"><span class="log-time">[HIER]</span> <span class="log-msg">Patch Adobe After Effects <span class="status-up">V26.11 OK</span></span></div>
-        <div class="log-line"><span class="log-time">[NEW]</span> <span class="log-msg">Intégration guide Amnesia (RDR2/GTA)</span></div>
-        <div class="log-line blink">_</div>
-    </div>
-</div>
+        <a href="free-softwares.html" class="portal-card bento js-tilt purple-hover">
+            <div style="font-size: 1.5rem;">🎬</div>
+            <h3>Logiciels</h3>
+            <p>Pack Adobe & Filmora</p>
+            <span class="status-tag" style="color:var(--primary)">MAJ 2025 OK</span>
+        </a>
 
-<style>
-    .activity-terminal { background: #000; border: 1px solid #333; border-radius: 10px; font-family: 'Space Mono', monospace; overflow: hidden; max-width: 500px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .terminal-header { background: #1a1a1a; padding: 10px; display: flex; align-items: center; gap: 8px; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; }
-    .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-    .terminal-title { color: #666; font-size: 0.7rem; margin-left: 10px; letter-spacing: 1px; }
-    .terminal-body { padding: 15px; font-size: 0.8rem; color: #00ff88; line-height: 1.5; }
-    .log-time { color: #555; margin-right: 10px; }
-    .status-up { color: #a166ff; font-weight: bold; }
-    .blink { animation: blink 1s infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-</style>
-
-        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card small js-tilt">
-            <h3 style="color: #ffaa00;">AVIS</h3>
-            <p>Retours Clients</p>
-            <div class="btn-enter" style="background:#ffaa00; color:black;">Voir</div>
+        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card bento js-tilt blue-hover">
+            <div style="font-size: 1.5rem;">💬</div>
+            <h3>Support</h3>
+            <p>News & Communauté</p>
+            <span class="status-tag" style="color:#5865F2">DISCORD ONLINE</span>
         </a>
 
     </section>
