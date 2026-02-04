@@ -6,7 +6,16 @@
     <title>On Top Lounge | Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); --discord: #5865F2; --gold: #ffcc00; }
+        :root { 
+            --primary: #a166ff; 
+            --bg: #060606; 
+            --card-bg: rgba(15, 15, 20, 0.85); 
+            --discord: #5865F2; 
+            --gold: #ffcc00; 
+            --accent-pink: #ff66b2;
+            --accent-blue: #66ccff;
+            --accent-orange: #ff9966;
+        }
         
         *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
@@ -14,52 +23,59 @@
         /* BACKGROUND & PARTICLES */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.3; }
         #canvas-particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
-            z-index: -1; background-size: 100% 3px, 3px 100%; pointer-events: none;
-        }
 
         .reveal { opacity: 0; transform: translateY(20px); filter: blur(5px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
 
-        header { height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+        header { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
         .logo-img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--primary); filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 20px; animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* SECTION FEATURES (DÉPLACÉE EN BAS) */
-        .features-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 80px auto 0; padding: 0 20px; }
-        .feature-item { text-align: center; padding: 20px; background: rgba(161, 102, 255, 0.03); border-radius: 15px; border: 1px solid rgba(161, 102, 255, 0.1); }
-        .feature-item span { display: block; font-size: 1.5rem; margin-bottom: 10px; }
-        .feature-item h4 { font-family: 'Space Mono'; font-size: 0.7rem; letter-spacing: 2px; color: var(--primary); text-transform: uppercase; }
-        .feature-item p { font-size: 0.75rem; opacity: 0.5; margin-top: 5px; }
-
         /* GRID SYSTEM */
         .portal-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; perspective: 1000px; }
-        .portal-card { position: relative; background: var(--card-bg); border-radius: 20px; text-align: center; border: 1px solid rgba(161, 102, 255, 0.15); text-decoration: none; color: white; transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; overflow: hidden; }
-        .portal-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(161, 102, 255, 0.2); transform: translateY(-5px); }
+        .portal-card { position: relative; background: var(--card-bg); border-radius: 20px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.08); text-decoration: none; color: white; transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; overflow: hidden; }
+        
+        /* PINNED BUTTONS STYLING (The 2 big ones) */
+        .pinned { 
+            grid-column: span 3; 
+            padding: 50px 40px; 
+            border: 2px solid rgba(161, 102, 255, 0.3); 
+            background: linear-gradient(135deg, rgba(161, 102, 255, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+            box-shadow: 0 0 20px rgba(161, 102, 255, 0.05);
+        }
+        .pinned h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 15px; font-weight: 900; }
+        
+        /* BENTO BUTTONS STYLING (The 3 small ones) */
+        .bento { 
+            grid-column: span 2; 
+            padding: 25px; 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+        .bento h3 { font-family: 'Space Mono'; font-size: 0.9rem; margin-top: 10px; text-transform: uppercase; opacity: 0.8; }
 
-        .pinned { grid-column: span 3; padding: 50px 40px; border: 1px solid rgba(161, 102, 255, 0.4); background: rgba(161, 102, 255, 0.05); }
-        .pinned h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 15px; }
-        .bento { grid-column: span 2; padding: 25px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); }
-        .bento h3 { font-family: 'Space Mono'; font-size: 0.9rem; margin-top: 10px; text-transform: uppercase; }
+        .portal-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(161, 102, 255, 0.2); transform: translateY(-5px); }
         .status-tag { font-size: 0.6rem; color: #00ff88; font-weight: bold; margin-top: 8px; letter-spacing: 1px; }
 
         /* FAQ */
-        .content-section { max-width: 800px; margin: 100px auto 40px; padding: 0 20px; }
+        .content-section { max-width: 800px; margin: 100px auto 50px; padding: 0 20px; }
         .section-title { text-align: center; font-family: 'Space Mono'; font-size: 1.2rem; margin-bottom: 30px; letter-spacing: 5px; opacity: 0.8; }
-        .faq-container { background: rgba(255,255,255,0.02); border-radius: 24px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); }
         details { background: rgba(161, 102, 255, 0.03); border: 1px solid rgba(161, 102, 255, 0.08); border-radius: 12px; margin-bottom: 12px; padding: 18px; transition: 0.3s; }
         details[open] { background: rgba(161, 102, 255, 0.08); border-color: var(--primary); }
         summary { font-family: 'Space Mono'; font-size: 0.8rem; color: var(--primary); list-style: none; display: flex; justify-content: space-between; cursor: pointer; font-weight: 700; }
-        .faq-answer { margin-top: 15px; font-size: 0.85rem; opacity: 0.6; line-height: 1.6; }
+
+        /* SECTION FEATURES (Moved to Bottom) */
+        .features-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 50px auto; padding: 0 20px; }
+        .feature-item { text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.02); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .feature-item h4 { font-family: 'Space Mono'; font-size: 0.7rem; color: var(--primary); text-transform: uppercase; margin: 10px 0; }
+        .feature-item p { font-size: 0.7rem; opacity: 0.5; }
 
         .btn-enter { margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 10px; text-transform: uppercase; transition: 0.3s; }
         .portal-card:hover .btn-enter { background: white; }
 
-        footer { padding: 60px 20px 80px; text-align: center; opacity: 0.3; font-size: 9px; letter-spacing: 2px; }
+        footer { padding: 50px; text-align: center; opacity: 0.3; font-size: 9px; letter-spacing: 2px; }
 
-        @media (max-width: 900px) { .pinned, .bento, .features-row { grid-template-columns: 1fr; grid-column: span 6; } .features-row { margin-top: 50px; } }
+        @media (max-width: 900px) { .pinned, .bento, .features-row { grid-template-columns: 1fr; grid-column: span 6; } }
     </style>
 </head>
 <body>
@@ -80,13 +96,13 @@
     <section class="portal-grid reveal">
         <a href="boutique-payante.html" class="portal-card pinned js-tilt">
             <h3 style="font-family: 'Space Mono';">BOUTIQUE PREMIUM</h3>
-            <p style="opacity: 0.7;">Comptes boostés, services exclusifs et options VIP.</p>
+            <p style="opacity: 0.7; font-size: 0.9rem;">Comptes boostés, services exclusifs et options VIP.</p>
             <div class="btn-enter">Accéder aux offres</div>
         </a>
 
         <a href="boutique-gratuite.html" class="portal-card pinned js-tilt">
             <h3 style="font-family: 'Space Mono';">ESPACE GRATUIT</h3>
-            <p style="opacity: 0.7;">Ressources, scripts et outils gratuits pour tous.</p>
+            <p style="opacity: 0.7; font-size: 0.9rem;">Ressources, scripts et outils gratuits pour tous.</p>
             <div class="btn-enter">Explorer l'index</div>
         </a>
 
@@ -119,10 +135,6 @@
             <details>
                 <summary>COMMENT RECEVOIR MA COMMANDE ? <span>+</span></summary>
                 <div class="faq-answer">Une fois le paiement validé sur notre boutique, vous recevrez vos accès ou fichiers directement via notre système de ticket automatique sur Discord.</div>
-            </details>
-            <details>
-                <summary>REJOINDRE L'ÉQUIPE OTL ? <span>+</span></summary>
-                <div class="faq-answer">Nous sommes toujours à la recherche de talents (modérateurs, uploaders). Passez par le salon "Recrutement" sur notre serveur Discord.</div>
             </details>
         </div>
     </section>
@@ -173,11 +185,12 @@
         });
     });
 
-    // PARTICLES SYSTEM
+    // MULTICOLOR PARTICLES SYSTEM
     const canvas = document.getElementById('canvas-particles');
     const ctx = canvas.getContext('2d');
     let particles = [];
     const mouse = { x: null, y: null };
+    const colors = ['#a166ff', '#ff9966', '#66ccff', '#ff66b2']; // Purple, Orange, Blue, Pink
 
     window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
 
@@ -190,30 +203,38 @@
 
     class Particle {
         constructor() {
+            this.init();
+        }
+        init() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 0.5;
-            this.speedX = Math.random() * 1 - 0.5;
-            this.speedY = Math.random() * 1 - 0.5;
+            this.size = Math.random() * 1.5 + 0.5;
+            this.speedX = Math.random() * 0.8 - 0.4;
+            this.speedY = Math.random() * 0.8 - 0.4;
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+            this.opacity = Math.random() * 0.5 + 0.2;
         }
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
+
             if (this.x > canvas.width) this.x = 0;
             if (this.x < 0) this.x = canvas.width;
             if (this.y > canvas.height) this.y = 0;
             if (this.y < 0) this.y = canvas.height;
 
+            // Mouse Interaction
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
             let distance = Math.sqrt(dx*dx + dy*dy);
-            if (distance < 150) {
-                this.x -= dx/20;
-                this.y -= dy/20;
+            if (distance < 120) {
+                this.x -= dx/30;
+                this.y -= dy/30;
             }
         }
         draw() {
-            ctx.fillStyle = 'rgba(161, 102, 255, 0.3)';
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.opacity;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -222,7 +243,7 @@
 
     function init() {
         particles = [];
-        for (let i = 0; i < 80; i++) particles.push(new Particle());
+        for (let i = 0; i < 65; i++) particles.push(new Particle());
     }
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
