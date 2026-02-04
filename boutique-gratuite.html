@@ -3,62 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTL | Index Gratuit</title>
+    <title>OTL | Hub Gratuit</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); }
-        
-        *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
-        body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;}
+        :root { --primary: #a166ff; --bg: #060606; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter', sans-serif; background:var(--bg); color:white; overflow:hidden; }
 
-        /* Background Video */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.15; }
 
-        header { padding: 60px 20px; text-align: center; }
-        .back-link { position: absolute; top: 30px; left: 30px; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; transition: 0.3s; z-index: 10; }
+        header { padding: 80px 20px 40px; text-align: center; }
+        .back-link { position: absolute; top: 30px; left: 30px; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; transition: 0.3s; }
         .back-link:hover { background: var(--primary); color: black; }
 
         .title-section h1 { font-family: 'Space Mono'; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; }
-        .title-section p { opacity: 0.5; font-size: 0.9rem; margin-bottom: 25px; }
+        .title-section p { opacity: 0.5; font-size: 0.9rem; }
 
-        /* Disclaimer */
-        .disclaimer-box {
-            max-width: 800px; margin: 0 auto 30px auto; padding: 15px;
-            background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3);
-            border-radius: 12px; font-size: 0.75rem; color: #ff8888; line-height: 1.4;
+        /* Hub Grid */
+        .hub-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 40px;
         }
 
-        /* Filter System */
-        .filter-container { margin-bottom: 40px; display: flex; justify-content: center; gap: 10px; }
-        .filter-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(161, 102, 255, 0.2);
-            color: white; padding: 8px 20px; border-radius: 20px; cursor: pointer;
-            font-family: 'Space Mono'; font-size: 0.7rem; transition: 0.3s;
+        .hub-card {
+            background: rgba(15, 15, 20, 0.85);
+            border: 1px solid rgba(161, 102, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 30px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: black; border-color: var(--primary); }
 
-        /* Grid Outils */
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        .tool-card { 
-            background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.1); border-radius: 20px; 
-            padding: 30px; transition: 0.4s; backdrop-filter: blur(10px); display: flex; flex-direction: column;
+        .hub-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(161, 102, 255, 0.2);
+            background: rgba(161, 102, 255, 0.05);
         }
-        .tool-card.hidden { display: none; }
-        .tool-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(161, 102, 255, 0.15); }
 
-        .tool-tag { font-family: 'Space Mono'; font-size: 0.6rem; background: rgba(161, 102, 255, 0.2); color: var(--primary); padding: 4px 10px; border-radius: 4px; align-self: flex-start; margin-bottom: 15px; }
-        .tool-card h3 { margin-bottom: 10px; letter-spacing: 1px; }
-        .tool-card p { font-size: 0.85rem; opacity: 0.6; line-height: 1.5; margin-bottom: 20px; }
+        .hub-card i { font-size: 3rem; margin-bottom: 20px; display: block; }
+        .hub-card h2 { font-family: 'Space Mono'; font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 2px; }
+        .hub-card p { font-size: 0.8rem; opacity: 0.5; line-height: 1.6; }
 
-        .btn-download { 
-            margin-top: auto; padding: 12px; background: transparent; border: 1px solid var(--primary); 
-            color: var(--primary); text-align: center; text-decoration: none; font-weight: bold; 
-            border-radius: 10px; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; 
-        }
-        .btn-download:hover { background: var(--primary); color: black; }
+        .tag-count { font-size: 0.6rem; color: var(--primary); border: 1px solid var(--primary); padding: 2px 8px; border-radius: 10px; margin-top: 15px; }
 
-        footer { padding: 80px 50px 50px 50px; text-align: center; opacity: 0.3; font-size: 10px; }
+        @media (max-width: 850px) { .hub-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -70,69 +69,39 @@
 <header>
     <a href="index.html" class="back-link">← RETOUR</a>
     <div class="title-section">
-        <h1>FREE INDEX</h1>
-        <p>RESSOURCES GRATUITES ET LOGICIELS OPEN-SOURCE</p>
-        
-        <div class="disclaimer-box">
-            <b>NOTE IMPORTANTE :</b> Les ressources ci-dessous sont externes. Contrairement aux produits Premium, elles ne sont pas vérifiées par OnTopLounge. Crédit source : INJ4ALL. Utilisez-les à vos propres risques.
-        </div>
-
-        <div class="filter-container">
-            <button class="filter-btn active" onclick="filterTools('all')">TOUT</button>
-            <button class="filter-btn" onclick="filterTools('fps')">FPS</button>
-            <button class="filter-btn" onclick="filterTools('roblox')">ROBLOX</button>
-        </div>
+        <h1>FREE HUB</h1>
+        <p>SÉLECTIONNEZ UNE CATÉGORIE</p>
     </div>
 </header>
 
-<main>
-    <div class="tools-grid" id="toolsGrid">
-        
-        <div class="tool-card" data-category="fps">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <span class="tool-tag">CS2 EXTERNAL</span>
-                <span style="font-size: 0.6rem; color: #00ff88; font-family: 'Space Mono';">● UNDETECTED</span>
-            </div>
-            <h3>Counter Strike 2 Free</h3>
-            <p>Aimbot, ESP, TriggerBot et RCS. Version externe sécurisée pour CS2.</p>
-            <a href="tutorialCSGO.html" class="btn-download">Télécharger</a>
-        </div>
+<main class="hub-container">
+    
+    <a href="free-softwares.html" class="hub-card">
+        <i>⚙️</i>
+        <h2>LOGICIELS</h2>
+        <p>Optimisation PC, Cleaners, et outils open-source vérifiés.</p>
+        <span class="tag-count">0 DISPONIBLES</span>
+    </a>
 
-        <div class="tool-card" data-category="roblox">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <span class="tool-tag" style="background:rgba(255, 68, 68, 0.2); color:#ff4444;">ROBLOX EXECUTOR</span>
-                <span style="font-size: 0.6rem; color: #00ff88; font-family: 'Space Mono';">● OK (1.3.20)</span>
-            </div>
-            <h3>Xeno Executor v1.3</h3>
-            <p>Injecteur de scripts puissant pour Roblox. Supporte Phantom Forces et plus.</p>
-            <a href="tutorialRoblox.html" class="btn-download" style="border-color:#ff4444; color:#ff4444;">Télécharger</a>
-        </div>
+    <a href="free-games.html" class="hub-card">
+        <i>🎮</i>
+        <h2>JEUX</h2>
+        <p>Jeux gratuits, comptes ou accès exclusifs temporaires.</p>
+        <span class="tag-count">0 DISPONIBLES</span>
+    </a>
 
-    </div>
+    <a href="free-cheats.html" class="hub-card">
+        <i>⚠️</i>
+        <h2>CHEATS</h2>
+        <p>Ressources externes (CS2, Roblox). Non vérifiées par OTL.</p>
+        <span class="tag-count">2 DISPONIBLES</span>
+    </a>
+
 </main>
 
 <footer>
-    ON TOP LOUNGE — FREE REPOSITORY v1.1
+    <center style="opacity: 0.3; font-size: 10px; margin-top: 50px;">ON TOP LOUNGE — SELECTION HUB v1.0</center>
 </footer>
-
-<script>
-    function filterTools(category) {
-        // Mise à jour des boutons
-        const buttons = document.querySelectorAll('.filter-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-
-        // Filtrage des cartes
-        const cards = document.querySelectorAll('.tool-card');
-        cards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-category') === category) {
-                card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
-            }
-        });
-    }
-</script>
 
 </body>
 </html>
