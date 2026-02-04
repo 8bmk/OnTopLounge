@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTL | 404 - Perdu dans le code</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --otl-purple: #a166ff; --bg: #060606; }
+        body { margin:0; padding:0; background:var(--bg); color:white; font-family:'Inter', sans-serif; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+        
+        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -1; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.1; filter: grayscale(1); }
+        
+        .content { text-align: center; z-index: 1; }
+        .error-code { font-family: 'Space Mono'; font-size: 8rem; font-weight: 900; color: var(--otl-purple); line-height: 1; margin-bottom: 20px; text-shadow: 0 0 30px rgba(161, 102, 255, 0.5); }
+        h1 { font-family: 'Space Mono'; text-transform: uppercase; letter-spacing: 5px; font-size: 1.2rem; margin-bottom: 20px; }
+        p { opacity: 0.6; font-size: 0.9rem; max-width: 400px; margin: 0 auto 40px; }
+        
+        .btn-home { padding: 15px 30px; border: 1px solid var(--otl-purple); color: var(--otl-purple); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border-radius: 5px; transition: 0.3s; text-transform: uppercase; }
+        .btn-home:hover { background: var(--otl-purple); color: black; box-shadow: 0 0 20px rgba(161, 102, 255, 0.4); }
+
+        /* Effet glitch simple */
+        .glitch { animation: glitch 1s linear infinite; }
+        @keyframes glitch { 
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+    </style>
+</head>
+<body>
+
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="firewatch-purple-night.1920x1080.mp4" type="video/mp4">
+</video>
+
+<div class="content">
+    <div class="error-code glitch">404</div>
+    <h1>Chemin introuvable</h1>
+    <p>Même avec un Wallhack, nous n'avons pas réussi à localiser cette page. Elle a probablement été supprimée ou déplacée.</p>
+    <br>
+    <a href="index.html" class="btn-home">Retourner au QG</a>
+</div>
+
+</body>
+</html>
