@@ -15,9 +15,9 @@
         .back-link:hover { background: var(--primary); color: black; }
         .title-section h1 { font-family: 'Space Mono'; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; }
         .disclaimer-box { max-width: 800px; margin: 20px auto; padding: 15px; background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3); border-radius: 12px; font-size: 0.75rem; color: #ff8888; line-height: 1.4; }
-        .filter-container { margin: 30px 0; display: flex; justify-content: center; gap: 10px; }
-        .filter-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(161, 102, 255, 0.2); color: white; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-family: 'Space Mono'; font-size: 0.7rem; }
-        .filter-btn.active { background: var(--primary); color: black; }
+        .filter-container { margin: 30px 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .filter-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(161, 102, 255, 0.2); color: white; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-family: 'Space Mono'; font-size: 0.7rem; transition: 0.3s; }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: black; }
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .tool-card { background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.1); border-radius: 20px; padding: 30px; transition: 0.4s; backdrop-filter: blur(10px); display: flex; flex-direction: column; }
         .tool-card.hidden { display: none; }
@@ -33,28 +33,42 @@
         <div class="title-section">
             <h1>FREE CHEATS</h1>
             <div class="disclaimer-box">
-                ⚠️ <b>RESSOURCES EXTERNES :</b> Ces outils sont fournis par des sources tierces (INJ4ALL). Ils n'ont pas été vérifiés par l'équipe OTL. Utilisez-les avec prudence.
+                ⚠️ <b>RESSOURCES EXTERNES :</b> Ces outils sont fournis par des sources tierces. Ils n'ont pas été vérifiés par l'équipe OTL. Utilisez-les avec prudence.
             </div>
             <div class="filter-container">
                 <button class="filter-btn active" onclick="filter('all')">TOUT</button>
                 <button class="filter-btn" onclick="filter('fps')">FPS</button>
                 <button class="filter-btn" onclick="filter('roblox')">ROBLOX</button>
+                <button class="filter-btn" onclick="filter('openworld')">WORLD</button>
             </div>
         </div>
     </header>
     <main class="tools-grid">
+        
         <div class="tool-card" data-cat="fps">
             <span class="tool-tag">CS2 EXTERNAL</span>
             <h3>Counter Strike 2 Free</h3>
             <p>ESP et Aimbot externe sécurisé (Source: INJ4ALL).</p>
             <a href="tutorialCSGO.html" class="btn-download">Détails / Télécharger</a>
         </div>
+
         <div class="tool-card" data-cat="roblox">
-            <span class="tool-tag" style="color:#ff4444; border-color:#ff4444;">ROBLOX</span>
+            <span class="tool-tag" style="color:#ff4444; border-color:#ff4444; background:rgba(255, 68, 68, 0.1);">ROBLOX</span>
             <h3>Xeno Executor</h3>
             <p>Injecteur puissant pour Roblox (Source: INJ4ALL).</p>
-            <a href="tutorialRoblox.html" class="btn-download">Détails / Télécharger</a>
+            <a href="tutorialRoblox.html" class="btn-download" style="border-color:#ff4444; color:#ff4444;">Détails / Télécharger</a>
         </div>
+
+        <div class="tool-card" data-cat="openworld">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <span class="tool-tag" style="background:rgba(255, 166, 0, 0.2); color:#ffa600;">RDR2 MOD MENU</span>
+                <span style="font-size: 0.6rem; color: #00ff88; font-family: 'Space Mono';">● UNDETECTED</span>
+            </div>
+            <h3>FamilyRed Menu</h3>
+            <p>Mod Menu complet pour RDR2 Online. Inclut diverses options de protection et de fun. (Source: Shiteur)</p>
+            <a href="tutorialRDR2.html" class="btn-download" style="border-color:#ffa600; color:#ffa600;">Détails / Télécharger</a>
+        </div>
+
     </main>
     <script>
         function filter(c){
