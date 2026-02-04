@@ -19,11 +19,10 @@
             z-index: -1; background-size: 100% 3px, 3px 100%; pointer-events: none;
         }
 
-        /* ANIMATIONS */
         .reveal { opacity: 0; transform: translateY(20px); filter: blur(5px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
 
-        header { height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        header { height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .logo-img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--primary); filter: drop-shadow(0 0 15px var(--primary)); margin-bottom: 20px; animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
@@ -31,41 +30,45 @@
         .portal-grid { 
             display: grid; 
             grid-template-columns: repeat(6, 1fr); 
-            gap: 20px; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; perspective: 1000px; 
+            gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; perspective: 1000px; 
         }
         
         .portal-card { 
-            position: relative; background: var(--card-bg); border-radius: 24px; text-align: center; 
-            border: 1px solid rgba(161, 102, 255, 0.12); text-decoration: none; color: white; 
-            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(12px);
+            position: relative; background: var(--card-bg); border-radius: 20px; text-align: center; 
+            border: 1px solid rgba(161, 102, 255, 0.15); text-decoration: none; color: white; 
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px);
             display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px;
             overflow: hidden;
         }
-        .portal-card:hover { border-color: var(--primary); box-shadow: 0 10px 40px rgba(161, 102, 255, 0.15); transform: translateY(-5px); }
+        .portal-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(161, 102, 255, 0.2); transform: translateY(-5px); }
 
-        .pinned { grid-column: span 3; padding: 50px 40px; }
-        .pinned h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 12px; letter-spacing: 1px; }
+        /* ÉPINGLÉS */
+        .pinned { grid-column: span 3; padding: 50px 40px; border: 1px solid rgba(161, 102, 255, 0.4); background: rgba(161, 102, 255, 0.05); }
+        .pinned h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 15px; }
         
-        .bento { grid-column: span 2; padding: 25px; background: rgba(255, 255, 255, 0.02); }
-        .bento h3 { font-family: 'Space Mono'; font-size: 0.85rem; margin-top: 12px; text-transform: uppercase; }
-        .status-tag { font-size: 0.6rem; color: #00ff88; font-weight: bold; margin-top: 8px; letter-spacing: 1px; opacity: 0.8; }
+        /* QUICK ACCESS BENTO (NEW) */
+        .bento { grid-column: span 2; padding: 25px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); }
+        .bento h3 { font-family: 'Space Mono'; font-size: 0.9rem; margin-top: 10px; margin-bottom: 5px; text-transform: uppercase; }
+        .bento p { font-size: 0.75rem; opacity: 0.5; }
+        .status-tag { font-size: 0.6rem; color: #00ff88; font-weight: bold; margin-top: 8px; letter-spacing: 1px; }
 
-        .gold-hover:hover { border-color: var(--gold); }
-        .blue-hover:hover { border-color: var(--discord); }
+        .gold-hover:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(255, 204, 0, 0.15); }
+        .purple-hover:hover { border-color: var(--primary); box-shadow: 0 0 20px rgba(161, 102, 255, 0.15); }
+        .blue-hover:hover { border-color: var(--discord); box-shadow: 0 0 20px rgba(88, 101, 242, 0.15); }
 
-        .btn-enter { 
-            margin-top: 20px; padding: 10px 30px; background: var(--primary); color: #000; 
-            font-weight: 900; border-radius: 50px; font-size: 11px; 
-            text-transform: uppercase; transition: 0.3s; 
-        }
-        .portal-card:hover .btn-enter { background: white; transform: scale(1.05); }
+        /* BUTTONS */
+        .btn-enter { margin-top: 20px; padding: 10px 25px; background: var(--primary); color: #000; font-weight: 800; border-radius: 50px; font-size: 10px; text-transform: uppercase; transition: 0.3s; }
+        .portal-card:hover .btn-enter { background: white; }
 
-        footer { padding: 80px 20px; text-align: center; opacity: 0.3; font-size: 10px; letter-spacing: 3px; font-family: 'Space Mono'; }
+        /* FAQ */
+        .content-section { max-width: 900px; margin: 80px auto; padding: 0 20px; }
+        .faq-container { background: rgba(255,255,255,0.02); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        details { background: rgba(161, 102, 255, 0.03); border: 1px solid rgba(161, 102, 255, 0.08); border-radius: 12px; margin-bottom: 10px; padding: 15px; cursor: pointer; }
+        summary { font-family: 'Space Mono'; font-size: 0.85rem; color: var(--primary); list-style: none; display: flex; justify-content: space-between; }
 
-        @media (max-width: 900px) { 
-            .pinned, .bento { grid-column: span 6; } 
-            header { height: 35vh; }
-        }
+        footer { padding: 60px; text-align: center; opacity: 0.3; font-size: 9px; letter-spacing: 2px; }
+
+        @media (max-width: 900px) { .pinned, .bento { grid-column: span 6; } }
     </style>
 </head>
 <body>
@@ -76,50 +79,67 @@
 
 <header class="reveal">
     <img src="OTL.png" alt="OTL Logo" class="logo-img">
-    <h1 style="letter-spacing: 10px; text-transform: uppercase; font-size: 2.2rem; font-weight: 900;">On Top Lounge</h1>
-    <p style="opacity: 0.5; font-family: 'Space Mono'; font-size: 0.75rem; margin-top: 12px; letter-spacing: 2px;">PREMIUM PORTAL // V1.0</p>
+    <h1 style="letter-spacing: 10px; text-transform: uppercase; font-size: 2.5rem;">On Top Lounge</h1>
+    <p style="opacity: 0.5; font-family: 'Space Mono'; font-size: 0.8rem; margin-top: 10px;">PREMIUM QUALITY // COMMUNITY DRIVEN</p>
 </header>
 
 <main>
     <section class="portal-grid reveal">
+        
         <a href="boutique-payante.html" class="portal-card pinned js-tilt">
             <h3 style="font-family: 'Space Mono';">BOUTIQUE PREMIUM</h3>
-            <p style="opacity: 0.6; font-size: 0.9rem;">Comptes, boosts et services VIP exclusifs.</p>
-            <div class="btn-enter">Accéder</div>
+            <p style="opacity: 0.7;">Comptes boostés, services exclusifs et options VIP. Le meilleur d'OTL.</p>
+            <div class="btn-enter">Accéder aux offres</div>
         </a>
 
         <a href="boutique-gratuite.html" class="portal-card pinned js-tilt">
             <h3 style="font-family: 'Space Mono';">ESPACE GRATUIT</h3>
-            <p style="opacity: 0.6; font-size: 0.9rem;">Ressources et outils en libre service.</p>
-            <div class="btn-enter">Explorer</div>
+            <p style="opacity: 0.7;">Ressources, scripts et outils gratuits pour toute la communauté.</p>
+            <div class="btn-enter">Explorer l'index</div>
         </a>
 
         <a href="amnesia-cheat.html" class="portal-card bento js-tilt gold-hover">
             <div style="font-size: 1.5rem;">🔑</div>
-            <h3>Cheats</h3>
+            <h3>Game Cheats</h3>
+            <p>Amnesia RDR2 & GTA V</p>
             <span class="status-tag">UNDETECTED</span>
         </a>
 
-        <a href="free-softwares.html" class="portal-card bento js-tilt">
+        <a href="free-softwares.html" class="portal-card bento js-tilt purple-hover">
             <div style="font-size: 1.5rem;">🎬</div>
             <h3>Logiciels</h3>
-            <span class="status-tag" style="color:var(--primary)">2025 READY</span>
+            <p>Pack Adobe & Filmora</p>
+            <span class="status-tag" style="color:var(--primary)">MAJ 2025 OK</span>
         </a>
 
         <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card bento js-tilt blue-hover">
             <div style="font-size: 1.5rem;">💬</div>
-            <h3>Discord</h3>
-            <span class="status-tag" style="color:#5865F2">REJOINDRE</span>
+            <h3>Support</h3>
+            <p>News & Communauté</p>
+            <span class="status-tag" style="color:#5865F2">DISCORD ONLINE</span>
         </a>
+
+    </section>
+
+    <section class="content-section reveal">
+        <div class="faq-container">
+            <details>
+                <summary>POURQUOI NOUS CHOISIR ? <span>▼</span></summary>
+                <p style="margin-top:10px; font-size:0.85rem; opacity:0.7;">Nous offrons le meilleur rapport qualité-prix avec un support actif et des mises à jour constantes pour éviter tout risque.</p>
+            </details>
+            <details>
+                <summary>MÉTHODES DE PAIEMENT <span>▼</span></summary>
+                <p style="margin-top:10px; font-size:0.85rem; opacity:0.7;">Nous acceptons diverses méthodes sécurisées via notre plateforme Discord. Contactez un administrateur.</p>
+            </details>
+        </div>
     </section>
 </main>
 
 <footer>
-    <p>© 2026 ON TOP LOUNGE — DESIGNED BY 8BMK</p>
+    <p>© 2026 ON TOP LOUNGE — BY 8BMK</p>
 </footer>
 
 <script>
-    // Apparition au défilement
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) entry.target.classList.add('active');
@@ -127,13 +147,12 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-    // Effet d'inclinaison (Tilt)
     const cards = document.querySelectorAll('.js-tilt');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            const rotateX = (e.clientY - rect.top - rect.height / 2) / -20;
-            const rotateY = (e.clientX - rect.left - rect.width / 2) / 20;
+            const rotateX = (e.clientY - rect.top - rect.height / 2) / -15;
+            const rotateY = (e.clientX - rect.left - rect.width / 2) / 15;
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
         });
         card.addEventListener('mouseleave', () => {
