@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTL | Tutoriel Adobe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #00d4ff; --bg: #060606; } /* Change la couleur ici */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter', sans-serif; background:var(--bg); color:white; line-height: 1.6; }
+        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.1; filter: saturate(0); }
+        .container { max-width: 850px; margin: 60px auto; padding: 40px; background: rgba(15, 15, 20, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; backdrop-filter: blur(10px); }
+        .back-link { position: absolute; top: 30px; left: 30px; color: #a166ff; text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid #a166ff; padding: 8px 15px; border-radius: 5px; transition: 0.3s; z-index: 100;}
+        h1 { font-family: 'Space Mono'; color: var(--primary); text-transform: uppercase; margin-bottom: 5px; }
+        .status { font-size: 0.7rem; color: #00ff88; margin-bottom: 30px; font-family: 'Space Mono'; }
+        .step-card { background: rgba(255, 255, 255, 0.03); border-left: 3px solid var(--primary); padding: 20px; margin-bottom: 15px; border-radius: 0 15px 15px 0; }
+        .step-card h3 { font-size: 0.85rem; color: var(--primary); text-transform: uppercase; margin-bottom: 5px; font-family: 'Space Mono'; }
+        .warning-box { background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; padding: 15px; border-radius: 12px; color: #ff8888; font-size: 0.8rem; margin: 20px 0; }
+        details { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
+        details summary { font-weight: bold; font-size: 0.9rem; color: #ffcc00; }
+        code { background: #000; padding: 2px 6px; border-radius: 4px; color: #ff4444; font-family: 'Space Mono'; font-size: 0.8rem; }
+        .btn-download { display: block; width: 100%; padding: 20px; background: var(--primary); color: black; text-align: center; text-decoration: none; font-weight: 900; border-radius: 15px; font-size: 1.1rem; text-transform: uppercase; transition: 0.3s; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <a href="free-softwares.html" class="back-link">← RETOUR</a>
+    <div class="container">
+        <h1>ADOBE PHOTOSHOP 2024</h1> <div class="status">● PATCH AUTOMATIQUE INCLUS</div>
 
+        <div class="step-card">
+            <h3>1. Antivirus</h3>
+            <p>Désactive temporairement ton antivirus. Le patch modifie le Pare-feu Windows, ce qui peut créer un faux-positif.</p>
+        </div>
+
+        <div class="step-card">
+            <h3>2. Montage ISO</h3>
+            <p>Fais un clic-droit sur le fichier <code>.iso</code> téléchargé et clique sur <b>"Monter"</b>. Un nouveau lecteur apparaîtra dans "Ce PC".</p>
+        </div>
+
+        <div class="step-card">
+            <h3>3. Installation</h3>
+            <p>Dans le disque monté, lance <code>autoplay.exe</code>. Si rien ne se passe après avoir cliqué sur "Installer", vérifie que ton antivirus est bien coupé.</p>
+        </div>
+
+        <div class="warning-box">
+            <b>NOTE :</b> Le patch bloque automatiquement l'application dans le pare-feu Defender.
+        </div>
+
+        <h2 style="font-size: 1rem; margin: 30px 0 15px; font-family: 'Space Mono'; color: #ffcc00;">⚠️ RÉSOLUTIONS DES PROBLÈMES</h2>
+        
+        <details>
+            <summary>Pop-up "Cette application a été désactivée" (Non-AGS)</summary>
+            <p style="font-size: 0.85rem; margin-top:10px;">
+                1. Ouvre Sécurité Windows > Pare-feu > Paramètres avancés.<br>
+                2. Règles de trafic sortant > Nouvelle règle > Programme.<br>
+                3. Sélectionne le <code>.exe</code> de l'app Adobe et coche <b>"Bloquer la connexion"</b>.
+            </p>
+        </details>
+
+        <details>
+            <summary>Pop-up "Adobe Genuine Service Alert" (AGS)</summary>
+            <p style="font-size: 0.85rem; margin-top:10px;">
+                Lance <b>PowerShell en administrateur</b> et colle :<br>
+                <code>[System.Diagnostics.Process]::Start("C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient\AdobeCleanUpUtility.exe")</code>
+            </p>
+        </details>
+
+        <details>
+            <summary>Erreur "Privilèges administrateur requis" (Code 24)</summary>
+            <p style="font-size: 0.85rem; margin-top:10px;">
+                Copie tous les fichiers du disque ISO monté dans un nouveau dossier sur ton <b>Bureau</b>, puis relance <code>autoplay.exe</code> depuis ce dossier.
+            </p>
+        </details>
+
+        <a href="https://lockr.so/wgn8HO0j" target="_blank" class="btn-download">TÉLÉCHARGER LE LOGICIEL</a>
+    </div>
+</body>
+</html>
