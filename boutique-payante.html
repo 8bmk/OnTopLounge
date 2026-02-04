@@ -97,7 +97,66 @@
         <p style="font-size: 0.7rem; opacity: 0.5; margin-bottom: 15px; text-align: center; text-transform: uppercase;">Disponible uniquement sur commande directe</p>
         <a href="https://discord.gg/MPKADDqYtk" class="btn-buy btn-discord">Ouvrir un Ticket Discord</a>
     </div>
+<div class="product-card partner-highlight js-tilt">
+    <div class="partner-tag">OFFRE PARTENAIRE</div>
+    <div class="product-icon">🚗</div>
+    <h3>GTA FRANCE - SERVICES</h3>
+    <p>Accédez aux services exclusifs de la plus grosse communauté GTA FR.</p>
+    <div class="price-row">
+        <span class="price-label">Accès</span>
+        <span class="price-value">FREE / VIP</span>
+    </div>
+    <a href="https://discord.gg/DdDy3DdAsN" target="_blank" class="btn-buy">REJOINDRE LE SERVEUR</a>
+</div>
 
+<style>
+    .partner-highlight {
+        border: 1px solid var(--gold) !important; /* Pour la faire ressortir */
+        background: linear-gradient(135deg, rgba(255, 204, 0, 0.05) 0%, rgba(0, 0, 0, 0.6) 100%) !important;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .partner-tag {
+        position: absolute;
+        top: 10px;
+        right: -30px;
+        background: var(--gold);
+        color: black;
+        font-size: 0.6rem;
+        font-weight: 900;
+        padding: 5px 40px;
+        transform: rotate(45deg);
+        font-family: 'Space Mono';
+    }
+
+    .partner-highlight h3 {
+        color: var(--gold) !important;
+    }
+
+    .partner-highlight .btn-buy {
+        background: var(--gold) !important;
+        color: black !important;
+    }
+
+    /* Optionnel : ajout d'un petit effet de brillance doré qui passe sur la carte */
+    .partner-highlight::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 204, 0, 0.1), transparent);
+        transform: rotate(45deg);
+        animation: shine 4s infinite;
+    }
+
+    @keyframes shine {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+</style>
 </div>
 
 <footer style="text-align: center; padding: 80px; opacity: 0.3; font-size: 0.7rem; font-family: 'Space Mono'; letter-spacing: 2px;">
