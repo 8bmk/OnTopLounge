@@ -97,11 +97,31 @@
             <div class="btn-enter" style="background:#5865F2; color:white;">Rejoindre</div>
         </a>
 
-        <div class="portal-card small js-tilt">
-            <h3 style="color: #00ff88;">STATUS</h3>
-            <p>Tous les outils : <span style="color: #00ff88; font-weight: bold;">ONLINE</span></p>
-            <div class="btn-enter" style="background:#00ff88; color:black;">Vérifier</div>
-        </div>
+        <div class="activity-terminal">
+    <div class="terminal-header">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="terminal-title">OTL_SYSTEM_LOGS</span>
+    </div>
+    <div class="terminal-body">
+        <div class="log-line"><span class="log-time">[11:42]</span> <span class="log-msg">Initialisation du catalogue...</span></div>
+        <div class="log-line"><span class="log-time">[HIER]</span> <span class="log-msg">Patch Adobe After Effects <span class="status-up">V26.11 OK</span></span></div>
+        <div class="log-line"><span class="log-time">[NEW]</span> <span class="log-msg">Intégration guide Amnesia (RDR2/GTA)</span></div>
+        <div class="log-line blink">_</div>
+    </div>
+</div>
+
+<style>
+    .activity-terminal { background: #000; border: 1px solid #333; border-radius: 10px; font-family: 'Space Mono', monospace; overflow: hidden; max-width: 500px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .terminal-header { background: #1a1a1a; padding: 10px; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+    .terminal-title { color: #666; font-size: 0.7rem; margin-left: 10px; letter-spacing: 1px; }
+    .terminal-body { padding: 15px; font-size: 0.8rem; color: #00ff88; line-height: 1.5; }
+    .log-time { color: #555; margin-right: 10px; }
+    .status-up { color: #a166ff; font-weight: bold; }
+    .blink { animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+</style>
 
         <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="portal-card small js-tilt">
             <h3 style="color: #ffaa00;">AVIS</h3>
