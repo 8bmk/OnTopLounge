@@ -13,6 +13,7 @@
             --discord: #5865F2; 
             --gold: #ffcc00;
             --danger: #ff4444;
+            --force-v10: #ff00ff;
         }
         
         *{margin:0;padding:0;box-sizing:border-box;}
@@ -21,14 +22,14 @@
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.2; }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.01));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
             z-index: -1; background-size: 100% 3px, 3px 100%; pointer-events: none;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 0, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 255, 0); }
         }
 
         header { padding: 60px 20px 30px; text-align: center; }
@@ -108,20 +109,24 @@
 
 <div class="shop-container">
     
-    <div class="product-card item-services" style="border-color: var(--primary); background: linear-gradient(145deg, rgba(25, 25, 35, 0.95), rgba(161, 102, 255, 0.05));">
-        <div class="badge" style="background: var(--danger); animation: pulse 2s infinite;">HOT</div>
-        <span class="price-tag">25.00€ <small style="font-size: 0.6rem; opacity: 0.5;">LIFETIME</small></span>
-        <h2>FORCE VOID V1.0</h2>
+    <div class="product-card item-services" style="border-color: var(--force-v10); background: linear-gradient(145deg, rgba(15, 15, 25, 0.95), rgba(255, 0, 255, 0.05));">
+        <div class="badge" style="background: var(--force-v10); animation: pulse 2s infinite;">EXCLUSIVE</div>
+        <span class="price-tag" style="color: var(--force-v10);">14.99€ <small style="font-size: 0.6rem; opacity: 0.5;">LIFETIME ACCESS</small></span>
+        <h2 style="color: var(--force-v10); text-shadow: 0 0 10px rgba(255, 0, 255, 0.3);">FORCE V10</h2>
         <ul class="specs-list">
-            <li>Type : <b>Nuclear Self-Bot & Raider</b></li>
-            <li>Interface : <b>GUI Desktop Exécutive</b></li>
-            <li>Modules : <b>Auto-Nuke, Mass Spam, Ghost Mode</b></li>
-            <li>Sécurité : <b>Anti-Token Grab & Obfuscation</b></li>
-            <li>Vitesse : <b>Multi-threaded (Destruction Instantanée)</b></li>
-            <li>Support : <b>Accès VIP & Mises à jour</b></li>
+            <li>Type : <b style="color: var(--force-v10);">Advanced Self-Bot Terminal</b></li>
+            <li>Contrôle : <b style="color: var(--force-v10);">User Token Bypass (No Bot Required)</b></li>
+            <li>Action : <b style="color: var(--force-v10);">Mass DMs, Server Raid, Ghost Mode</b></li>
+            <li>Protection : <b style="color: var(--force-v10);">Anti-Self-Bot Detection v2</b></li>
+            <li>Vitesse : <b style="color: var(--force-v10);">Socket-Based (Ultra Fast)</b></li>
+            <li>Statut : <b style="color: var(--force-v10);">Undetected & Functional</b></li>
         </ul>
-        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="btn-buy btn-sellauth" style="box-shadow: 0 0 15px rgba(161, 102, 255, 0.4);">Acheter via Ticket</a>
-        <p style="font-size: 0.6rem; text-align: center; margin-top: 10px; font-family: 'Space Mono'; opacity: 0.4;">LICENCE UNIQUE PAR UTILISATEUR</p>
+        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="btn-buy" style="background: var(--force-v10); color: white; box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);">
+            ACCÉDER AU GHOST MODULE
+        </a>
+        <p style="font-size: 0.6rem; text-align: center; margin-top: 10px; font-family: 'Space Mono'; opacity: 0.5; color: var(--force-v10);">
+            BYPASS DISCORD SECURITY PROTOCOLS
+        </p>
     </div>
 
     <div class="product-card item-services">
