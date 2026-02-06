@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTL | Tutoriel Spotify Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1DB954; --bg: #060606; } 
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter', sans-serif; background:var(--bg); color:white; line-height: 1.6; }
+        #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.1; filter: saturate(0); }
+        .container { max-width: 850px; margin: 60px auto; padding: 40px; background: rgba(15, 15, 20, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; backdrop-filter: blur(10px); }
+        .back-link { position: absolute; top: 30px; left: 30px; color: #a166ff; text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid #a166ff; padding: 8px 15px; border-radius: 5px; transition: 0.3s; z-index: 100;}
+        .back-link:hover { background: #a166ff; color: black; }
+        h1 { font-family: 'Space Mono'; color: var(--primary); text-transform: uppercase; margin-bottom: 5px; }
+        .status { font-size: 0.7rem; color: #00ff88; margin-bottom: 30px; font-family: 'Space Mono'; }
+        .step-card { background: rgba(255, 255, 255, 0.03); border-left: 3px solid var(--primary); padding: 20px; margin-bottom: 15px; border-radius: 0 15px 15px 0; }
+        .step-card h3 { font-size: 0.85rem; color: var(--primary); text-transform: uppercase; margin-bottom: 5px; font-family: 'Space Mono'; }
+        .warning-box { background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; padding: 15px; border-radius: 12px; color: #ff8888; font-size: 0.8rem; margin: 20px 0; }
+        details { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
+        details summary { font-weight: bold; font-size: 0.9rem; color: #ffcc00; }
+        code { background: #000; padding: 2px 6px; border-radius: 4px; color: #1DB954; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid rgba(29, 185, 84, 0.3); }
+        .btn-download { display: block; width: 100%; padding: 20px; background: var(--primary); color: black; text-align: center; text-decoration: none; font-weight: 900; border-radius: 15px; font-size: 1.1rem; text-transform: uppercase; transition: 0.3s; margin-top: 30px; }
+        .btn-download:hover { transform: scale(1.02); filter: brightness(1.1); }
+    </style>
+</head>
+<body>
+    <a href="free-softwares.html" class="back-link">← RETOUR</a>
+    <div class="container">
+        <h1>SPOTIFY PREMIUM (SPICETIFY)</h1> 
+        <div class="status">● MODIFICATION ACTIVE v2.40.11</div>
+
+        <div class="warning-box">
+            <b>ATTENTION :</b> Ne fonctionne PAS avec la version Spotify du Microsoft Store. Désinstalle-la avant de commencer.
+        </div>
+
+        <div class="step-card">
+            <h3>1. Installation Propre</h3>
+            <p>Télécharge et installe la version officielle de Spotify (Windows) depuis le site web classique.</p>
+        </div>
+
+        <div class="step-card">
+            <h3>2. Injection Spicetify</h3>
+            <p>Ouvre <b>PowerShell</b> (recherche Windows) et colle la commande suivante :</p>
+            <code style="display:block; margin-top:10px; padding:10px;">iwr -useb https://raw.githubusercontent.com/spicetify/spicetify-cli/master/install.ps1 | iex</code>
+            <p style="font-size: 0.8rem; margin-top:10px; opacity: 0.7;">Appuie sur <b>"Y"</b> si on te demande d'installer le Marketplace.</p>
+        </div>
+
+        <div class="step-card">
+            <h3>3. Activation Adblockify</h3>
+            <p>Ouvre Spotify. Clique sur l'onglet <b>Marketplace</b> en haut à gauche, recherche l'extension <code>Adblockify</code> et installe-la pour supprimer les publicités.</p>
+        </div>
+
+        <h2 style="font-size: 1rem; margin: 30px 0 15px; font-family: 'Space Mono'; color: #ffcc00;">⚠️ RÉSOLUTIONS DES PROBLÈMES</h2>
+
+        <details>
+            <summary>Spicetify a disparu après une mise à jour Spotify</summary>
+            <p style="font-size: 0.85rem; margin-top:10px;">
+                C'est normal, les mises à jour de Spotify écrasent le mod. Colle simplement ceci dans PowerShell :<br><br>
+                <code>spicetify backup apply</code>
+            </p>
+        </details>
+
+        <details>
+            <summary>Le Marketplace ne s'affiche pas</summary>
+            <p style="font-size: 0.85rem; margin-top:10px;">
+                Relance PowerShell et tape :<br><br>
+                <code>spicetify apply</code><br><br>
+                Puis redémarre complètement Spotify.
+            </p>
+        </details>
+
+        <details>
+            <summary>Extensions recommandées</summary>
+            <p style="font-size: 0.85rem; margin-top:10px;">
+                <b>• Beautiful Lyrics :</b> Paroles style Apple Music.<br>
+                <b>• Bookmark :</b> Sauvegarde des moments précis dans les podcasts/sons.
+            </p>
+        </details>
+
+        <a href="https://www.spotify.com/download/windows/" target="_blank" class="btn-download">1. TÉLÉCHARGER SPOTIFY (OFFICIEL)</a>
+    </div>
+</body>
+</html>
