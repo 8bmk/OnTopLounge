@@ -16,7 +16,6 @@
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;min-height:100vh;}
 
-        /* Style identique au portail */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.15; }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -28,55 +27,54 @@
         .back-link:hover { background: var(--primary); color: white; }
 
         header { padding: 80px 20px 40px; text-align: center; }
-        h1 { font-family: 'Space Mono'; letter-spacing: 5px; text-transform: uppercase; font-size: 2rem; }
+        h1 { font-family: 'Space Mono'; letter-spacing: 5px; text-transform: uppercase; font-size: 2.2rem; font-weight: 900; }
 
-        .config-container { max-width: 800px; margin: 0 auto 100px; padding: 20px; }
+        .config-container { max-width: 900px; margin: 0 auto 100px; padding: 20px; }
 
         .config-card { 
-            background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.2); border-radius: 20px; 
+            background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.2); border-radius: 24px; 
             padding: 40px; backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        .step-title { font-family: 'Space Mono'; color: var(--primary); font-size: 1.1rem; margin-bottom: 25px; display: flex; align-items: center; }
-        .step-title::before { content: " [0" attr(data-step) "] "; margin-right: 10px; opacity: 0.5; }
+        .input-group { margin-bottom: 45px; background: rgba(255,255,255,0.02); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        .step-title { font-family: 'Space Mono'; color: var(--primary); font-size: 0.9rem; margin-bottom: 20px; display: block; text-transform: uppercase; letter-spacing: 2px; }
 
-        .input-group { margin-bottom: 40px; }
-        
-        /* Style des Sliders */
+        .value-display { font-family: 'Space Mono'; font-size: 1.8rem; color: white; margin-bottom: 10px; display: block; font-weight: 900; }
+
+        /* Sliders Custom */
         input[type=range] { width: 100%; margin: 15px 0; background: transparent; -webkit-appearance: none; }
-        input[type=range]:focus { outline: none; }
-        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: rgba(161, 102, 255, 0.2); border-radius: 3px; }
-        input[type=range]::-webkit-slider-thumb { height: 20px; width: 20px; border-radius: 50%; background: var(--primary); cursor: pointer; -webkit-appearance: none; margin-top: -7px; box-shadow: 0 0 10px var(--primary); }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #1a1a25; border-radius: 4px; border: 1px solid rgba(161, 102, 255, 0.2); }
+        input[type=range]::-webkit-slider-thumb { height: 24px; width: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; -webkit-appearance: none; margin-top: -9px; box-shadow: 0 0 15px var(--primary); }
 
-        .value-display { font-family: 'Space Mono'; font-size: 1.5rem; color: white; margin-bottom: 10px; display: block; }
-
-        /* Options de Checkbox stylisées */
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        /* Grille des options */
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .option-item { 
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
-            padding: 15px; border-radius: 10px; cursor: pointer; transition: 0.3s;
-            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); 
+            padding: 18px; border-radius: 12px; cursor: pointer; transition: 0.2s;
+            display: flex; flex-direction: column; gap: 8px;
         }
         .option-item:hover { border-color: var(--primary); background: rgba(161, 102, 255, 0.05); }
-        .option-item.active { border-color: var(--primary); background: rgba(161, 102, 255, 0.15); box-shadow: inset 0 0 10px rgba(161, 102, 255, 0.2); }
+        .option-item.active { border-color: var(--primary); background: rgba(161, 102, 255, 0.15); box-shadow: 0 0 20px rgba(161, 102, 255, 0.1); }
+        .option-item span:first-child { font-size: 0.85rem; font-weight: 700; }
+        .option-item .opt-price { color: var(--primary); font-family: 'Space Mono'; font-size: 0.8rem; }
 
-        /* Panneau de Prix */
+        /* Panneau de Prix Fixe en bas sur mobile ou intégré ici */
         .price-panel { 
-            margin-top: 40px; padding-top: 30px; border-top: 1px dashed rgba(161, 102, 255, 0.3);
-            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 40px; padding: 30px; background: rgba(161, 102, 255, 0.1); border-radius: 15px;
+            display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--primary);
         }
-        .total-label { font-family: 'Space Mono'; opacity: 0.6; text-transform: uppercase; }
-        .total-amount { font-family: 'Space Mono'; font-size: 2.5rem; color: var(--primary); font-weight: 900; }
+        .total-amount { font-family: 'Space Mono'; font-size: 3rem; color: white; font-weight: 900; text-shadow: 0 0 20px rgba(161, 102, 255, 0.5); }
 
         .btn-order { 
-            display: block; width: 100%; padding: 20px; margin-top: 30px; 
-            background: var(--primary); color: white; border: none; border-radius: 12px;
+            display: block; width: 100%; padding: 22px; margin-top: 30px; 
+            background: var(--primary); color: white; border: none; border-radius: 15px;
             font-weight: 900; text-transform: uppercase; letter-spacing: 3px; cursor: pointer;
             transition: 0.3s; font-family: 'Space Mono'; text-decoration: none; text-align: center;
+            box-shadow: 0 10px 30px rgba(161, 102, 255, 0.3);
         }
-        .btn-order:hover { background: white; color: black; transform: scale(1.02); }
+        .btn-order:hover { background: white; color: black; transform: translateY(-3px); }
 
-        footer { text-align: center; padding-bottom: 50px; opacity: 0.3; font-family: 'Space Mono'; font-size: 0.7rem; }
+        footer { text-align: center; padding: 40px; opacity: 0.3; font-family: 'Space Mono'; font-size: 0.7rem; }
     </style>
 </head>
 <body>
@@ -85,65 +83,79 @@
     <source src="purple-sky.3840x2160.mp4" type="video/mp4">
 </video>
 
-<a href="force-operationnelle.html" class="back-link">← ANNULER</a>
+<a href="force-operationnelle.html" class="back-link">← RETOUR SHOP</a>
 
 <header>
-    <h1>CONFIGURATEUR</h1>
-    <p style="opacity: 0.5; font-family: 'Space Mono'; margin-top: 10px; font-size: 0.8rem;">CONSTRUISEZ VOTRE PACK SUR MESURE</p>
+    <h1>BUILDER PRO</h1>
+    <p style="opacity: 0.5; font-family: 'Space Mono'; margin-top: 10px; font-size: 0.8rem;">VOTRE COMPTE, VOS RÈGLES.</p>
 </header>
 
 <div class="config-container">
     <div class="config-card">
         
         <div class="input-group">
-            <span class="step-title" data-step="1">MONTANT DE CASH (GTA$)</span>
+            <span class="step-title">1. VOLUME DE CASH (GTA$)</span>
             <span class="value-display" id="cash-val">50,000,000 $</span>
-            <input type="range" id="cash-slider" min="10" max="500" step="10" value="50">
-            <p style="font-size: 0.7rem; opacity: 0.4; font-family: 'Space Mono';">Min: 10M / Max: 500M</p>
+            <input type="range" id="cash-slider" min="0" max="2000" step="50" value="50">
+            <div style="display: flex; justify-content: space-between; opacity: 0.4; font-size: 0.7rem; font-family: 'Space Mono'; margin-top: 10px;">
+                <span>0$</span>
+                <span>2 MILLIARDS $</span>
+            </div>
         </div>
 
         <div class="input-group">
-            <span class="step-title" data-step="2">NIVEAU (RP)</span>
-            <span class="value-display" id="rp-val">Niveau 120</span>
-            <input type="range" id="rp-slider" min="1" max="8000" step="10" value="120">
+            <span class="step-title">2. RANG DE RÉPUTATION (RP)</span>
+            <span class="value-display" id="rp-val">Rang 120</span>
+            <input type="range" id="rp-slider" min="1" max="8000" step="1" value="120">
+            <div style="display: flex; justify-content: space-between; opacity: 0.4; font-size: 0.7rem; font-family: 'Space Mono'; margin-top: 10px;">
+                <span>LVL 1</span>
+                <span>LVL 8000</span>
+            </div>
         </div>
 
         <div class="input-group">
-            <span class="step-title" data-step="3">MODULES ADDITIONNELS</span>
+            <span class="step-title">3. PACKS DE DÉBLOCAGE & SKILLS</span>
             <div class="options-grid">
                 <div class="option-item" onclick="toggleOption(this, 10)">
-                    <span>Unlock All (Tout débloquer)</span>
-                    <span style="color: var(--primary);">+10€</span>
+                    <span>FULL UNLOCK ALL</span>
+                    <span class="opt-price">+10.00€</span>
+                </div>
+                <div class="option-item" onclick="toggleOption(this, 7)">
+                    <span>TENUES MODDÉES (X15)</span>
+                    <span class="opt-price">+7.00€</span>
                 </div>
                 <div class="option-item" onclick="toggleOption(this, 5)">
-                    <span>Tenues Moddées (x10)</span>
-                    <span style="color: var(--primary);">+5€</span>
+                    <span>FAST RUN & ROLL</span>
+                    <span class="opt-price">+5.00€</span>
                 </div>
-                <div class="option-item" onclick="toggleOption(this, 15)">
-                    <span>Livraison Express (< 2h)</span>
-                    <span style="color: var(--primary);">+15€</span>
+                <div class="option-item" onclick="toggleOption(this, 4)">
+                    <span>KD RATIO MODDÉ</span>
+                    <span class="opt-price">+4.00€</span>
                 </div>
                 <div class="option-item" onclick="toggleOption(this, 5)">
-                    <span>Statistiques Max</span>
-                    <span style="color: var(--primary);">+5€</span>
+                    <span>MAX STATS</span>
+                    <span class="opt-price">+5.00€</span>
+                </div>
+                <div class="option-item" onclick="toggleOption(this, 12)">
+                    <span>LIVRAISON PRIORITAIRE</span>
+                    <span class="opt-price">+12.00€</span>
                 </div>
             </div>
         </div>
 
         <div class="price-panel">
             <div>
-                <span class="total-label">Estimation Totale</span>
-                <p style="font-size: 0.6rem; opacity: 0.5;">TVA incluse / Cryptage SSL</p>
+                <span style="font-family: 'Space Mono'; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px;">TOTAL À RÉGLER</span>
             </div>
-            <div class="total-amount" id="total-price">15.00€</div>
+            <div class="total-amount" id="total-price">0.00€</div>
         </div>
 
-        <a href="https://discord.gg/DdDy3DdAsN" target="_blank" class="btn-order">COMMANDER VIA TICKET DISCORD</a>
+        <a href="https://discord.gg/DdDy3DdAsN" target="_blank" class="btn-order">COMMANDER MON CONFIG</a>
     </div>
 </div>
 
 <footer>
-    CONFIG_SYTEM_V2.0 // OTL INTERACTIVE
+    OTL BUILDER SYSTEM // ENCRYPTED DATA
 </footer>
 
 <script>
@@ -153,37 +165,63 @@
     const rpVal = document.getElementById('rp-val');
     const totalPrice = document.getElementById('total-price');
 
-    let basePrice = 10; 
-    let extraOptions = 0;
+    let extraOptionsPrice = 0;
 
-    function updatePrice() {
-        // Logique de prix : 5€ par tranche de 100M + prix de base + options
-        let cashCost = Math.floor(cashSlider.value / 50) * 3; 
-        let finalPrice = basePrice + cashCost + extraOptions;
-        totalPrice.innerText = finalPrice.toFixed(2) + "€";
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+
+    function calculateFinalPrice() {
+        let price = 0;
+
+        // --- LOGIQUE DE PRIX INSPIRÉE SUPREMACY ---
+        
+        // 1. Calcul de l'argent (Dégressif)
+        let cash = parseInt(cashSlider.value);
+        if (cash > 0) {
+            price += 5; // Frais de base si on prend de l'argent
+            if (cash <= 500) price += (cash / 50) * 2; // 2€ tous les 50M jusqu'à 500M
+            else if (cash <= 1000) price += 20 + ((cash-500) / 100) * 3; // Ralentissement du prix
+            else price += 35 + ((cash-1000) / 200) * 2; // Gros volumes pas chers
+        }
+
+        // 2. Calcul du Niveau
+        let rp = parseInt(rpSlider.value);
+        if (rp > 120) {
+            price += 3; // Frais pour niveau au dessus du standard 120
+            if (rp > 1000) price += 5; // Bonus difficulté lvl 1000+
+        }
+
+        // 3. Ajout des options cochées
+        price += extraOptionsPrice;
+
+        // Affichage final
+        totalPrice.innerText = price.toFixed(2) + "€";
     }
 
     cashSlider.oninput = function() {
-        cashVal.innerText = this.value + ",000,000 $";
-        updatePrice();
+        let display = formatNumber(this.value * 1000000);
+        cashVal.innerText = display + " $";
+        calculateFinalPrice();
     }
 
     rpSlider.oninput = function() {
-        rpVal.innerText = "Niveau " + this.value;
+        rpVal.innerText = "Rang " + this.value;
+        calculateFinalPrice();
     }
 
     function toggleOption(el, price) {
         el.classList.toggle('active');
         if(el.classList.contains('active')) {
-            extraOptions += price;
+            extraOptionsPrice += price;
         } else {
-            extraOptions -= price;
+            extraOptionsPrice -= price;
         }
-        updatePrice();
+        calculateFinalPrice();
     }
 
-    // Init
-    updatePrice();
+    // Initialisation
+    calculateFinalPrice();
 </script>
 
 </body>
