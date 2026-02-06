@@ -3,68 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTL | Configurateur Professionnel</title>
+    <title>OTL | Configurateur Équilibré</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --primary: #a166ff; 
-            --bg: #08080a; 
-            --card-bg: rgba(20, 20, 25, 0.95); 
-        }
-        
+        :root { --primary: #a166ff; --bg: #08080a; --card-bg: rgba(20, 20, 25, 0.95); }
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white; line-height: 1.6;}
+        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; object-fit: cover; opacity: 0.12; }
 
-        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; object-fit: cover; opacity: 0.15; }
+        .container { max-width: 1100px; margin: 40px auto; padding: 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; margin-top: 20px; } }
 
-        .container { max-width: 1100px; margin: 60px auto; padding: 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
-        @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
+        .config-card { background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.2); border-radius: 24px; padding: 40px; backdrop-filter: blur(20px); }
+        .step-section { margin-bottom: 35px; }
+        .label-group { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; }
+        .step-label { font-family: 'Space Mono'; color: var(--primary); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+        .val-num { font-family: 'Space Mono'; font-size: 1.3rem; font-weight: 900; }
 
-        .config-card { 
-            background: var(--card-bg); 
-            border: 1px solid rgba(161, 102, 255, 0.2); 
-            border-radius: 24px; 
-            padding: 40px; 
-            backdrop-filter: blur(20px);
-        }
-
-        .step-section { margin-bottom: 40px; }
-        .label-group { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
-        .step-label { font-family: 'Space Mono'; color: var(--primary); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
-        .val-num { font-family: 'Space Mono'; font-size: 1.4rem; font-weight: 900; }
-
-        /* Sliders Custom */
-        input[type=range] { width: 100%; -webkit-appearance: none; background: transparent; height: 20px; }
+        input[type=range] { width: 100%; -webkit-appearance: none; background: transparent; height: 20px; cursor: pointer; }
         input[type=range]::-webkit-slider-runnable-track { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
-        input[type=range]::-webkit-slider-thumb { height: 20px; width: 20px; border-radius: 50%; background: var(--primary); -webkit-appearance: none; margin-top: -8px; cursor: pointer; box-shadow: 0 0 15px var(--primary); }
+        input[type=range]::-webkit-slider-thumb { height: 18px; width: 18px; border-radius: 50%; background: var(--primary); -webkit-appearance: none; margin-top: -7px; box-shadow: 0 0 10px var(--primary); }
 
-        /* Recap Sidebar */
-        .sidebar { position: sticky; top: 40px; height: fit-content; }
-        .recap-box { 
-            background: var(--primary); color: white; border-radius: 24px; padding: 30px;
-            box-shadow: 0 20px 50px rgba(161, 102, 255, 0.2);
-        }
-        .recap-title { font-family: 'Space Mono'; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 20px; display: block; opacity: 0.9; }
-        .price-display { font-size: 3rem; font-weight: 900; font-family: 'Space Mono'; margin-bottom: 10px; }
+        .sidebar { position: sticky; top: 20px; height: fit-content; }
+        .recap-box { background: var(--primary); color: white; border-radius: 24px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .price-display { font-size: 3.5rem; font-weight: 900; font-family: 'Space Mono'; margin-bottom: 10px; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
         
-        .info-row { display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.8rem; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
-        .delivery-tag { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; margin-top: 20px; font-family: 'Space Mono'; text-align: center; }
+        .info-row { display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.75rem; padding: 8px 0; opacity: 0.9; }
+        .delivery-tag { background: rgba(0,0,0,0.25); padding: 15px; border-radius: 12px; margin-top: 20px; font-family: 'Space Mono'; text-align: center; }
 
-        .btn-order { 
-            display: block; width: 100%; padding: 18px; background: white; color: black; 
-            text-align: center; text-decoration: none; border-radius: 12px; 
-            font-weight: 900; font-family: 'Space Mono'; margin-top: 20px; transition: 0.3s;
-        }
-        .btn-order:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-
-        /* Extras Grid */
         .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .extra-item { 
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); 
-            padding: 15px; border-radius: 12px; cursor: pointer; transition: 0.2s; font-size: 0.8rem;
-        }
-        .extra-item.active { background: rgba(161, 102, 255, 0.2); border-color: var(--primary); }
+        .extra-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 12px; border-radius: 10px; cursor: pointer; transition: 0.2s; font-size: 0.75rem; text-align: center; }
+        .extra-item.active { background: white; color: black; font-weight: bold; border-color: white; }
 
+        .btn-order { display: block; width: 100%; padding: 18px; background: white; color: black; text-align: center; text-decoration: none; border-radius: 12px; font-weight: 900; font-family: 'Space Mono'; margin-top: 20px; transition: 0.3s; }
+        .btn-order:hover { transform: scale(1.02); }
     </style>
 </head>
 <body>
@@ -75,57 +47,54 @@
 
 <div class="container">
     <div class="config-card">
-        <h2 style="margin-bottom: 40px; font-family: 'Space Mono'; letter-spacing: -1px;">CONFIGURATION SUR-MESURE</h2>
+        <h2 style="margin-bottom: 30px; font-family: 'Space Mono';">MODDING CONFIGURATEUR</h2>
 
         <div class="step-section">
             <div class="label-group">
-                <span class="step-label">Argent Cash (Max 500M)</span>
+                <span class="step-label">Argent GTA Online (500M Max)</span>
                 <span class="val-num" id="cash-val">100M</span>
             </div>
-            <input type="range" id="cash-slider" min="0" max="500" step="10" value="100">
+            <input type="range" id="cash-slider" min="0" max="500" step="50" value="100">
         </div>
 
         <div class="step-section">
             <div class="label-group">
-                <span class="step-label">Tenues Personnalisables (Max 20)</span>
+                <span class="step-label">Garages Moddés (10 places/u)</span>
+                <span class="val-num" id="car-val">0 Garage</span>
+            </div>
+            <input type="range" id="car-slider" min="0" max="15" step="1" value="0">
+        </div>
+
+        <div class="step-section">
+            <div class="label-group">
+                <span class="step-label">Tenues de Collection (Max 20)</span>
                 <span class="val-num" id="outfit-val">0</span>
             </div>
             <input type="range" id="outfit-slider" min="0" max="20" step="1" value="0">
         </div>
 
         <div class="step-section">
-            <div class="label-group">
-                <span class="step-label">Garages Full Moddés (10 places/u)</span>
-                <span class="val-num" id="car-val">0 Garage</span>
-            </div>
-            <input type="range" id="car-slider" min="0" max="15" step="1" value="0">
-            <p style="font-size: 0.7rem; color: var(--primary); margin-top: 8px; font-family: 'Space Mono';">Total : <span id="total-cars">0</span> véhicules moddés (Max 150-200)</p>
-        </div>
-
-        <div class="step-section">
-            <span class="step-label">Modules Additionnels</span>
+            <span class="step-label">Options Spéciales</span>
             <div class="extras-grid">
-                <div class="extra-item" onclick="toggleExtra(this, 10, 'Unlock All')">Unlock All (Compétences/Objets)</div>
-                <div class="extra-item" onclick="toggleExtra(this, 5, 'Stats Max')">Stats Personnage Max</div>
-                <div class="extra-item" onclick="toggleExtra(this, 5, 'Fast Run')">Fast Run & Roll</div>
-                <div class="extra-item" onclick="toggleExtra(this, 5, 'KD')">Ratio K/D Moddé</div>
+                <div class="extra-item" onclick="toggleExtra(this, 5, 'Unlock')">Unlock All All</div>
+                <div class="extra-item" onclick="toggleExtra(this, 3, 'Stats')">Stats & Skills Max</div>
+                <div class="extra-item" onclick="toggleExtra(this, 3, 'Fast')">Fast Run & Roll</div>
+                <div class="extra-item" onclick="toggleExtra(this, 4, 'KD')">K/D Ratio Moddé</div>
             </div>
         </div>
     </div>
 
     <div class="sidebar">
         <div class="recap-box">
-            <span class="recap-title">Récapitulatif</span>
+            <span style="font-size: 0.7rem; opacity: 0.8; font-family: 'Space Mono';">PRIX TOTAL</span>
             <div class="price-display" id="total-price">15€</div>
             
-            <div class="info-row"><span>Base & Licence</span><span>15€</span></div>
-            <div class="info-row"><span>Argent</span><span id="recap-cash">+0€</span></div>
-            <div class="info-row"><span>Garages</span><span id="recap-cars">+0€</span></div>
-            <div class="info-row"><span>Tenues</span><span id="recap-outfits">+0€</span></div>
+            <div class="info-row"><span>Base + Licence</span><span>15€</span></div>
+            <div class="info-row"><span>Suppléments</span><span id="recap-supp">+0€</span></div>
 
             <div class="delivery-tag">
-                <div style="font-size: 0.6rem; opacity: 0.8; margin-bottom: 5px;">DÉLAI DE LIVRAISON ESTIMÉ</div>
-                <div id="delivery-time" style="font-size: 1.2rem; font-weight: 900;">2 JOURS</div>
+                <div style="font-size: 0.6rem; opacity: 0.7;">DÉLAI ESTIMÉ</div>
+                <div id="delivery-time" style="font-size: 1.1rem; font-weight: 900;">2 JOURS</div>
             </div>
 
             <a href="https://discord.gg/votrelien" class="btn-order">COMMANDER</a>
@@ -141,33 +110,32 @@
     let extraPrice = 0;
 
     function update() {
-        let base = 15;
-        let cash = parseInt(cashS.value);
-        let outfits = parseInt(outS.value);
-        let garages = parseInt(carS.value);
+        const base = 15;
+        const cash = parseInt(cashS.value);
+        const outfits = parseInt(outS.value);
+        const garages = parseInt(carS.value);
 
-        // Calculs Prix
-        let pCash = (cash / 100) * 10; // 10€ par 100M
-        let pOutfits = outfits * 2.5;  // 2.50€ la tenue
-        let pCars = garages * 12;      // 12€ par garage de 10 voitures moddées
+        // NOUVELLE RÉPARTITION POUR MAX ~115€
+        // Argent : 5€ les 100M (Max 25€)
+        let pCash = (cash / 100) * 5; 
+        // Garages : 4€ par garage (Max 60€ pour 15 garages)
+        let pCars = garages * 4;
+        // Tenues : 0.50€ la tenue (Max 10€ pour 20 tenues)
+        let pOutfits = outfits * 0.5;
 
-        let total = base + pCash + pOutfits + pCars + extraPrice;
+        let total = base + pCash + pCars + pOutfits + extraPrice;
 
-        // Affichage valeurs
+        // Affichage
         document.getElementById('cash-val').innerText = cash + "M";
         document.getElementById('outfit-val').innerText = outfits;
         document.getElementById('car-val').innerText = garages + (garages > 1 ? " Garages" : " Garage");
-        document.getElementById('total-cars').innerText = garages * 10;
+        
+        document.getElementById('total-price').innerText = Math.floor(total) + "€";
+        document.getElementById('recap-supp').innerText = "+" + (total - base).toFixed(0) + "€";
 
-        // Affichage Recap
-        document.getElementById('total-price').innerText = total.toFixed(0) + "€";
-        document.getElementById('recap-cash').innerText = "+" + pCash.toFixed(0) + "€";
-        document.getElementById('recap-cars').innerText = "+" + pCars.toFixed(0) + "€";
-        document.getElementById('recap-outfits').innerText = "+" + pOutfits.toFixed(0) + "€";
-
-        // Calcul Délai (40M / 24h)
+        // Délais : 40M / 24h
         let days = Math.ceil(cash / 40);
-        if (days < 1) days = 1;
+        if (cash === 0) days = 1;
         document.getElementById('delivery-time').innerText = days + (days > 1 ? " JOURS" : " JOUR");
     }
 
@@ -181,7 +149,6 @@
     cashS.oninput = update;
     outS.oninput = update;
     carS.oninput = update;
-
     update();
 </script>
 
