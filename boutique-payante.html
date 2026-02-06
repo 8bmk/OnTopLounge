@@ -48,8 +48,8 @@
         }
         .product-card:hover { border-color: var(--primary); transform: translateY(-8px); }
 
-        /* État Indisponible */
-        .card-disabled { filter: grayscale(1); opacity: 0.6; pointer-events: none; border-color: var(--disabled) !important; }
+        /* Style Force V10 Indisponible */
+        .card-disabled { filter: grayscale(1); opacity: 0.6; pointer-events: none; }
         .banner-unavailable {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
             background: var(--danger); color: white; padding: 10px 40px; font-weight: 900;
@@ -63,13 +63,26 @@
         .specs-list { list-style: none; margin-bottom: 30px; flex-grow: 1; }
         .specs-list li { margin-bottom: 12px; font-size: 0.9rem; display: flex; align-items: flex-start; opacity: 0.8; line-height: 1.4; }
         .specs-list li::before { content: "►"; color: var(--primary); font-size: 0.7rem; margin-right: 12px; margin-top: 4px; }
+        .specs-list b { color: var(--primary); }
 
-        .btn-buy { display: block; text-align: center; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s; margin-top: auto; border: none; }
-        .btn-active { background: var(--primary); color: white; cursor: pointer; }
-        .btn-active:hover { background: white; color: black; transform: scale(1.02); }
-        .btn-disabled { background: #222; color: #555; cursor: not-allowed; }
+        .btn-buy { display: block; text-align: center; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s; margin-top: auto; }
+        .btn-sellauth { background: var(--primary); color: white; }
+        .btn-sellauth:hover { background: white; color: black; }
+
+        .btn-discord { background: transparent; border: 2px solid var(--discord); color: white; }
+        .btn-discord:hover { background: var(--discord); }
 
         .badge { position: absolute; top: 15px; right: 15px; background: var(--primary); color: white; padding: 5px 15px; border-radius: 5px; font-size: 0.65rem; font-weight: bold; font-family: 'Space Mono'; z-index: 2; }
+
+        /* Partenaires */
+        .partner-highlight { border: 1px solid rgba(255, 204, 0, 0.3) !important; background: rgba(30, 25, 10, 0.6) !important; }
+        .partner-tag { 
+            position: absolute; top: 0; right: 0; background: var(--gold); color: #000; 
+            padding: 6px 20px; font-size: 0.7rem; font-weight: 900; font-family: 'Space Mono';
+            border-bottom-left-radius: 15px;
+        }
+        .partner-highlight h3 { color: var(--gold); font-family: 'Space Mono'; margin-bottom: 15px; font-size: 1.6rem; }
+        .partner-logo { width: 60px; height: 60px; object-fit: contain; margin-bottom: 20px; }
 
         footer { text-align: center; padding: 60px; opacity: 0.3; font-size: 0.7rem; font-family: 'Space Mono'; letter-spacing: 2px; }
         .hidden { display: none !important; }
@@ -78,8 +91,7 @@
 <body>
 
 <video autoplay muted loop playsinline id="bg-video">
-    <source src="" type="video/mp4">
-</video>
+    <source src="votre-video.mp4" type="video/mp4"> </video>
 
 <a href="index.html" class="back-link">← RETOUR PORTAIL</a>
 
@@ -98,50 +110,60 @@
     
     <div class="product-card item-services card-disabled">
         <div class="banner-unavailable">INDISPONIBLE</div>
-        <div class="badge" style="background: #555;">MAINTENANCE</div>
+        <div class="badge" style="background: var(--disabled);">MAINTENANCE</div>
         <div>
-            <span class="price-tag" style="color: #555;">14.99€</span>
-            <h2>FORCE V10 (Selfbot)</h2>
+            <span class="price-tag" style="color: var(--disabled);">14.99€</span>
+            <h2 style="color: var(--disabled);">FORCE V10</h2>
             <ul class="specs-list">
-                <li>Module Advanced Self-Bot</li>
+                <li>Ghost Terminal v10</li>
+                <li>Advanced Self-Bot Module</li>
                 <li>Mass DM & Dynamic Status</li>
-                <li>Anti-Detection Bypass</li>
+                <li>Statut: <b>HORS-LIGNE</b></li>
             </ul>
         </div>
-        <button class="btn-buy btn-disabled">ACTUELLEMENT HORS-LIGNE</button>
+        <a href="#" class="btn-buy" style="background: #222; color: #444; cursor: not-allowed;">MODULE DÉSACTIVÉ</a>
     </div>
 
     <div class="product-card item-services">
-        <div class="badge">POPULAIRE</div>
+        <div class="badge">DISPONIBLE</div>
         <div>
             <span class="price-tag">49.99€</span>
             <h2>Premium Bundle</h2>
             <ul class="specs-list">
                 <li>Argent : <b>10M à 200M GTA$</b></li>
                 <li>Niveau : <b>150 à 8000</b></li>
-                <li><b>Full Unlock All</b></li>
+                <li>Déblocage : <b>Full Unlock All</b></li>
             </ul>
         </div>
-        <a href="https://on-top-lounge-shop.mysellauth.com/product/compte-gta-pc-version-avancee" target="_blank" class="btn-buy btn-active">Acheter maintenant</a>
+        <a href="https://on-top-lounge-shop.mysellauth.com/product/compte-gta-pc-version-avancee" target="_blank" class="btn-buy btn-sellauth">Acheter maintenant</a>
     </div>
 
-    <div class="product-card item-services" style="border-color: var(--primary); background: linear-gradient(160deg, rgba(161, 102, 255, 0.05), rgba(0,0,0,0));">
-        <div class="badge" style="background: var(--primary);">PERSONNALISABLE</div>
+    <div class="product-card item-services">
         <div>
             <span class="price-tag">SUR MESURE</span>
-            <h2>Compte Personnalisé</h2>
+            <h2>Service Sur Mesure</h2>
             <p style="opacity: 0.7; font-size: 0.85rem; margin-bottom: 20px; font-family: 'Space Mono';">
-                Configurez vos propres options (Argent, Tenues, Délais) et obtenez un prix instantané.
+                Créez votre propre configuration d'actifs numériques.
             </p>
             <ul class="specs-list">
-                <li>Choix du montant exact</li>
-                <li>Tenues moddées au choix</li>
-                <li>Livraison Express possible</li>
+                <li>Montant GTA$ ajustable</li>
+                <li>Garages thématiques</li>
+                <li>Support prioritaire 24/7</li>
             </ul>
         </div>
-        <a href="sur-mesure.html" class="btn-buy btn-active" style="background: transparent; border: 2px solid var(--primary);">
-            OUVRIR LE CONFIGURATEUR
-        </a>
+        <a href="sur-mesure.html" class="btn-buy btn-discord" style="border-color: var(--primary); color: var(--primary);">Ouvrir le configurateur</a>
+    </div>
+
+    <div class="product-card partner-highlight item-partners">
+        <div class="partner-tag">OFFICIEL</div>
+        <div>
+            <img src="GTA FRANCE.png" alt="Logo" class="partner-logo">
+            <h3>GTA FRANCE</h3>
+            <p style="opacity: 0.8; font-size: 0.85rem; margin-bottom: 25px; line-height: 1.5;">
+                Rejoignez la plaque tournante du modding en France. Communauté active et fiable.
+            </p>
+        </div>
+        <a href="https://discord.gg/DdDy3DdAsN" target="_blank" class="btn-buy btn-partner" style="background: var(--gold); color:black; text-decoration: none;">REJOINDRE</a>
     </div>
 
 </div>
