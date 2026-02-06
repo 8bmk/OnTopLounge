@@ -14,6 +14,7 @@
             --gold: #ffcc00;
             --danger: #ff4444;
             --force-v10: #ff00ff;
+            --disabled: #444444;
         }
         
         *{margin:0;padding:0;box-sizing:border-box;}
@@ -24,12 +25,6 @@
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
             z-index: -1; background-size: 100% 3px, 3px 100%; pointer-events: none;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 0, 255, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 255, 0); }
         }
 
         header { padding: 60px 20px 30px; text-align: center; }
@@ -49,9 +44,18 @@
         .product-card { 
             background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.15); border-radius: 20px; 
             padding: 40px; display: flex; flex-direction: column; justify-content: space-between;
-            backdrop-filter: blur(20px); transition: 0.4s ease; min-height: 550px;
+            backdrop-filter: blur(20px); transition: 0.4s ease; min-height: 550px; position: relative;
         }
         .product-card:hover { border-color: var(--primary); transform: translateY(-8px); }
+
+        /* État Indisponible */
+        .card-disabled { filter: grayscale(1); opacity: 0.6; pointer-events: none; border-color: var(--disabled) !important; }
+        .banner-unavailable {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
+            background: var(--danger); color: white; padding: 10px 40px; font-weight: 900;
+            font-family: 'Space Mono'; font-size: 1.2rem; z-index: 10; border: 2px solid white;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.5); pointer-events: none;
+        }
 
         .price-tag { font-family: 'Space Mono'; color: var(--primary); font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; display: block; }
         h2 { font-family: 'Space Mono'; font-size: 1.4rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
@@ -59,27 +63,13 @@
         .specs-list { list-style: none; margin-bottom: 30px; flex-grow: 1; }
         .specs-list li { margin-bottom: 12px; font-size: 0.9rem; display: flex; align-items: flex-start; opacity: 0.8; line-height: 1.4; }
         .specs-list li::before { content: "►"; color: var(--primary); font-size: 0.7rem; margin-right: 12px; margin-top: 4px; }
-        .specs-list b { color: var(--primary); }
 
-        .btn-buy { display: block; text-align: center; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s; margin-top: auto; }
-        .btn-sellauth { background: var(--primary); color: white; }
-        .btn-sellauth:hover { background: white; color: black; }
-
-        .btn-discord { background: transparent; border: 2px solid var(--discord); color: white; }
-        .btn-discord:hover { background: var(--discord); }
+        .btn-buy { display: block; text-align: center; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s; margin-top: auto; border: none; }
+        .btn-active { background: var(--primary); color: white; cursor: pointer; }
+        .btn-active:hover { background: white; color: black; transform: scale(1.02); }
+        .btn-disabled { background: #222; color: #555; cursor: not-allowed; }
 
         .badge { position: absolute; top: 15px; right: 15px; background: var(--primary); color: white; padding: 5px 15px; border-radius: 5px; font-size: 0.65rem; font-weight: bold; font-family: 'Space Mono'; z-index: 2; }
-
-        .partner-highlight { border: 1px solid rgba(255, 204, 0, 0.3) !important; background: rgba(30, 25, 10, 0.6) !important; }
-        .partner-tag { 
-            position: absolute; top: 0; right: 0; background: var(--gold); color: #000; 
-            padding: 6px 20px; font-size: 0.7rem; font-weight: 900; font-family: 'Space Mono';
-            border-bottom-left-radius: 15px;
-        }
-        .partner-highlight h3 { color: var(--gold); font-family: 'Space Mono'; margin-bottom: 15px; font-size: 1.6rem; }
-        .partner-highlight .btn-partner { background: var(--gold); color: black; }
-
-        .partner-logo { width: 60px; height: 60px; object-fit: contain; margin-bottom: 20px; }
 
         footer { text-align: center; padding: 60px; opacity: 0.3; font-size: 0.7rem; font-family: 'Space Mono'; letter-spacing: 2px; }
         .hidden { display: none !important; }
@@ -90,7 +80,6 @@
 <video autoplay muted loop playsinline id="bg-video">
     <source src="" type="video/mp4">
 </video>
-<script src="config.js"></script>
 
 <a href="index.html" class="back-link">← RETOUR PORTAIL</a>
 
@@ -107,85 +96,52 @@
 
 <div class="shop-container">
     
-<div class="product-card item-services" style="border-color: var(--force-v10); background: linear-gradient(160deg, rgba(20, 15, 25, 0.98), rgba(255, 0, 255, 0.03)); position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
-        <div class="badge" style="background: var(--force-v10); animation: pulse 2s infinite; box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);">EXCLUSIVE</div>
-        
+    <div class="product-card item-services card-disabled">
+        <div class="banner-unavailable">INDISPONIBLE</div>
+        <div class="badge" style="background: #555;">MAINTENANCE</div>
         <div>
-            <span class="price-tag" style="color: var(--force-v10); font-family: 'Space Mono'; letter-spacing: -1px;">14.99€ <small style="font-size: 0.6rem; opacity: 0.5; vertical-align: middle;">LIFETIME</small></span>
-            <h2 style="color: var(--force-v10); text-shadow: 0 0 15px rgba(255, 0, 255, 0.4); font-size: 1.8rem; margin-bottom: 20px;">FORCE V10</h2>
-            
-            <ul class="specs-list" style="border-top: 1px solid rgba(255, 0, 255, 0.1); padding-top: 20px;">
-                <li><code style="color: var(--force-v10); margin-right: 8px;">[proc]</code> Ghost Terminal v10</li>
-                <li><code style="color: var(--force-v10); margin-right: 8px;">[type]</code> Advanced Self-Bot Module</li>
-                <li><code style="color: var(--force-v10); margin-right: 8px;">[ctrl]</code> Mass DM & Dynamic Status</li>
-                <li><code style="color: var(--force-v10); margin-right: 8px;">[edit]</code> Badge & House Swapper</li>
-                <li><code style="color: var(--force-v10); margin-right: 8px;">[pass]</code> Anti-Detection Bypass</li>
-                <li><code style="color: var(--force-v10); margin-right: 8px;">[stat]</code> Undetected / Working</li>
+            <span class="price-tag" style="color: #555;">14.99€</span>
+            <h2>FORCE V10 (Selfbot)</h2>
+            <ul class="specs-list">
+                <li>Module Advanced Self-Bot</li>
+                <li>Mass DM & Dynamic Status</li>
+                <li>Anti-Detection Bypass</li>
             </ul>
         </div>
-
-        <div style="margin-top: auto;">
-            <a href="https://8bmk.github.io/OnTopLounge/sur-mesure.html" target="_blank" class="btn-buy" style="background: var(--force-v10); color: white; box-shadow: 0 5px 20px rgba(255, 0, 255, 0.3); border: none; cursor: pointer;">
-                ACTIVER LE MODULE
-            </a>
-            <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 15px; opacity: 0.4;">
-                <span style="width: 4px; height: 4px; background: var(--force-v10); border-radius: 50%;"></span>
-                <p style="font-size: 0.55rem; font-family: 'Space Mono'; color: var(--force-v10); text-transform: uppercase; letter-spacing: 1px;">
-                    Socket-Based Injection
-                </p>
-                <span style="width: 4px; height: 4px; background: var(--force-v10); border-radius: 50%;"></span>
-            </div>
-        </div>
+        <button class="btn-buy btn-disabled">ACTUELLEMENT HORS-LIGNE</button>
     </div>
 
     <div class="product-card item-services">
-        <div class="badge">DISPONIBLE</div>
+        <div class="badge">POPULAIRE</div>
         <div>
             <span class="price-tag">49.99€</span>
             <h2>Premium Bundle</h2>
             <ul class="specs-list">
                 <li>Argent : <b>10M à 200M GTA$</b></li>
                 <li>Niveau : <b>150 à 8000</b></li>
-                <li>Véhicules : <b>250 slots disponibles</b></li>
-                <li>Déblocage : <b>Full Unlock All</b></li>
-                <li>Stats : <b>Fast Run & Max Skills</b></li>
+                <li><b>Full Unlock All</b></li>
             </ul>
         </div>
-        <a href="https://on-top-lounge-shop.mysellauth.com/product/compte-gta-pc-version-avancee" target="_blank" class="btn-buy btn-sellauth">Acheter maintenant</a>
+        <a href="https://on-top-lounge-shop.mysellauth.com/product/compte-gta-pc-version-avancee" target="_blank" class="btn-buy btn-active">Acheter maintenant</a>
     </div>
 
-    <div class="product-card item-services">
+    <div class="product-card item-services" style="border-color: var(--primary); background: linear-gradient(160deg, rgba(161, 102, 255, 0.05), rgba(0,0,0,0));">
+        <div class="badge" style="background: var(--primary);">PERSONNALISABLE</div>
         <div>
-            <span class="price-tag">SUR DEVIS</span>
-            <h2>Service Sur Mesure</h2>
-            <p style="opacity: 0.7; font-size: 0.85rem; margin-bottom: 20px; font-family: 'Space Mono'; line-height: 1.5;">
-                Configuration d'actifs numériques sur demande spécifique pour une expérience unique.
+            <span class="price-tag">SUR MESURE</span>
+            <h2>Compte Personnalisé</h2>
+            <p style="opacity: 0.7; font-size: 0.85rem; margin-bottom: 20px; font-family: 'Space Mono';">
+                Configurez vos propres options (Argent, Tenues, Délais) et obtenez un prix instantané.
             </p>
             <ul class="specs-list">
-                <li>Montant GTA$ ajustable</li>
-                <li>Garages thématiques</li>
-                <li>Tenues Moddées exclusives</li>
-                <li>Support prioritaire 24/7</li>
+                <li>Choix du montant exact</li>
+                <li>Tenues moddées au choix</li>
+                <li>Livraison Express possible</li>
             </ul>
         </div>
-        <a href="https://discord.gg/MPKADDqYtk" target="_blank" class="btn-buy btn-discord">Ouvrir un Ticket</a>
-    </div>
-
-    <div class="product-card partner-highlight item-partners">
-        <div class="partner-tag">OFFICIEL</div>
-        <div>
-            <img src="GTA FRANCE.png" alt="Logo" class="partner-logo">
-            <h3>GTA FRANCE</h3>
-            <p style="opacity: 0.8; font-size: 0.85rem; margin-bottom: 25px; line-height: 1.5;">
-                Rejoignez la plaque tournante du modding en France. Communauté active et fiable.
-            </p>
-            <div style="font-family: 'Space Mono'; font-size: 0.7rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 20px;">
-                ● RÉFÉRENCE N°1 <br>
-                ● ÉVÉNEMENTS RÉGULIERS <br>
-                ● MARKETPLACE SÉCURISÉ
-            </div>
-        </div>
-        <a href="https://discord.gg/DdDy3DdAsN" target="_blank" class="btn-buy btn-partner" style="background: var(--gold); color:black;">REJOINDRE</a>
+        <a href="sur-mesure.html" class="btn-buy btn-active" style="background: transparent; border: 2px solid var(--primary);">
+            OUVRIR LE CONFIGURATEUR
+        </a>
     </div>
 
 </div>
