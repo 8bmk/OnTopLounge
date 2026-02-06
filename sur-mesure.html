@@ -3,87 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTL | Configurateur Premium</title>
+    <title>OTL | Configurateur Professionnel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root { 
             --primary: #a166ff; 
             --bg: #08080a; 
-            --card-bg: rgba(15, 15, 20, 0.9); 
-            --accent: #d4b8ff;
+            --card-bg: rgba(20, 20, 25, 0.95); 
         }
         
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;perspective: 1000px;}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:white; line-height: 1.6;}
 
-        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; object-fit: cover; opacity: 0.2; }
+        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; object-fit: cover; opacity: 0.15; }
 
-        .back-link { position: absolute; top: 30px; left: 30px; color: var(--primary); text-decoration: none; font-family: 'Space Mono'; font-size: 0.8rem; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 5px; transition: 0.3s; z-index: 100; }
-
-        .parallax-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 20px;
-            transform-style: preserve-3d;
-        }
+        .container { max-width: 1100px; margin: 60px auto; padding: 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
 
         .config-card { 
             background: var(--card-bg); 
-            border: 1px solid rgba(161, 102, 255, 0.3); 
-            border-radius: 30px; 
-            padding: 50px; 
-            max-width: 900px;
-            width: 100%;
-            backdrop-filter: blur(30px); 
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
+            border: 1px solid rgba(161, 102, 255, 0.2); 
+            border-radius: 24px; 
+            padding: 40px; 
+            backdrop-filter: blur(20px);
         }
 
-        .step-section { margin-bottom: 40px; transform: translateZ(20px); }
-        .label-group { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
-        .step-label { font-family: 'Space Mono'; color: var(--primary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; }
-        .val-num { font-family: 'Space Mono'; font-size: 1.6rem; font-weight: 900; color: white; }
+        .step-section { margin-bottom: 40px; }
+        .label-group { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+        .step-label { font-family: 'Space Mono'; color: var(--primary); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        .val-num { font-family: 'Space Mono'; font-size: 1.4rem; font-weight: 900; }
 
-        /* Sliders */
-        input[type=range] { width: 100%; -webkit-appearance: none; background: transparent; height: 30px; }
-        input[type=range]::-webkit-slider-runnable-track { height: 4px; background: rgba(161, 102, 255, 0.2); border-radius: 2px; }
-        input[type=range]::-webkit-slider-thumb { height: 22px; width: 22px; border-radius: 50%; background: var(--primary); -webkit-appearance: none; margin-top: -9px; cursor: pointer; box-shadow: 0 0 15px var(--primary); }
+        /* Sliders Custom */
+        input[type=range] { width: 100%; -webkit-appearance: none; background: transparent; height: 20px; }
+        input[type=range]::-webkit-slider-runnable-track { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+        input[type=range]::-webkit-slider-thumb { height: 20px; width: 20px; border-radius: 50%; background: var(--primary); -webkit-appearance: none; margin-top: -8px; cursor: pointer; box-shadow: 0 0 15px var(--primary); }
 
-        /* Grid Options */
-        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 10px; }
-        .opt-item { 
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
-            padding: 20px; border-radius: 15px; cursor: pointer; transition: 0.3s;
-            display: flex; flex-direction: column; gap: 5px; transform: translateZ(10px);
+        /* Recap Sidebar */
+        .sidebar { position: sticky; top: 40px; height: fit-content; }
+        .recap-box { 
+            background: var(--primary); color: white; border-radius: 24px; padding: 30px;
+            box-shadow: 0 20px 50px rgba(161, 102, 255, 0.2);
         }
-        .opt-item:hover { border-color: var(--primary); background: rgba(161, 102, 255, 0.05); }
-        .opt-item.active { background: var(--primary); border-color: white; }
-        .opt-item.active * { color: white !important; }
-        .opt-name { font-size: 0.85rem; font-weight: 700; }
-        .opt-price { color: var(--primary); font-family: 'Space Mono'; font-size: 0.8rem; }
+        .recap-title { font-family: 'Space Mono'; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 20px; display: block; opacity: 0.9; }
+        .price-display { font-size: 3rem; font-weight: 900; font-family: 'Space Mono'; margin-bottom: 10px; }
+        
+        .info-row { display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.8rem; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .delivery-tag { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; margin-top: 20px; font-family: 'Space Mono'; text-align: center; }
 
-        /* Footer Card */
-        .card-footer { 
-            margin-top: 50px; padding-top: 30px; 
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-            transform: translateZ(30px);
+        .btn-order { 
+            display: block; width: 100%; padding: 18px; background: white; color: black; 
+            text-align: center; text-decoration: none; border-radius: 12px; 
+            font-weight: 900; font-family: 'Space Mono'; margin-top: 20px; transition: 0.3s;
         }
+        .btn-order:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
-        .price-box { font-family: 'Space Mono'; }
-        .total-price { font-size: 3.5rem; font-weight: 900; line-height: 1; margin: 10px 0; color: var(--primary); }
-        .delivery-info { font-size: 0.8rem; opacity: 0.6; display: flex; align-items: center; gap: 8px; }
-
-        .btn-checkout {
-            background: white; color: black; text-decoration: none;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 15px; font-weight: 900; font-family: 'Space Mono';
-            text-transform: uppercase; transition: 0.3s;
+        /* Extras Grid */
+        .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .extra-item { 
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); 
+            padding: 15px; border-radius: 12px; cursor: pointer; transition: 0.2s; font-size: 0.8rem;
         }
-        .btn-checkout:hover { background: var(--primary); color: white; transform: scale(1.02); }
+        .extra-item.active { background: rgba(161, 102, 255, 0.2); border-color: var(--primary); }
 
     </style>
 </head>
@@ -93,17 +73,13 @@
     <source src="purple-sky.3840x2160.mp4" type="video/mp4">
 </video>
 
-<div class="parallax-container" id="scene">
-    <div class="config-card" id="card">
-        <a href="index.html" class="back-link">← ANNULER</a>
-        
-        <div style="text-align: center; margin-bottom: 50px;">
-            <h1 style="font-family: 'Space Mono'; font-size: 1.2rem; letter-spacing: 8px; opacity: 0.5;">BUILDER V2.4</h1>
-        </div>
+<div class="container">
+    <div class="config-card">
+        <h2 style="margin-bottom: 40px; font-family: 'Space Mono'; letter-spacing: -1px;">CONFIGURATION SUR-MESURE</h2>
 
         <div class="step-section">
             <div class="label-group">
-                <span class="step-label">01 // CAPITAL GTA$</span>
+                <span class="step-label">Argent Cash (Max 500M)</span>
                 <span class="val-num" id="cash-val">100M</span>
             </div>
             <input type="range" id="cash-slider" min="0" max="500" step="10" value="100">
@@ -111,112 +87,101 @@
 
         <div class="step-section">
             <div class="label-group">
-                <span class="step-label">02 // TENUES MODDÉES</span>
+                <span class="step-label">Tenues Personnalisables (Max 20)</span>
                 <span class="val-num" id="outfit-val">0</span>
             </div>
             <input type="range" id="outfit-slider" min="0" max="20" step="1" value="0">
         </div>
 
         <div class="step-section">
-            <span class="step-label">03 // VÉHICULES & MODULES</span>
-            <div class="options-grid">
-                <div class="opt-item" onclick="toggleOption(this, 10, 'Pack 3 Véhicules')">
-                    <span class="opt-name">PACK 3 VÉHICULES</span>
-                    <span class="opt-price">+10.00€</span>
-                </div>
-                <div class="opt-item" onclick="toggleOption(this, 25, 'GARAGE COMPLET')">
-                    <span class="opt-name">GARAGE FULL (10)</span>
-                    <span class="opt-price">+25.00€</span>
-                </div>
-                <div class="opt-item" onclick="toggleOption(this, 10, 'Unlock All')">
-                    <span class="opt-name">UNLOCK ALL ALL</span>
-                    <span class="opt-price">+10.00€</span>
-                </div>
-                <div class="opt-item" onclick="toggleOption(this, 5, 'Skills')">
-                    <span class="opt-name">FAST RUN + STATS</span>
-                    <span class="opt-price">+5.00€</span>
-                </div>
+            <div class="label-group">
+                <span class="step-label">Garages Full Moddés (10 places/u)</span>
+                <span class="val-num" id="car-val">0 Garage</span>
             </div>
+            <input type="range" id="car-slider" min="0" max="15" step="1" value="0">
+            <p style="font-size: 0.7rem; color: var(--primary); margin-top: 8px; font-family: 'Space Mono';">Total : <span id="total-cars">0</span> véhicules moddés (Max 150-200)</p>
         </div>
 
-        <div class="card-footer">
-            <div class="price-box">
-                <span style="opacity: 0.5; font-size: 0.7rem;">TOTAL ESTIMÉ</span>
-                <div class="total-price" id="total-price">15.00€</div>
-                <div class="delivery-info">
-                    <span id="delivery-time">48 HEURES</span>
-                    <span style="opacity: 0.3;">//</span>
-                    <span>LICENCE INCLUSE</span>
-                </div>
+        <div class="step-section">
+            <span class="step-label">Modules Additionnels</span>
+            <div class="extras-grid">
+                <div class="extra-item" onclick="toggleExtra(this, 10, 'Unlock All')">Unlock All (Compétences/Objets)</div>
+                <div class="extra-item" onclick="toggleExtra(this, 5, 'Stats Max')">Stats Personnage Max</div>
+                <div class="extra-item" onclick="toggleExtra(this, 5, 'Fast Run')">Fast Run & Roll</div>
+                <div class="extra-item" onclick="toggleExtra(this, 5, 'KD')">Ratio K/D Moddé</div>
             </div>
-            <a href="https://discord.gg/votrelien" class="btn-checkout">COMMANDER</a>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="recap-box">
+            <span class="recap-title">Récapitulatif</span>
+            <div class="price-display" id="total-price">15€</div>
+            
+            <div class="info-row"><span>Base & Licence</span><span>15€</span></div>
+            <div class="info-row"><span>Argent</span><span id="recap-cash">+0€</span></div>
+            <div class="info-row"><span>Garages</span><span id="recap-cars">+0€</span></div>
+            <div class="info-row"><span>Tenues</span><span id="recap-outfits">+0€</span></div>
+
+            <div class="delivery-tag">
+                <div style="font-size: 0.6rem; opacity: 0.8; margin-bottom: 5px;">DÉLAI DE LIVRAISON ESTIMÉ</div>
+                <div id="delivery-time" style="font-size: 1.2rem; font-weight: 900;">2 JOURS</div>
+            </div>
+
+            <a href="https://discord.gg/votrelien" class="btn-order">COMMANDER</a>
         </div>
     </div>
 </div>
 
 <script>
-    const card = document.getElementById('card');
-    const scene = document.getElementById('scene');
     const cashS = document.getElementById('cash-slider');
     const outS = document.getElementById('outfit-slider');
-    const totalPriceTxt = document.getElementById('total-price');
-    const deliveryTxt = document.getElementById('delivery-time');
+    const carS = document.getElementById('car-slider');
+    
+    let extraPrice = 0;
 
-    let extraOptionsPrice = 0;
-
-    // EFFET PARALLAXE
-    scene.addEventListener('mousemove', (e) => {
-        let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-        let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-        card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    });
-
-    scene.addEventListener('mouseleave', () => {
-        card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-        card.style.transition = "all 0.5s ease";
-    });
-
-    scene.addEventListener('mouseenter', () => {
-        card.style.transition = "none";
-    });
-
-    // LOGIQUE CALCUL
     function update() {
-        let basePrice = 15; 
+        let base = 15;
         let cash = parseInt(cashS.value);
         let outfits = parseInt(outS.value);
+        let garages = parseInt(carS.value);
 
-        // Nouveaux prix : 5€ par tranche de 100M (plus réaliste)
-        let cashPrice = (cash / 100) * 8; 
-        
-        // Tenues : 2€ l'unité
-        let outfitPrice = outfits * 2;
+        // Calculs Prix
+        let pCash = (cash / 100) * 10; // 10€ par 100M
+        let pOutfits = outfits * 2.5;  // 2.50€ la tenue
+        let pCars = garages * 12;      // 12€ par garage de 10 voitures moddées
 
-        let finalPrice = basePrice + cashPrice + outfitPrice + extraOptionsPrice;
+        let total = base + pCash + pOutfits + pCars + extraPrice;
 
-        // Affichage
+        // Affichage valeurs
         document.getElementById('cash-val').innerText = cash + "M";
         document.getElementById('outfit-val').innerText = outfits;
-        totalPriceTxt.innerText = finalPrice.toFixed(2) + "€";
+        document.getElementById('car-val').innerText = garages + (garages > 1 ? " Garages" : " Garage");
+        document.getElementById('total-cars').innerText = garages * 10;
 
-        // Délais : 40M / 24h
-        let hours = Math.ceil(cash / 40) * 24;
-        if (hours < 24) hours = 24;
-        deliveryTxt.innerText = hours + " HEURES";
+        // Affichage Recap
+        document.getElementById('total-price').innerText = total.toFixed(0) + "€";
+        document.getElementById('recap-cash').innerText = "+" + pCash.toFixed(0) + "€";
+        document.getElementById('recap-cars').innerText = "+" + pCars.toFixed(0) + "€";
+        document.getElementById('recap-outfits').innerText = "+" + pOutfits.toFixed(0) + "€";
+
+        // Calcul Délai (40M / 24h)
+        let days = Math.ceil(cash / 40);
+        if (days < 1) days = 1;
+        document.getElementById('delivery-time').innerText = days + (days > 1 ? " JOURS" : " JOUR");
     }
 
-    function toggleOption(el, cost, name) {
+    function toggleExtra(el, cost, name) {
         el.classList.toggle('active');
-        if(el.classList.contains('active')) {
-            extraOptionsPrice += cost;
-        } else {
-            extraOptionsPrice -= cost;
-        }
+        if(el.classList.contains('active')) extraPrice += cost;
+        else extraPrice -= cost;
         update();
     }
 
     cashS.oninput = update;
     outS.oninput = update;
+    carS.oninput = update;
+
     update();
 </script>
 
