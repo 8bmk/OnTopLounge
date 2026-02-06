@@ -10,7 +10,6 @@
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white;overflow-x:hidden;}
         
-        /* VIDEO DE FOND FIXÉE */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.15; }
         
         header { padding: 60px 20px; text-align: center; height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
@@ -48,6 +47,16 @@
         .btn-download:hover { background: var(--primary); color: black; }
         .btn-spotify { border-color: var(--spotify-green); color: var(--spotify-green); }
         .btn-spotify:hover { background: var(--spotify-green); color: white; }
+
+        /* Style spécifique pour les instructions APK */
+        .apk-instructions {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.7rem !important;
+            margin-bottom: 15px;
+            border-left: 2px solid var(--spotify-green);
+        }
     </style>
 </head>
 <body>
@@ -67,10 +76,23 @@
 <main class="tools-grid">
     <div class="tool-card">
         <div class="soft-icon sp">Sp</div>
-        <span class="tool-tag" style="color:var(--spotify-green)">v2.40.11</span>
+        <span class="tool-tag" style="color:var(--spotify-green)">PC / WINDOWS</span>
         <h3>Spotify Premium</h3>
         <p>Plus aucune publicité et écoute illimitée via l'extension Adblockify (Spicetify mod).</p>
         <a href="tutorialSpotify.html" class="btn-download btn-spotify">Installer / Tutoriel</a>
+    </div>
+
+    <div class="tool-card">
+        <div class="soft-icon sp">Sp</div>
+        <span class="tool-tag" style="color:var(--spotify-green)">ANDROID (.APK)</span>
+        <h3>Spotify Mobile</h3>
+        <div class="apk-instructions">
+            <b>📄 Installation :</b><br>
+            1. Autoriser les sources inconnues dans les paramètres.<br>
+            2. Installer l'APK et se connecter.
+        </div>
+        <p>Version Premium débloquée pour smartphone. Skip illimité et sans pubs.</p>
+        <a href="https://mega.nz/file/PkZzWYAb#xNezFiL-n6WrZNdtodGCArrswDj_uWT24iatLpL3mIY" target="_blank" class="btn-download btn-spotify">Télécharger APK</a>
     </div>
 
     <div class="tool-card">
