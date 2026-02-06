@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTL | Configurateur Équilibré</title>
+    <title>OTL | Configurateur Professionnel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #a166ff; --bg: #08080a; --card-bg: rgba(20, 20, 25, 0.95); }
@@ -11,8 +11,12 @@
         body{font-family:'Inter',sans-serif;background:var(--bg);color:white; line-height: 1.6;}
         #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; object-fit: cover; opacity: 0.12; }
 
-        .container { max-width: 1100px; margin: 40px auto; padding: 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
-        @media (max-width: 900px) { .container { grid-template-columns: 1fr; margin-top: 20px; } }
+        .back-nav { position: absolute; top: 20px; left: 20px; z-index: 100; }
+        .btn-back { text-decoration: none; color: white; font-family: 'Space Mono'; font-size: 0.8rem; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .btn-back:hover { background: var(--primary); border-color: var(--primary); }
+
+        .container { max-width: 1100px; margin: 60px auto; padding: 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
 
         .config-card { background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.2); border-radius: 24px; padding: 40px; backdrop-filter: blur(20px); }
         .step-section { margin-bottom: 35px; }
@@ -31,12 +35,19 @@
         .info-row { display: flex; justify-content: space-between; font-family: 'Space Mono'; font-size: 0.75rem; padding: 8px 0; opacity: 0.9; }
         .delivery-tag { background: rgba(0,0,0,0.25); padding: 15px; border-radius: 12px; margin-top: 20px; font-family: 'Space Mono'; text-align: center; }
 
+        /* Order Buttons */
+        .order-options { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .btn-order { display: block; width: 100%; padding: 15px; text-align: center; text-decoration: none; border-radius: 12px; font-weight: 900; font-family: 'Space Mono'; transition: 0.3s; font-size: 0.9rem; }
+        
+        .btn-discord { background: white; color: black; }
+        .btn-discord:hover { transform: translateY(-2px); background: #f0f0f0; }
+        
+        .btn-stripe { background: rgba(0,0,0,0.2); color: rgba(255,255,255,0.4); cursor: not-allowed; border: 1px dashed rgba(255,255,255,0.2); position: relative; overflow: hidden; }
+        .badge-soon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-5deg); background: #ff4444; color: white; padding: 2px 10px; font-size: 0.6rem; border-radius: 4px; }
+
         .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .extra-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 12px; border-radius: 10px; cursor: pointer; transition: 0.2s; font-size: 0.75rem; text-align: center; }
         .extra-item.active { background: white; color: black; font-weight: bold; border-color: white; }
-
-        .btn-order { display: block; width: 100%; padding: 18px; background: white; color: black; text-align: center; text-decoration: none; border-radius: 12px; font-weight: 900; font-family: 'Space Mono'; margin-top: 20px; transition: 0.3s; }
-        .btn-order:hover { transform: scale(1.02); }
     </style>
 </head>
 <body>
@@ -45,9 +56,13 @@
     <source src="purple-sky.3840x2160.mp4" type="video/mp4">
 </video>
 
+<nav class="back-nav">
+    <a href="boutique-payante.html" class="btn-back">← RETOUR BOUTIQUE</a>
+</nav>
+
 <div class="container">
     <div class="config-card">
-        <h2 style="margin-bottom: 30px; font-family: 'Space Mono';">MODDING CONFIGURATEUR</h2>
+        <h2 style="margin-bottom: 30px; font-family: 'Space Mono'; letter-spacing: -1px;">VOTRE COMPTE SUR-MESURE</h2>
 
         <div class="step-section">
             <div class="label-group">
@@ -86,18 +101,25 @@
 
     <div class="sidebar">
         <div class="recap-box">
-            <span style="font-size: 0.7rem; opacity: 0.8; font-family: 'Space Mono';">PRIX TOTAL</span>
+            <span style="font-size: 0.7rem; opacity: 0.8; font-family: 'Space Mono'; text-transform: uppercase;">Estimation Finale</span>
             <div class="price-display" id="total-price">15€</div>
             
-            <div class="info-row"><span>Base + Licence</span><span>15€</span></div>
-            <div class="info-row"><span>Suppléments</span><span id="recap-supp">+0€</span></div>
+            <div class="info-row"><span>Pack de Base</span><span>15€</span></div>
+            <div class="info-row"><span>Options & Mods</span><span id="recap-supp">+0€</span></div>
 
             <div class="delivery-tag">
-                <div style="font-size: 0.6rem; opacity: 0.7;">DÉLAI ESTIMÉ</div>
+                <div style="font-size: 0.6rem; opacity: 0.7;">TEMPS DE PRODUCTION</div>
                 <div id="delivery-time" style="font-size: 1.1rem; font-weight: 900;">2 JOURS</div>
             </div>
 
-            <a href="https://discord.gg/votrelien" class="btn-order">COMMANDER</a>
+            <div class="order-options">
+                <a href="https://discord.gg/votrelien" class="btn-order btn-discord">VIA DISCORD</a>
+                <div class="btn-order btn-stripe">
+                    CARTE BANCAIRE
+                    <span class="badge-soon">BIENTÔT</span>
+                </div>
+            </div>
+            <p style="font-size: 0.6rem; text-align: center; margin-top: 15px; opacity: 0.8;">Paiement 100% sécurisé</p>
         </div>
     </div>
 </div>
@@ -106,7 +128,6 @@
     const cashS = document.getElementById('cash-slider');
     const outS = document.getElementById('outfit-slider');
     const carS = document.getElementById('car-slider');
-    
     let extraPrice = 0;
 
     function update() {
@@ -115,17 +136,13 @@
         const outfits = parseInt(outS.value);
         const garages = parseInt(carS.value);
 
-        // NOUVELLE RÉPARTITION POUR MAX ~115€
-        // Argent : 5€ les 100M (Max 25€)
+        // Tarification équilibrée (Max ~115€)
         let pCash = (cash / 100) * 5; 
-        // Garages : 4€ par garage (Max 60€ pour 15 garages)
-        let pCars = garages * 4;
-        // Tenues : 0.50€ la tenue (Max 10€ pour 20 tenues)
+        let pCars = garages * 3.5; // Ajusté pour le plafond
         let pOutfits = outfits * 0.5;
 
         let total = base + pCash + pCars + pOutfits + extraPrice;
 
-        // Affichage
         document.getElementById('cash-val').innerText = cash + "M";
         document.getElementById('outfit-val').innerText = outfits;
         document.getElementById('car-val').innerText = garages + (garages > 1 ? " Garages" : " Garage");
@@ -133,7 +150,6 @@
         document.getElementById('total-price').innerText = Math.floor(total) + "€";
         document.getElementById('recap-supp').innerText = "+" + (total - base).toFixed(0) + "€";
 
-        // Délais : 40M / 24h
         let days = Math.ceil(cash / 40);
         if (cash === 0) days = 1;
         document.getElementById('delivery-time').innerText = days + (days > 1 ? " JOURS" : " JOUR");
