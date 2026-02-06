@@ -1,0 +1,63 @@
+<div class="tool-card" style="grid-column: 1 / -1; max-width: 800px; margin: 20px auto; border: 1px solid var(--otl-purple);">
+    <div class="soft-icon" style="color: var(--otl-purple); border-color: var(--otl-purple);">BY</div>
+    <span class="tool-tag" style="background: rgba(161, 102, 255, 0.2); color: var(--otl-purple);">CONFIGURATEUR</span>
+    <h3>Compte sur Mesure</h3>
+    <p>Configure tes options pour voir le prix final.</p>
+
+    <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px; margin-top: 15px;">
+        <div style="margin-bottom: 20px;">
+            <label style="display:block; font-size: 0.8rem; color: var(--otl-purple); margin-bottom: 10px; font-family: 'Space Mono';">DURÉE DU COMPTE :</label>
+            <select id="duree" onchange="calculerPrix()" style="width:100%; background:#111; color:white; border:1px solid #333; padding:10px; border-radius:5px;">
+                <option value="5">1 Mois (5€)</option>
+                <option value="12">3 Mois (12€)</option>
+                <option value="20">6 Mois (20€)</option>
+                <option value="35">12 Mois (35€)</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display:block; font-size: 0.8rem; color: var(--otl-purple); margin-bottom: 10px; font-family: 'Space Mono';">QUALITÉ :</label>
+            <div style="display:flex; gap: 10px;">
+                <button onclick="setQualite(0, this)" class="btn-opt active">HD</button>
+                <button onclick="setQualite(3, this)" class="btn-opt">4K / Ultra HD (+3€)</button>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display:block; font-size: 0.8rem; color: var(--otl-purple); margin-bottom: 10px; font-family: 'Space Mono';">OPTIONS :</label>
+            <label style="display:flex; align-items:center; gap:10px; font-size: 0.8rem; opacity:0.8; cursor:pointer;">
+                <input type="checkbox" id="ecrans" onchange="calculerPrix()"> Écrans simultanés illimités (+2€)
+            </label>
+        </div>
+
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+            <span style="font-size: 0.9rem; opacity: 0.6;">Prix estimé :</span>
+            <div id="total-price" style="font-size: 2.5rem; font-weight: 900; color: var(--primary);">5€</div>
+        </div>
+
+        <a href="https://t.me/TON_CONTACT" class="btn-download" style="display:block; margin-top:20px; background: var(--otl-purple); color:white; border:none;">Commander ce setup</a>
+    </div>
+</div>
+
+<style>
+    .btn-opt { flex:1; padding:10px; background:transparent; border:1px solid #333; color:white; cursor:pointer; border-radius:5px; transition: 0.3s; font-size: 0.8rem; }
+    .btn-opt.active { border-color: var(--primary); background: rgba(0, 212, 255, 0.1); color: var(--primary); }
+</style>
+
+<script>
+    let prixQualite = 0;
+
+    function setQualite(val, btn) {
+        prixQualite = val;
+        document.querySelectorAll('.btn-opt').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        calculerPrix();
+    }
+
+    function calculerPrix() {
+        let base = parseInt(document.getElementById('duree').value);
+        let bonus = document.getElementById('ecrans').checked ? 2 : 0;
+        let total = base + prixQualite + bonus;
+        document.getElementById('total-price').innerText = total + "€";
+    }
+</script>
