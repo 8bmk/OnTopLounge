@@ -6,7 +6,7 @@
     <title>OTL | Accès Refusé</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --error: #ff4d4d; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); }
+        :root { --error: #ff4d4d; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.9); }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
         
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.15; filter: grayscale(1); }
@@ -16,8 +16,8 @@
         .icon { font-size: 60px; margin-bottom: 20px; }
         h1 { font-family: 'Space Mono'; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 15px; text-transform: uppercase; color: var(--error); }
         p { opacity: 0.6; font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; }
-        .btn { border: 1px solid var(--error); color: var(--error); padding: 12px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 900; transition: 0.3s; display: inline-block; text-transform: uppercase; letter-spacing: 1px; }
-        .btn:hover { background: var(--error); color: white; transform: translateY(-2px); }
+        .btn { border: 1px solid var(--error); color: var(--error); padding: 12px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 900; transition: 0.3s; display: inline-block; text-transform: uppercase; cursor: pointer; }
+        .btn:hover { background: var(--error); color: white; }
     </style>
 </head>
 <body>
@@ -28,9 +28,9 @@
 
     <div class="card">
         <div class="icon">⚠️</div>
-        <h1>Échec de Connexion</h1>
-        <p>L'autorisation a été annulée ou a expiré.<br>Veuillez réessayer depuis l'application.</p>
-        <a href="#" onclick="window.close()" class="btn">Retour au logiciel</a>
+        <h1>Accès Interrompu</h1>
+        <p>L'autorisation Discord a été déclinée.<br>Le sniper ne peut pas démarrer sans validation.</p>
+        <div class="btn" onclick="window.close()">RETOUR AU LOGICIEL</div>
     </div>
 </body>
 </html>
