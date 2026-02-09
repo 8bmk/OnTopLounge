@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTL | Accès Refusé</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800;900&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #ff4d4d; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: var(--card-bg); border: 1px solid var(--primary); padding: 50px; border-radius: 30px; text-align: center; backdrop-filter: blur(15px); box-shadow: 0 0 40px rgba(255, 77, 77, 0.15); max-width: 450px; }
+        .icon { font-size: 60px; margin-bottom: 20px; }
+        h1 { font-family: 'Space Mono'; font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 15px; text-transform: uppercase; color: var(--primary); }
+        p { opacity: 0.6; font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; }
+        .btn { border: 1px solid var(--primary); color: var(--primary); padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: bold; transition: 0.3s; }
+        .btn:hover { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">⚠️</div>
+        <h1>Accès Interrompu</h1>
+        <p>L'autorisation a été refusée ou le lien a expiré.<br>Le sniper ne peut pas fonctionner sans cette étape.</p>
+        <a href="#" onclick="window.close()" class="btn">RETOUR AU LOGICIEL</a>
+    </div>
+</body>
+</html>
