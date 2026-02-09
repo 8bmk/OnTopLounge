@@ -6,17 +6,21 @@
     <title>OTL | Accès Autorisé</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.85); --online: #23a55a; }
+        :root { --primary: #a166ff; --bg: #060606; --card-bg: rgba(15, 15, 20, 0.9); --online: #23a55a; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
         
+        /* BACKGROUND VIDEO */
         #bg-video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; z-index: -2; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.3; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 100%); z-index: -1; }
 
-        .card { background: var(--card-bg); border: 1px solid var(--primary); padding: 50px; border-radius: 30px; text-align: center; backdrop-filter: blur(15px); box-shadow: 0 0 40px rgba(161, 102, 255, 0.2); max-width: 450px; z-index: 10; border: 1px solid rgba(161, 102, 255, 0.3); }
+        /* CARD STYLE */
+        .card { background: var(--card-bg); border: 1px solid rgba(161, 102, 255, 0.3); padding: 50px; border-radius: 30px; text-align: center; backdrop-filter: blur(20px); box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); max-width: 450px; z-index: 10; }
         .icon { font-size: 60px; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--online)); }
-        h1 { font-family: 'Space Mono'; font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 15px; text-transform: uppercase; }
+        h1 { font-family: 'Space Mono'; font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 10px; text-transform: uppercase; }
+        #user-name { color: var(--primary); font-weight: 800; }
         p { opacity: 0.6; font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; }
         
+        /* PROGRESS BAR */
         .loader { height: 4px; width: 100%; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; }
         .progress { height: 100%; width: 0%; background: var(--primary); animation: load 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         @keyframes load { to { width: 100%; } }
@@ -30,14 +34,39 @@
 
     <div class="card">
         <div class="icon">✅</div>
-        <h1>Accès Validé</h1>
-        <p>L'authentification <strong>On Top Lounge</strong> est réussie.<br>Le logiciel est maintenant prêt à l'emploi.</p>
+        <h1 id="status-title">Vérification...</h1>
+        <p id="status-text">Synchronisation avec On Top Lounge en cours.</p>
         <div class="loader"><div class="progress"></div></div>
-        <p style="font-size: 0.7rem; margin-top: 15px; opacity: 0.4; letter-spacing: 1px;">FERMETURE AUTOMATIQUE...</p>
+        <p style="font-size: 0.7rem; margin-top: 15px; opacity: 0.4; letter-spacing: 1px;">RETOUR AU LOGICIEL DANS QUELQUES SECONDES</p>
     </div>
 
     <script>
-        setTimeout(() => { window.close(); }, 4000);
+        // Extraction du token depuis l'URL (format #access_token=...)
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        const accessToken = params.get('access_token');
+
+        if (accessToken) {
+            // Requête vers Discord pour obtenir le profil
+            fetch('https://discord.com/api/users/@me', {
+                headers: { Authorization: `Bearer ${accessToken}` }
+            })
+            .then(res => res.json())
+            .then(user => {
+                document.getElementById('status-title').innerHTML = "Welcome, <span id='user-name'>" + user.username + "</span>";
+                document.getElementById('status-text').innerHTML = "Authentification réussie.<br>Le logiciel On Top Lounge est activé.";
+            })
+            .catch(() => {
+                document.getElementById('status-title').innerText = "Erreur";
+                document.getElementById('status-text').innerText = "Jeton invalide ou expiré.";
+            });
+        } else {
+            document.getElementById('status-title').innerText = "Accès Direct";
+            document.getElementById('status-text').innerText = "Veuillez passer par le logiciel pour vous authentifier.";
+        }
+
+        // Fermeture automatique après 5 secondes
+        setTimeout(() => { window.close(); }, 5500);
     </script>
 </body>
 </html>
